@@ -34,7 +34,7 @@ def load_level_configs(config_path = "config/levels.json"):
     }
 
 
-def generate_feedback_message(fidelity, retention, score_100h) -> str:
+def generate_feedback_message(fidelity, retention, score_100h):
     if retention < 0.25:
         return (
             f"Over-protected! Retention fell to {retention*100:.1f}%. "
@@ -51,24 +51,7 @@ def generate_feedback_message(fidelity, retention, score_100h) -> str:
     return f"Good balance! Game Score: {score_100h:.1f}/100. Try fine-tuning check locations for higher fidelity."
 
 
-def play_level(
-    level_id: str,
-    num_checks: int = 0,
-    target_qubits: list[int] = None,
-    placed_checks: list[dict] = None,
-    shots: int = 1024,
-    config_path: str = "config/levels.json"
-) -> dict:
-    """
-    Main game loop endpoint for running a level simulation.
-    
-    Args:
-        level_id: Key matching levels.json (e.g. 'level_1', 'level_4')
-        num_checks: Number of automated Clifford checks
-        target_qubits: Qubit indices for Clifford checks
-        placed_checks: Manual Z-checks for T-doped levels [{'qubit': 0, 'layer': 1, 'check_type': 'Z'}]
-        shots: Number of simulation shots
-    """
+def play_level(level_id, num_checks = 0, target_qubits = None, placed_checks = None, shots = 1024, config_path = "config/levels.json"):
     levels = load_level_configs(config_path)
     if level_id not in levels:
         raise ValueError(f"Invalid level_id '{level_id}'. Available levels: {list(levels.keys())}")
