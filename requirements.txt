@@ -1,0 +1,8 @@
+qiskit
+qiskit-aer
+qiskit-paulice
+numpy
+scipy
+pandas
+matplotlib
+pytest
