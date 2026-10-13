@@ -1,57 +1,92 @@
 {
-    "level_1": {
-        "title": "Level 1: Shallow Clifford",
-        "payload_type": "clifford",
-        "num_qubits": 3,
-        "depth_layers": 2,
-        "t_count": 0,
-        "max_checks": 3,
-        "description": "Protect a shallow 3-qubit Clifford state with low gate noise."
-    },
-    "level_2": {
-        "title": "Level 2: Medium Depth Clifford",
-        "payload_type": "clifford",
-        "num_qubits": 3,
-        "depth_layers": 5,
-        "t_count": 0,
-        "max_checks": 5,
-        "description": "Higher depth introduces cumulative noise. Balance check count vs. retention."
-    },
-    "level_3": {
-        "title": "Level 3: Deep Clifford Endurance",
-        "payload_type": "clifford",
-        "num_qubits": 4,
-        "depth_layers": 10,
-        "t_count": 0,
-        "max_checks": 6,
-        "description": "Deep circuit with heavy noise. Over-checking will crash shot retention!"
-    },
-
-    "level_4": {
-        "title": "Level 4: Light T-Doping",
-        "payload_type": "tdoped",
-        "num_qubits": 3,
-        "depth_layers": 3,
-        "t_count": 1,
-        "max_checks": 3,
-        "description": "First non-Clifford gate introduced. Place hand-made Z-checks on commuting lines."
-    },
-    "level_5": {
-        "title": "Level 5: Medium T-Doping",
-        "payload_type": "tdoped",
-        "num_qubits": 3,
-        "depth_layers": 5,
-        "t_count": 4,
-        "max_checks": 4,
-        "description": "Multiple T-gates degrade baseline fidelity. Apply Z-checks strategically."
-    },
-    "level_6": {
-        "title": "Level 6: Universal Gauntlet",
-        "payload_type": "tdoped",
-        "num_qubits": 4,
-        "depth_layers": 8,
-        "t_count": 8,
-        "max_checks": 6,
-        "description": "High depth combined with heavy T-doping. Maximum protection challenge."
-    }
+  "level_1": {
+    "title": "Level 1: Shallow Clifford Core",
+    "payload_type": "clifford",
+    "num_qubits": 3,
+    "depth_layers": 6,
+    "t_count": 0,
+    "max_checks": 2,
+    "description": "3-qubit GHZ entangler. Learn how spacetime checks catch simple bit and phase errors."
+  },
+  "level_2": {
+    "title": "Level 2: Medium Clifford Entanglement",
+    "payload_type": "clifford",
+    "num_qubits": 4,
+    "depth_layers": 12,
+    "t_count": 0,
+    "max_checks": 3,
+    "description": "4-qubit stabilizer circuit with CNOT ladders. Identify high-crosstalk channels."
+  },
+  "level_3": {
+    "title": "Level 3: Wide Clifford Lattice",
+    "payload_type": "clifford",
+    "num_qubits": 5,
+    "depth_layers": 18,
+    "t_count": 0,
+    "max_checks": 3,
+    "description": "5-qubit lattice entangler. Balancing check count against gate overhead becomes critical."
+  },
+  "level_4": {
+    "title": "Level 4: Deep Clifford Gauntlet",
+    "payload_type": "clifford",
+    "num_qubits": 6,
+    "depth_layers": 24,
+    "t_count": 0,
+    "max_checks": 4,
+    "description": "6-qubit deep circuit. High thermal relaxation noise requires targeted spacetime placement."
+  },
+  "level_5": {
+    "title": "Level 5: High-Volume Clifford Stress Test",
+    "payload_type": "clifford",
+    "num_qubits": 7,
+    "depth_layers": 32,
+    "t_count": 0,
+    "max_checks": 5,
+    "description": "7-qubit dense Clifford network. Over-checking will rapidly destroy shot retention."
+  },
+  "level_6": {
+    "title": "Level 6: Light T-Doping Injection",
+    "payload_type": "tdoped",
+    "num_qubits": 3,
+    "depth_layers": 8,
+    "t_count": 2,
+    "max_checks": 2,
+    "description": "Non-Clifford T-gates introduced. Place manual Z-checks on commuting qubit channels."
+  },
+  "level_7": {
+    "title": "Level 7: Moderate T-Doped Subroutine",
+    "payload_type": "tdoped",
+    "num_qubits": 4,
+    "depth_layers": 14,
+    "t_count": 4,
+    "max_checks": 3,
+    "description": "4 qubits with 4 T-gates. Target noisy bit-flip channels without disturbing phase coherence."
+  },
+  "level_8": {
+    "title": "Level 8: Dense T-State Circuit",
+    "payload_type": "tdoped",
+    "num_qubits": 5,
+    "depth_layers": 20,
+    "t_count": 7,
+    "max_checks": 3,
+    "description": "5 qubits with 7 T-gates disrupting Clifford symmetry. Strategic Z-parity checks are required."
+  },
+  "level_9": {
+    "title": "Level 9: High-Density Non-Clifford Gauntlet",
+    "payload_type": "tdoped",
+    "num_qubits": 6,
+    "depth_layers": 28,
+    "t_count": 10,
+    "max_checks": 4,
+    "description": "6 qubits, depth 14, 10 T-gates. Severe error accumulation across T-gate layers."
+  },
+  "level_10": {
+    "title": "Level 10: Universal Fault-Tolerance Extreme Test",
+    "payload_type": "tdoped",
+    "num_qubits": 7,
+    "depth_layers": 36,
+    "t_count": 15,
+    "max_checks": 5,
+    "description": "7-qubit extreme test with 15 T-gates. Precise Z-check placement is required to hit target score."
+  }
 }

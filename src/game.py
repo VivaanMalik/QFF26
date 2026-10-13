@@ -88,7 +88,7 @@ def play_level(level_id, num_checks = 0, target_qubits = None, placed_checks = N
     counts_noisy = run_noisy_simulation(checked_qc, shots=shots)
 
     # 5. Calculate Metrics & Game Score (100 * H)
-    metrics = compute_all_metrics(counts_ideal, counts_noisy, ancilla_bits)
+    metrics = compute_all_metrics(counts_ideal, counts_noisy, ancilla_bits, 1)
     game_score = round(metrics["harmonic_score"] * 100, 2)
 
     # 6. Build Feedback

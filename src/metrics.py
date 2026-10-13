@@ -65,20 +65,23 @@ def marginalize_raw_counts(counts, ancilla_bit_indices = None):
 
     return raw_data_counts
 
-def calculate_harmonic_score(F, R):
-    if (F + R) == 0:
+def calculate_harmonic_score(fidelity, retention, beta=2):
+    if (fidelity + beta * beta * retention) == 0:
         return 0.0
-    return float((2 * F * R) / (F + R))
+        
+    beta_sq = beta * beta
+    score = ((1 + beta_sq) * fidelity * retention) / (fidelity + beta_sq * retention)
+    return float(score)
 
 
-def compute_all_metrics(counts_ideal, counts_noisy_raw, ancilla_bit_indices = None):
+def compute_all_metrics(counts_ideal, counts_noisy_raw, ancilla_bit_indices = None, beta=2):
     raw_data_counts = marginalize_raw_counts(counts_noisy_raw, ancilla_bit_indices)
     raw_fidelity = calculate_hellinger_fidelity(counts_ideal, raw_data_counts)
     
     post_selected_counts, retention = filter_syndrome_shots(counts_noisy_raw, ancilla_bit_indices)
     post_selected_fidelity = calculate_hellinger_fidelity(counts_ideal, post_selected_counts)
 
-    score = calculate_harmonic_score(post_selected_fidelity, retention)
+    score = calculate_harmonic_score(post_selected_fidelity, retention, beta)
 
     return {
         "raw_fidelity": raw_fidelity,
