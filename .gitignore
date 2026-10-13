@@ -1,0 +1,10 @@
+# envs
+.venv/
+venv/
+env/
+.env
+
+__pycache__/
+
+# ipynb
+.ipynb_checkpoints/
