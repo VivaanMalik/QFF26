@@ -1,0 +1,57 @@
+{
+    "level_1": {
+        "title": "Level 1: Shallow Clifford",
+        "payload_type": "clifford",
+        "num_qubits": 3,
+        "depth_layers": 2,
+        "t_count": 0,
+        "max_checks": 3,
+        "description": "Protect a shallow 3-qubit Clifford state with low gate noise."
+    },
+    "level_2": {
+        "title": "Level 2: Medium Depth Clifford",
+        "payload_type": "clifford",
+        "num_qubits": 3,
+        "depth_layers": 5,
+        "t_count": 0,
+        "max_checks": 5,
+        "description": "Higher depth introduces cumulative noise. Balance check count vs. retention."
+    },
+    "level_3": {
+        "title": "Level 3: Deep Clifford Endurance",
+        "payload_type": "clifford",
+        "num_qubits": 4,
+        "depth_layers": 10,
+        "t_count": 0,
+        "max_checks": 6,
+        "description": "Deep circuit with heavy noise. Over-checking will crash shot retention!"
+    },
+
+    "level_4": {
+        "title": "Level 4: Light T-Doping",
+        "payload_type": "tdoped",
+        "num_qubits": 3,
+        "depth_layers": 3,
+        "t_count": 1,
+        "max_checks": 3,
+        "description": "First non-Clifford gate introduced. Place hand-made Z-checks on commuting lines."
+    },
+    "level_5": {
+        "title": "Level 5: Medium T-Doping",
+        "payload_type": "tdoped",
+        "num_qubits": 3,
+        "depth_layers": 5,
+        "t_count": 4,
+        "max_checks": 4,
+        "description": "Multiple T-gates degrade baseline fidelity. Apply Z-checks strategically."
+    },
+    "level_6": {
+        "title": "Level 6: Universal Gauntlet",
+        "payload_type": "tdoped",
+        "num_qubits": 4,
+        "depth_layers": 8,
+        "t_count": 8,
+        "max_checks": 6,
+        "description": "High depth combined with heavy T-doping. Maximum protection challenge."
+    }
+}
