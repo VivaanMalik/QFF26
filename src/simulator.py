@@ -45,24 +45,40 @@ def apply_clifford_spacetime_checks(circuit, num_checks, target_qubits):
             qc.measure_all()
         return qc, []
 
+    targets = target_qubits if target_qubits else list(range(circuit.num_qubits))
+
     try:
-        targets = target_qubits if target_qubits else list(range(circuit.num_qubits))
+        import qiskit_paulice as paulice
+        from qiskit_paulice.noise_models import NoiseModel as PauliceNoiseModel
+        from qiskit_ibm_runtime.fake_provider import FakeTorino
+
+        # 1. Prepare measured circuit copy for paulice
+        qc_measured = circuit.copy()
+        if qc_measured.num_clbits == 0:
+            qc_measured.measure_all()
+
         layout = list(range(circuit.num_qubits))
         paulice_noise = PauliceNoiseModel.from_backend(FakeTorino(), layout)
-        results = paulice.add_pauli_checks(circuit, targets, paulice_noise)
+        data_qubit_indices = list(range(circuit.num_qubits))
+
+        # 2. Pass measured_qubits explicitly to add_pauli_checks
+        results = paulice.add_pauli_checks(
+            qc_measured,
+            targets,
+            paulice_noise,
+            measured_qubits=data_qubit_indices
+        )
 
         selected_idx = min(num_checks, len(results) - 1)
         checked_item = results[selected_idx]
         checked_qc = checked_item.circuit if hasattr(checked_item, "circuit") else checked_item
-        
-        # Track ancilla classical bits added by paulice
-        # Ancilla bits are inserted into dedicated syndrome classical registers
+
         ancilla_indices = list(range(circuit.num_qubits, checked_qc.num_clbits))
         return checked_qc, ancilla_indices
 
-    except (ImportError, AttributeError):
-        return _manual_fallback_check_insertion(circuit, num_checks, target_qubits)
-
+    except Exception:
+        # Fallback uses unmeasured circuit to avoid duplicate measurement gates
+        return _manual_fallback_check_insertion(circuit, num_checks, targets)
 
 def apply_manual_z_checks(circuit, placed_checks):
     

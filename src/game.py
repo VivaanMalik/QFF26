@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from src.circuits import build_clifford_payload, build_tdoped_payload
+from src.circuits import get_clifford_payload, get_tdoped_payload
 from src.simulator import run_ideal_simulation, apply_clifford_spacetime_checks, apply_manual_z_checks, run_noisy_simulation
 from src.metrics import compute_all_metrics
 
@@ -64,9 +64,9 @@ def play_level(level_id, num_checks = 0, target_qubits = None, placed_checks = N
 
     # 1. Build Base Circuit Payload
     if payload_type == "clifford":
-        base_qc = build_clifford_payload(num_qubits=num_qubits, depth_layers=depth_layers)
+        base_qc = get_clifford_payload(num_qubits=num_qubits, depth_layers=depth_layers)
     else:
-        base_qc = build_tdoped_payload(num_qubits=num_qubits, depth_layers=depth_layers, t_count=t_count)
+        base_qc = get_tdoped_payload(num_qubits=num_qubits, depth_layers=depth_layers, t_count=t_count)
 
     # 2. Reference Ideal Counts (No Noise)
     counts_ideal = run_ideal_simulation(base_qc, shots=shots)
