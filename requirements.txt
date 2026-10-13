@@ -1,8 +1,10 @@
 qiskit
 qiskit-aer
 qiskit-paulice
+qiskit_ibm_runtime
 numpy
 scipy
 pandas
 matplotlib
 pytest
+pylatexenc
