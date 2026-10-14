@@ -22,9 +22,11 @@
     "max_checks": 3,
     "energy_budget": 100,
     "check_cost": 35,
-    "blocked_channels": [1],
+    "blocked_channels": [
+      1
+    ],
     "target_score": 58.0,
-    "min_retention": 0.20,
+    "min_retention": 0.2,
     "description": "Channel 1 is corrupted! You cannot place checks on blocked channels."
   },
   "level_3": {
@@ -36,9 +38,11 @@
     "max_checks": 3,
     "energy_budget": 120,
     "check_cost": 40,
-    "blocked_channels": [3],
+    "blocked_channels": [
+      3
+    ],
     "target_score": 60.0,
-    "min_retention": 0.20,
+    "min_retention": 0.2,
     "description": "5-qubit lattice. High gate noise. Avoid channel 3 and maximize post-selection fidelity."
   },
   "level_4": {
@@ -50,7 +54,10 @@
     "max_checks": 4,
     "energy_budget": 150,
     "check_cost": 40,
-    "blocked_channels": [2, 4],
+    "blocked_channels": [
+      2,
+      4
+    ],
     "target_score": 62.0,
     "min_retention": 0.15,
     "description": "Severe thermal relaxation. Channels 2 and 4 are completely offline."
@@ -64,7 +71,10 @@
     "max_checks": 5,
     "energy_budget": 160,
     "check_cost": 40,
-    "blocked_channels": [1, 5],
+    "blocked_channels": [
+      1,
+      5
+    ],
     "target_score": 65.0,
     "min_retention": 0.15,
     "description": "7-qubit extreme Clifford gauntlet. Raw fidelity is below 20%. Filter carefully."
@@ -80,8 +90,8 @@
     "check_cost": 50,
     "blocked_channels": [],
     "target_score": 55.0,
-    "min_retention": 0.20,
-    "description": "T-gates injected! Place manual ZZ parity checks without destroying phase coherence."
+    "min_retention": 0.2,
+    "description": "T-doped fidelity study: 2 T/Tdg gates; no Paulice checks are applied because the official method accepts Clifford circuits only."
   },
   "level_7": {
     "title": "Level 7: T-State Contagion",
@@ -92,10 +102,12 @@
     "max_checks": 3,
     "energy_budget": 110,
     "check_cost": 35,
-    "blocked_channels": [2],
+    "blocked_channels": [
+      2
+    ],
     "target_score": 58.0,
     "min_retention": 0.18,
-    "description": "4 T-gates disrupting stabilizer symmetry. Channel 2 is blocked."
+    "description": "T-doped fidelity study: 4 T/Tdg gates; compare noisy output fidelity without checks."
   },
   "level_8": {
     "title": "Level 8: Quantum Phase Cascade",
@@ -106,10 +118,12 @@
     "max_checks": 3,
     "energy_budget": 120,
     "check_cost": 40,
-    "blocked_channels": [1],
+    "blocked_channels": [
+      1
+    ],
     "target_score": 60.0,
     "min_retention": 0.15,
-    "description": "7 T-gates causing severe decoherence. Target high-crosstalk lines."
+    "description": "T-doped fidelity study: 7 T/Tdg gates; compare noisy output fidelity without checks."
   },
   "level_9": {
     "title": "Level 9: Fault-Tolerant Breach",
@@ -120,10 +134,13 @@
     "max_checks": 4,
     "energy_budget": 140,
     "check_cost": 35,
-    "blocked_channels": [0, 4],
+    "blocked_channels": [
+      0,
+      4
+    ],
     "target_score": 62.0,
     "min_retention": 0.15,
-    "description": "10 T-gates and heavy SWAP chains. Channels 0 and 4 are blocked."
+    "description": "T-doped fidelity study: 10 T/Tdg gates; compare noisy output fidelity without checks."
   },
   "level_10": {
     "title": "Level 10: Absolute Zero Citadel",
@@ -134,9 +151,13 @@
     "max_checks": 5,
     "energy_budget": 180,
     "check_cost": 35,
-    "blocked_channels": [1, 3, 5],
+    "blocked_channels": [
+      1,
+      3,
+      5
+    ],
     "target_score": 65.0,
-    "min_retention": 0.10,
-    "description": "15 T-gates, depth 40. Ultimate test of spacetime parity filtering."
+    "min_retention": 0.1,
+    "description": "T-doped fidelity study: 15 T/Tdg gates; compare noisy output fidelity without checks."
   }
 }

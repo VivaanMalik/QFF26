@@ -1,0 +1,1853 @@
+{
+  "rankings": {
+    "Guided::level_10::534afd69aae09438": {
+      "analysis_only_count": 1,
+      "best_strategy": null,
+      "cache_key": "Guided::level_10::534afd69aae09438",
+      "config_signature": "534afd69aae09438668f7ef86e618c0771e7dad68d5f1b0c904000ed947b35da",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 3,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "tdoped",
+        "t_count": 4,
+        "target_score": 45.0,
+        "title": "Level 10: Absolute Zero Citadel"
+      },
+      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
+      "invalid_strategy_count": 0,
+      "level_id": "level_10",
+      "level_title": "Level 10: Absolute Zero Citadel",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "tdoped",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:13+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 18,
+            "depth_before": 18,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.867582,
+          "rank": null,
+          "raw_fidelity": 0.867582,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": null,
+          "status": "analysis_only",
+          "targets": []
+        }
+      ],
+      "strategies_attempted": 1,
+      "valid_strategy_count": 0
+    },
+    "Guided::level_1::174357123c8bbf8c": {
+      "analysis_only_count": 0,
+      "best_strategy": {
+        "fidelity": 0.981334,
+        "rank": 1,
+        "retention": 0.842773,
+        "score": 95.01,
+        "targets": [
+          1
+        ]
+      },
+      "cache_key": "Guided::level_1::174357123c8bbf8c",
+      "config_signature": "174357123c8bbf8cc3f3afe9d841bf882d24e0fa4213229262e678dfecceede3",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 2,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "clifford",
+        "t_count": 0,
+        "target_score": 45.0,
+        "title": "Level 1: Outpost Sector"
+      },
+      "error": null,
+      "invalid_strategy_count": 0,
+      "level_id": "level_1",
+      "level_title": "Level 1: Outpost Sector",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "clifford",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:12+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 12,
+            "depth_before": 12,
+            "two_qubit_gates_after": 8,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.8662,
+          "rank": 7,
+          "raw_fidelity": 0.8662,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": 89.0,
+          "status": "valid",
+          "targets": []
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0414174649258954,
+          "post_selected_fidelity": 0.949311,
+          "rank": 5,
+          "raw_fidelity": 0.873476,
+          "raw_shots": 2048,
+          "retained_shots": 1797,
+          "retention_rate": 0.877441,
+          "score": 93.4,
+          "status": "valid",
+          "targets": [
+            0
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 15,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 27,
+            "depth_before": 12,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0414174649258954,
+          "post_selected_fidelity": 0.981334,
+          "rank": 1,
+          "raw_fidelity": 0.871514,
+          "raw_shots": 2048,
+          "retained_shots": 1726,
+          "retention_rate": 0.842773,
+          "score": 95.01,
+          "status": "valid",
+          "targets": [
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "ancilla_qubits": 1,
+            "depth_after": 16,
+            "depth_before": 12,
+            "two_qubit_gates_after": 10,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.2252360579214288,
+          "post_selected_fidelity": 0.920513,
+          "rank": 6,
+          "raw_fidelity": 0.876145,
+          "raw_shots": 2048,
+          "retained_shots": 1868,
+          "retention_rate": 0.912109,
+          "score": 91.88,
+          "status": "valid",
+          "targets": [
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              2,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0145045085041173,
+          "post_selected_fidelity": 0.992716,
+          "rank": 2,
+          "raw_fidelity": 0.869597,
+          "raw_shots": 2048,
+          "retained_shots": 1658,
+          "retention_rate": 0.80957,
+          "score": 94.97,
+          "status": "valid",
+          "targets": [
+            0,
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.01983087621565,
+          "post_selected_fidelity": 0.987157,
+          "rank": 3,
+          "raw_fidelity": 0.869597,
+          "raw_shots": 2048,
+          "retained_shots": 1651,
+          "retention_rate": 0.806152,
+          "score": 94.47,
+          "status": "valid",
+          "targets": [
+            0,
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 33,
+            "added_two_qubit_gates": 6,
+            "ancilla_qubits": 2,
+            "depth_after": 45,
+            "depth_before": 12,
+            "two_qubit_gates_after": 14,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0272003226772775,
+          "post_selected_fidelity": 0.978265,
+          "rank": 4,
+          "raw_fidelity": 0.8621,
+          "raw_shots": 2048,
+          "retained_shots": 1621,
+          "retention_rate": 0.791504,
+          "score": 93.42,
+          "status": "valid",
+          "targets": [
+            1,
+            2
+          ]
+        }
+      ],
+      "strategies_attempted": 7,
+      "valid_strategy_count": 7
+    },
+    "Guided::level_2::2c6d5160b3922a6f": {
+      "analysis_only_count": 0,
+      "best_strategy": {
+        "fidelity": 0.981334,
+        "rank": 1,
+        "retention": 0.842773,
+        "score": 95.01,
+        "targets": [
+          1
+        ]
+      },
+      "cache_key": "Guided::level_2::2c6d5160b3922a6f",
+      "config_signature": "2c6d5160b3922a6fd5bc9dbfce7867aaaa5bda523195ec448e54bda26e4320c1",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 2,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "clifford",
+        "t_count": 0,
+        "target_score": 45.0,
+        "title": "Level 2: Hazardous Corridor"
+      },
+      "error": null,
+      "invalid_strategy_count": 0,
+      "level_id": "level_2",
+      "level_title": "Level 2: Hazardous Corridor",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "clifford",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:12+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 12,
+            "depth_before": 12,
+            "two_qubit_gates_after": 8,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.8662,
+          "rank": 7,
+          "raw_fidelity": 0.8662,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": 89.0,
+          "status": "valid",
+          "targets": []
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0414174649258954,
+          "post_selected_fidelity": 0.949311,
+          "rank": 5,
+          "raw_fidelity": 0.873476,
+          "raw_shots": 2048,
+          "retained_shots": 1797,
+          "retention_rate": 0.877441,
+          "score": 93.4,
+          "status": "valid",
+          "targets": [
+            0
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 15,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 27,
+            "depth_before": 12,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0414174649258954,
+          "post_selected_fidelity": 0.981334,
+          "rank": 1,
+          "raw_fidelity": 0.871514,
+          "raw_shots": 2048,
+          "retained_shots": 1726,
+          "retention_rate": 0.842773,
+          "score": 95.01,
+          "status": "valid",
+          "targets": [
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "ancilla_qubits": 1,
+            "depth_after": 16,
+            "depth_before": 12,
+            "two_qubit_gates_after": 10,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.2252360579214288,
+          "post_selected_fidelity": 0.920513,
+          "rank": 6,
+          "raw_fidelity": 0.876145,
+          "raw_shots": 2048,
+          "retained_shots": 1868,
+          "retention_rate": 0.912109,
+          "score": 91.88,
+          "status": "valid",
+          "targets": [
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              2,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0145045085041173,
+          "post_selected_fidelity": 0.992716,
+          "rank": 2,
+          "raw_fidelity": 0.869597,
+          "raw_shots": 2048,
+          "retained_shots": 1658,
+          "retention_rate": 0.80957,
+          "score": 94.97,
+          "status": "valid",
+          "targets": [
+            0,
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.01983087621565,
+          "post_selected_fidelity": 0.987157,
+          "rank": 3,
+          "raw_fidelity": 0.869597,
+          "raw_shots": 2048,
+          "retained_shots": 1651,
+          "retention_rate": 0.806152,
+          "score": 94.47,
+          "status": "valid",
+          "targets": [
+            0,
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 33,
+            "added_two_qubit_gates": 6,
+            "ancilla_qubits": 2,
+            "depth_after": 45,
+            "depth_before": 12,
+            "two_qubit_gates_after": 14,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0272003226772775,
+          "post_selected_fidelity": 0.978265,
+          "rank": 4,
+          "raw_fidelity": 0.8621,
+          "raw_shots": 2048,
+          "retained_shots": 1621,
+          "retention_rate": 0.791504,
+          "score": 93.42,
+          "status": "valid",
+          "targets": [
+            1,
+            2
+          ]
+        }
+      ],
+      "strategies_attempted": 7,
+      "valid_strategy_count": 7
+    },
+    "Guided::level_3::3a91ac2c76208566": {
+      "analysis_only_count": 0,
+      "best_strategy": {
+        "fidelity": 0.981334,
+        "rank": 1,
+        "retention": 0.842773,
+        "score": 95.01,
+        "targets": [
+          1
+        ]
+      },
+      "cache_key": "Guided::level_3::3a91ac2c76208566",
+      "config_signature": "3a91ac2c762085668da111dec1bc53ee54cef490aa9291ac1a85ba48c1869cf8",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 2,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "clifford",
+        "t_count": 0,
+        "target_score": 45.0,
+        "title": "Level 3: Deep Lattice Storm"
+      },
+      "error": null,
+      "invalid_strategy_count": 0,
+      "level_id": "level_3",
+      "level_title": "Level 3: Deep Lattice Storm",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "clifford",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:12+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 12,
+            "depth_before": 12,
+            "two_qubit_gates_after": 8,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.8662,
+          "rank": 7,
+          "raw_fidelity": 0.8662,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": 89.0,
+          "status": "valid",
+          "targets": []
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0414174649258954,
+          "post_selected_fidelity": 0.949311,
+          "rank": 5,
+          "raw_fidelity": 0.873476,
+          "raw_shots": 2048,
+          "retained_shots": 1797,
+          "retention_rate": 0.877441,
+          "score": 93.4,
+          "status": "valid",
+          "targets": [
+            0
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 15,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 27,
+            "depth_before": 12,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0414174649258954,
+          "post_selected_fidelity": 0.981334,
+          "rank": 1,
+          "raw_fidelity": 0.871514,
+          "raw_shots": 2048,
+          "retained_shots": 1726,
+          "retention_rate": 0.842773,
+          "score": 95.01,
+          "status": "valid",
+          "targets": [
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "ancilla_qubits": 1,
+            "depth_after": 16,
+            "depth_before": 12,
+            "two_qubit_gates_after": 10,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.2252360579214288,
+          "post_selected_fidelity": 0.920513,
+          "rank": 6,
+          "raw_fidelity": 0.876145,
+          "raw_shots": 2048,
+          "retained_shots": 1868,
+          "retention_rate": 0.912109,
+          "score": 91.88,
+          "status": "valid",
+          "targets": [
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              2,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0145045085041173,
+          "post_selected_fidelity": 0.992716,
+          "rank": 2,
+          "raw_fidelity": 0.869597,
+          "raw_shots": 2048,
+          "retained_shots": 1658,
+          "retention_rate": 0.80957,
+          "score": 94.97,
+          "status": "valid",
+          "targets": [
+            0,
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 30,
+            "depth_before": 12,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.01983087621565,
+          "post_selected_fidelity": 0.987157,
+          "rank": 3,
+          "raw_fidelity": 0.869597,
+          "raw_shots": 2048,
+          "retained_shots": 1651,
+          "retention_rate": 0.806152,
+          "score": 94.47,
+          "status": "valid",
+          "targets": [
+            0,
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 33,
+            "added_two_qubit_gates": 6,
+            "ancilla_qubits": 2,
+            "depth_after": 45,
+            "depth_before": 12,
+            "two_qubit_gates_after": 14,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0272003226772775,
+          "post_selected_fidelity": 0.978265,
+          "rank": 4,
+          "raw_fidelity": 0.8621,
+          "raw_shots": 2048,
+          "retained_shots": 1621,
+          "retention_rate": 0.791504,
+          "score": 93.42,
+          "status": "valid",
+          "targets": [
+            1,
+            2
+          ]
+        }
+      ],
+      "strategies_attempted": 7,
+      "valid_strategy_count": 7
+    },
+    "Guided::level_4::aa8a7f661a7e7ac0": {
+      "analysis_only_count": 0,
+      "best_strategy": {
+        "fidelity": 0.975372,
+        "rank": 1,
+        "retention": 0.855957,
+        "score": 94.89,
+        "targets": [
+          2
+        ]
+      },
+      "cache_key": "Guided::level_4::aa8a7f661a7e7ac0",
+      "config_signature": "aa8a7f661a7e7ac062b43a1e469d3a6926a4ee30c07bc0aecbcd3ebb1ff8d202",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 3,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "clifford",
+        "t_count": 0,
+        "target_score": 45.0,
+        "title": "Level 4: Thermal Decay Nexus"
+      },
+      "error": null,
+      "invalid_strategy_count": 0,
+      "level_id": "level_4",
+      "level_title": "Level 4: Thermal Decay Nexus",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "clifford",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:13+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 16,
+            "depth_before": 16,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.86758,
+          "rank": 7,
+          "raw_fidelity": 0.86758,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": 89.12,
+          "status": "valid",
+          "targets": []
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 34,
+            "depth_before": 16,
+            "two_qubit_gates_after": 14,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0496297202512062,
+          "post_selected_fidelity": 0.972884,
+          "rank": 2,
+          "raw_fidelity": 0.859925,
+          "raw_shots": 2048,
+          "retained_shots": 1714,
+          "retention_rate": 0.836914,
+          "score": 94.23,
+          "status": "valid",
+          "targets": [
+            0
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 35,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 1,
+            "depth_after": 51,
+            "depth_before": 16,
+            "two_qubit_gates_after": 16,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.055140502908303,
+          "post_selected_fidelity": 0.969228,
+          "rank": 4,
+          "raw_fidelity": 0.848141,
+          "raw_shots": 2048,
+          "retained_shots": 1691,
+          "retention_rate": 0.825684,
+          "score": 93.67,
+          "status": "valid",
+          "targets": [
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "ancilla_qubits": 1,
+            "depth_after": 20,
+            "depth_before": 16,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0455155294757166,
+          "post_selected_fidelity": 0.975372,
+          "rank": 1,
+          "raw_fidelity": 0.865193,
+          "raw_shots": 2048,
+          "retained_shots": 1753,
+          "retention_rate": 0.855957,
+          "score": 94.89,
+          "status": "valid",
+          "targets": [
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 21,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 37,
+            "depth_before": 16,
+            "two_qubit_gates_after": 16,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0251852085076854,
+          "post_selected_fidelity": 0.983703,
+          "rank": 6,
+          "raw_fidelity": 0.850091,
+          "raw_shots": 2048,
+          "retained_shots": 1605,
+          "retention_rate": 0.783691,
+          "score": 93.59,
+          "status": "valid",
+          "targets": [
+            0,
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 20,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 36,
+            "depth_before": 16,
+            "two_qubit_gates_after": 16,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0278729072226047,
+          "post_selected_fidelity": 0.982618,
+          "rank": 5,
+          "raw_fidelity": 0.849112,
+          "raw_shots": 2048,
+          "retained_shots": 1615,
+          "retention_rate": 0.788574,
+          "score": 93.65,
+          "status": "valid",
+          "targets": [
+            0,
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 35,
+            "added_two_qubit_gates": 8,
+            "ancilla_qubits": 2,
+            "depth_after": 51,
+            "depth_before": 16,
+            "two_qubit_gates_after": 19,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.031917672808623,
+          "post_selected_fidelity": 0.984462,
+          "rank": 3,
+          "raw_fidelity": 0.85199,
+          "raw_shots": 2048,
+          "retained_shots": 1612,
+          "retention_rate": 0.787109,
+          "score": 93.75,
+          "status": "valid",
+          "targets": [
+            1,
+            2
+          ]
+        }
+      ],
+      "strategies_attempted": 7,
+      "valid_strategy_count": 7
+    },
+    "Guided::level_5::196f7e45d724faca": {
+      "analysis_only_count": 0,
+      "best_strategy": {
+        "fidelity": 0.975372,
+        "rank": 1,
+        "retention": 0.855957,
+        "score": 94.89,
+        "targets": [
+          2
+        ]
+      },
+      "cache_key": "Guided::level_5::196f7e45d724faca",
+      "config_signature": "196f7e45d724faca174d1e8667b3a7f81fc675f33f850a3cc180010ff7e692ea",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 3,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "clifford",
+        "t_count": 0,
+        "target_score": 45.0,
+        "title": "Level 5: Clifford Core Meltdown"
+      },
+      "error": null,
+      "invalid_strategy_count": 0,
+      "level_id": "level_5",
+      "level_title": "Level 5: Clifford Core Meltdown",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "clifford",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:13+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 16,
+            "depth_before": 16,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.86758,
+          "rank": 7,
+          "raw_fidelity": 0.86758,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": 89.12,
+          "status": "valid",
+          "targets": []
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "ancilla_qubits": 1,
+            "depth_after": 34,
+            "depth_before": 16,
+            "two_qubit_gates_after": 14,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0496297202512062,
+          "post_selected_fidelity": 0.972884,
+          "rank": 2,
+          "raw_fidelity": 0.859925,
+          "raw_shots": 2048,
+          "retained_shots": 1714,
+          "retention_rate": 0.836914,
+          "score": 94.23,
+          "status": "valid",
+          "targets": [
+            0
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 35,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 1,
+            "depth_after": 51,
+            "depth_before": 16,
+            "two_qubit_gates_after": 16,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.055140502908303,
+          "post_selected_fidelity": 0.969228,
+          "rank": 4,
+          "raw_fidelity": 0.848141,
+          "raw_shots": 2048,
+          "retained_shots": 1691,
+          "retention_rate": 0.825684,
+          "score": 93.67,
+          "status": "valid",
+          "targets": [
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "cost": {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "ancilla_qubits": 1,
+            "depth_after": 20,
+            "depth_before": 16,
+            "two_qubit_gates_after": 13,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 1,
+          "num_checks_used": 1,
+          "paulice_cost": 1.0455155294757166,
+          "post_selected_fidelity": 0.975372,
+          "rank": 1,
+          "raw_fidelity": 0.865193,
+          "raw_shots": 2048,
+          "retained_shots": 1753,
+          "retention_rate": 0.855957,
+          "score": 94.89,
+          "status": "valid",
+          "targets": [
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 21,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 37,
+            "depth_before": 16,
+            "two_qubit_gates_after": 16,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0251852085076854,
+          "post_selected_fidelity": 0.983703,
+          "rank": 6,
+          "raw_fidelity": 0.850091,
+          "raw_shots": 2048,
+          "retained_shots": 1605,
+          "retention_rate": 0.783691,
+          "score": 93.59,
+          "status": "valid",
+          "targets": [
+            0,
+            1
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 20,
+            "added_two_qubit_gates": 5,
+            "ancilla_qubits": 2,
+            "depth_after": 36,
+            "depth_before": 16,
+            "two_qubit_gates_after": 16,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.0278729072226047,
+          "post_selected_fidelity": 0.982618,
+          "rank": 5,
+          "raw_fidelity": 0.849112,
+          "raw_shots": 2048,
+          "retained_shots": 1615,
+          "retention_rate": 0.788574,
+          "score": 93.65,
+          "status": "valid",
+          "targets": [
+            0,
+            2
+          ]
+        },
+        {
+          "check_supports": [
+            [
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              1,
+              2,
+              4
+            ]
+          ],
+          "cost": {
+            "added_depth": 35,
+            "added_two_qubit_gates": 8,
+            "ancilla_qubits": 2,
+            "depth_after": 51,
+            "depth_before": 16,
+            "two_qubit_gates_after": 19,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 2,
+          "num_checks_used": 2,
+          "paulice_cost": 1.031917672808623,
+          "post_selected_fidelity": 0.984462,
+          "rank": 3,
+          "raw_fidelity": 0.85199,
+          "raw_shots": 2048,
+          "retained_shots": 1612,
+          "retention_rate": 0.787109,
+          "score": 93.75,
+          "status": "valid",
+          "targets": [
+            1,
+            2
+          ]
+        }
+      ],
+      "strategies_attempted": 7,
+      "valid_strategy_count": 7
+    },
+    "Guided::level_6::74d830f73264636b": {
+      "analysis_only_count": 1,
+      "best_strategy": null,
+      "cache_key": "Guided::level_6::74d830f73264636b",
+      "config_signature": "74d830f73264636b8051686dafcde931eb69293764f99e5ae70efeb72a0c26c6",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 2,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "tdoped",
+        "t_count": 1,
+        "target_score": 45.0,
+        "title": "Level 6: Non-Clifford Anomaly"
+      },
+      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
+      "invalid_strategy_count": 0,
+      "level_id": "level_6",
+      "level_title": "Level 6: Non-Clifford Anomaly",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "tdoped",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:13+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 12,
+            "depth_before": 12,
+            "two_qubit_gates_after": 8,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.866201,
+          "rank": null,
+          "raw_fidelity": 0.866201,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": null,
+          "status": "analysis_only",
+          "targets": []
+        }
+      ],
+      "strategies_attempted": 1,
+      "valid_strategy_count": 0
+    },
+    "Guided::level_7::d9aff5cd7d40c728": {
+      "analysis_only_count": 1,
+      "best_strategy": null,
+      "cache_key": "Guided::level_7::d9aff5cd7d40c728",
+      "config_signature": "d9aff5cd7d40c728759a6bf56df81c7143a8b5550b2faf300386b66e52d78b37",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 2,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "tdoped",
+        "t_count": 1,
+        "target_score": 45.0,
+        "title": "Level 7: T-State Contagion"
+      },
+      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
+      "invalid_strategy_count": 0,
+      "level_id": "level_7",
+      "level_title": "Level 7: T-State Contagion",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "tdoped",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:13+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 12,
+            "depth_before": 12,
+            "two_qubit_gates_after": 8,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.866201,
+          "rank": null,
+          "raw_fidelity": 0.866201,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": null,
+          "status": "analysis_only",
+          "targets": []
+        }
+      ],
+      "strategies_attempted": 1,
+      "valid_strategy_count": 0
+    },
+    "Guided::level_8::c03ba4106aae4eb3": {
+      "analysis_only_count": 1,
+      "best_strategy": null,
+      "cache_key": "Guided::level_8::c03ba4106aae4eb3",
+      "config_signature": "c03ba4106aae4eb3e2234862b52a2a624ae8580f50fa5d8e4ea314277742be29",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 2,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "tdoped",
+        "t_count": 2,
+        "target_score": 45.0,
+        "title": "Level 8: Quantum Phase Cascade"
+      },
+      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
+      "invalid_strategy_count": 0,
+      "level_id": "level_8",
+      "level_title": "Level 8: Quantum Phase Cascade",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "tdoped",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:13+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 13,
+            "depth_before": 13,
+            "two_qubit_gates_after": 8,
+            "two_qubit_gates_before": 8
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.866201,
+          "rank": null,
+          "raw_fidelity": 0.866201,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": null,
+          "status": "analysis_only",
+          "targets": []
+        }
+      ],
+      "strategies_attempted": 1,
+      "valid_strategy_count": 0
+    },
+    "Guided::level_9::fef0e0b6368b278f": {
+      "analysis_only_count": 1,
+      "best_strategy": null,
+      "cache_key": "Guided::level_9::fef0e0b6368b278f",
+      "config_signature": "fef0e0b6368b278f711e00dc2617b75233554ac444c97f2ba90d00b2011ad1a8",
+      "difficulty": "Guided",
+      "effective_config": {
+        "blocked_channels": [],
+        "check_cost": 35,
+        "depth_layers": 3,
+        "description": "Guided practice: same payload family in a short 3-qubit circuit, using the shared reference noise model.",
+        "energy_budget": 100,
+        "max_checks": 2,
+        "min_retention": 0.1,
+        "num_qubits": 3,
+        "payload_type": "tdoped",
+        "t_count": 3,
+        "target_score": 45.0,
+        "title": "Level 9: Fault-Tolerant Breach"
+      },
+      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
+      "invalid_strategy_count": 0,
+      "level_id": "level_9",
+      "level_title": "Level 9: Fault-Tolerant Breach",
+      "noise_sources": [
+        "FakeTorino-derived uniform noise"
+      ],
+      "package_versions": {
+        "numpy": "2.5.4",
+        "qiskit": "2.5.2",
+        "qiskit-aer": "0.17.2",
+        "qiskit-ibm-runtime": "0.50.0",
+        "qiskit-paulice": "0.2.1"
+      },
+      "paulice_seed": 1764,
+      "payload_type": "tdoped",
+      "rank_status": "complete",
+      "ranked_at": "2026-10-14T11:19:13+00:00",
+      "ranking_engine_version": "2",
+      "scoring_beta": 2.0,
+      "shots_per_strategy": 2048,
+      "simulator_seed": 2026,
+      "strategies": [
+        {
+          "check_supports": [],
+          "cost": {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "ancilla_qubits": 0,
+            "depth_after": 17,
+            "depth_before": 17,
+            "two_qubit_gates_after": 11,
+            "two_qubit_gates_before": 11
+          },
+          "noise_source": "FakeTorino-derived uniform noise",
+          "num_checks_requested": 0,
+          "num_checks_used": 0,
+          "paulice_cost": null,
+          "post_selected_fidelity": 0.867582,
+          "rank": null,
+          "raw_fidelity": 0.867582,
+          "raw_shots": 2048,
+          "retained_shots": 2048,
+          "retention_rate": 1.0,
+          "score": null,
+          "status": "analysis_only",
+          "targets": []
+        }
+      ],
+      "strategies_attempted": 1,
+      "valid_strategy_count": 0
+    }
+  },
+  "schema_version": 1,
+  "updated_at": "2026-10-14T11:19:13+00:00"
+}
