@@ -2,15 +2,15 @@
   "completed_levels": 10,
   "current_level": null,
   "current_strategy": null,
-  "difficulty": "Guided",
+  "difficulty": "Standard",
   "error": null,
-  "finished_at": "2026-10-14T11:19:13+00:00",
-  "pid": 182064,
+  "finished_at": "2026-10-14T15:32:35+00:00",
+  "pid": 37817,
   "skipped_cached_levels": 0,
-  "started_at": "2026-10-14T11:19:11+00:00",
+  "started_at": "2026-10-14T15:32:09+00:00",
   "status": "complete",
   "strategies_done_in_level": 1,
   "strategies_total_in_level": 1,
   "total_levels": 10,
-  "updated_at": "2026-10-14T11:19:13+00:00"
+  "updated_at": "2026-10-14T15:32:35+00:00"
 }

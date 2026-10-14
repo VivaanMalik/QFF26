@@ -17,7 +17,7 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
-RANKING_ENGINE_VERSION = "2"
+RANKING_ENGINE_VERSION = "3"
 SCORING_BETA = 2.0
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
@@ -433,8 +433,9 @@ def rank_all_levels_and_strategies(
                 q for q in range(int(cfg["num_qubits"]))
                 if q not in {int(item) for item in cfg.get("blocked_channels", [])}
             ]
-            maximum = max_checks_fn(cfg, len(eligible))
-            candidates = enumerate_strategy_sets(eligible, maximum)
+            # Exhaustively rank every subset of unblocked qubits. Mission minimum
+            # retention and normal-play check/energy budgets do not exclude candidates.
+            candidates = enumerate_strategy_sets(eligible, len(eligible))
             status["strategies_total_in_level"] = len(candidates)
             write_job_status(status, status_path)
             records: list[dict[str, Any]] = []
@@ -445,12 +446,22 @@ def rank_all_levels_and_strategies(
                 status["current_strategy"] = "NO CHECKS" if not targets else ",".join(map(str, targets))
                 write_job_status(status, status_path)
                 try:
+                    # Ranking explores all unblocked-qubit subsets, including sets
+                    # larger than the normal mission check/energy budget. Keep those
+                    # limits relaxed only for this ranking run; the saved signature
+                    # still represents the original mission configuration.
+                    strategy_cfg = dict(cfg)
+                    strategy_cfg["max_checks"] = len(eligible)
+                    strategy_cfg["energy_budget"] = max(
+                        int(strategy_cfg.get("energy_budget", 0)),
+                        len(eligible) * max(1, int(strategy_cfg.get("check_cost", 1))),
+                    )
                     result = play_level_fn(
                         level_id,
                         num_checks=len(targets),
                         target_qubits=list(targets),
                         shots=shots,
-                        config_overrides=cfg,
+                        config_overrides=strategy_cfg,
                     )
                     record = _safe_result_record(targets, result)
                     if record.get("score") is None:

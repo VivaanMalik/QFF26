@@ -30,7 +30,7 @@ def generate_feedback_message(fidelity, retention, score_100h):
     if retention < 0.15:
         return f"Very selective: only {retention * 100:.1f}% of shots survived. Try fewer checks."
     if fidelity < 0.35:
-        return f"The output remains noisy ({fidelity * 100:.1f}% post-selected fidelity). Try a different target order."
+        return f"The output remains noisy ({fidelity * 100:.1f}% post-selected fidelity). Try a different target-qubit set."
     if score_100h >= 80:
         return f"Strong balance: {fidelity * 100:.1f}% fidelity with {retention * 100:.1f}% retention."
     return f"Trade-off score: {score_100h:.1f}/100. Compare against the no-check baseline."
@@ -112,8 +112,11 @@ def play_level(
             raise ValueError("Target qubits must be unique.")
         if any(q < 0 or q >= n for q in target_qubits):
             raise ValueError(f"Target qubits must be in 0..{n - 1}.")
-        if num_checks > len(target_qubits):
-            raise ValueError("You cannot add more checks than selected target qubits.")
+        if num_checks != len(target_qubits):
+            raise ValueError(
+                "The number of checks is determined by the selected target qubits: "
+                "pass one target qubit per requested check."
+            )
         if num_checks > int(cfg.get("max_checks", n)):
             raise ValueError(f"This mission permits at most {cfg.get('max_checks')} checks.")
         max_budget_checks = int(cfg.get("energy_budget", 10**9)) // max(1, int(cfg.get("check_cost", 1)))

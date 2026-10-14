@@ -15,8 +15,12 @@ from qiskit_aer.noise import ReadoutError, depolarizing_error
 # only lets non-quantum unit tests (for example, the scoring tests) run in a
 # lightweight environment. The game raises a clear error if Paulice is needed
 # but is not installed.
-from qiskit_paulice import add_pauli_checks
-from qiskit_paulice.noise_models import NoiseModel as PauliceNoiseModel
+try:
+    from qiskit_paulice import add_pauli_checks
+    from qiskit_paulice.noise_models import NoiseModel as PauliceNoiseModel
+except ImportError:  # pragma: no cover - depends on the user's environment
+    add_pauli_checks = None
+    PauliceNoiseModel = None
 
 
 @lru_cache(maxsize=1)

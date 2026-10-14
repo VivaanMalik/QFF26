@@ -38,7 +38,7 @@ This means **three target qubits and three requested checks**. There is no separ
 
 Normal play only runs the strategy the player selected. It does not run an exhaustive ranking search after every mission. A strategy rank is shown only when a completed ranking for the exact level, difficulty, configuration, shot count, scoring version, and package versions is already saved.
 
-Use the main-menu **`R`** command to start or resume the exhaustive campaign ranking in a detached background process. For each Clifford level, the worker evaluates every canonical qubit subset up to the level's check and energy-budget limits, including the no-check baseline. It stores each candidate's result and rank, and saves the complete level table after that level finishes. Paulice-invalid target sets remain in the file with an error status and explanation. T-doped levels are stored as fidelity-only studies because the official path does not apply Paulice checks to non-Clifford circuits.
+Use the main-menu **`R`** command to start or resume the exhaustive campaign ranking in a detached background process. For each Clifford level, the worker evaluates every canonical subset of unblocked qubits, including sets that exceed normal gameplay check/energy limits and sets whose measured retention falls below the mission minimum. The ranking relaxes those two gameplay limits only for its exhaustive search; blocked qubits are never included. It stores each candidate's result and rank, and saves the complete level table after that level finishes. Paulice-invalid target sets remain in the file with an error status and explanation. T-doped levels are stored as fidelity-only studies because the official path does not apply Paulice checks to non-Clifford circuits.
 
 The search covers **qubit subsets in ascending order**; it does not enumerate every permutation of a target set. Since Paulice's internal search can depend on target order, the result is the best strategy among the game's canonical sorted subsets, not a claim that every possible target ordering was explored. The same number of shots is used for every candidate (2,048 by default), with seeded simulator and Paulice calls. Ranking is still subject to finite-shot sampling; small score differences may not be statistically meaningful.
 
@@ -92,10 +92,11 @@ available yet.
 From the main menu, press **`R`** to start or resume the campaign ranker for the
 currently selected difficulty. It runs in a detached Python process, so the CLI
 returns to the menu immediately and you can continue playing while the scan runs.
-The worker visits every campaign level. For Clifford levels it evaluates the
-no-check baseline and every legal subset of eligible target qubits up to the
-level's check/budget limit. For T-doped levels it stores the permitted no-check
-fidelity study only; these levels are not assigned a Paulice strategy score.
+The worker visits every campaign level. For Clifford levels it evaluates the no-check baseline and every subset of
+unblocked target qubits, even if a set exceeds normal check/energy limits or its
+retention falls below the mission minimum. Those limits are relaxed only for
+ranking; blocked qubits remain excluded. For T-doped levels it stores the permitted
+no-check fidelity study only; these levels are not assigned a Paulice strategy score.
 
 After each level has been fully evaluated, all its attempted strategy rows are
 written atomically to `data/strategy_rankings.json`, including valid results,
@@ -111,3 +112,33 @@ JSON are generated locally and are ignored by Git. The worker requires the
 project's Qiskit, Qiskit Aer, FakeTorino provider, and `qiskit-paulice`
 dependencies to be installed in the same Python environment used to launch the
 CLI.
+
+
+## Streamlit web frontend
+
+A local Streamlit interface is available in `app.py`. It reuses the existing gameplay, difficulty presets, metrics, and ranking worker rather than implementing a separate simulator.
+
+### Launch
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
+
+The **Campaign** page lets you choose a mission, difficulty, and target-qubit set. The number of selected qubits is the number of requested checks. The no-check baseline uses the existing simulation and noise configuration, but does not add Pauli checks. T-doped levels run as no-check fidelity studies. After a run, the page displays fidelity, retention, accepted/rejected shots, circuit overhead, and compatible saved strategy comparisons.
+
+The **Strategy Rankings** page starts or resumes the existing detached campaign-ranking worker and displays saved rankings only when a completed record matches the selected configuration. Progress is read from `data/ranking_status.json`; detailed worker output is written to `data/strategy_ranking_worker.log`. The **Baseline Study** page runs no-check simulations across all configured levels using the existing noise configuration. The Campaign page displays this no-check baseline beside a checked strategy when applicable, and **How It Works** describes the implemented method.
+
+The CLI remains available with `python play_cli.py`.
+
+### Scoring formula note
+
+The current `src/metrics.py` implementation uses
+
+\[
+H_\beta = \frac{(1+\beta^2)FR}{F+\beta^2R}, \quad \beta=2.
+\]
+
+That denominator weights retention by \(\beta^2\), rather than weighting fidelity more heavily. The Streamlit frontend deliberately displays this discrepancy and uses the backend's current scores without silently changing them. If fidelity should receive the larger weight, agree on the intended formula first and update the backend scoring function, its tests, ranking-engine version, and README together; old rankings should then be treated as incompatible.
