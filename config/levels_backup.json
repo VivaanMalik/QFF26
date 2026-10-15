@@ -1,0 +1,67 @@
+{
+  "level_1": {
+    "title": "Level 1: Outpost Sector",
+    "payload_type": "clifford",
+    "num_qubits": 3,
+    "depth_layers": 8,
+    "t_count": 0,
+    "max_checks": 2,
+    "energy_budget": 100,
+    "check_cost": 45,
+    "target_score": 55.0,
+    "min_retention": 0.25,
+    "description": "A compact 3-qubit Clifford payload. Establish a no-check baseline, then try your first detection strategy."
+  },
+  "level_2": {
+    "title": "Level 2: Hazardous Corridor",
+    "payload_type": "clifford",
+    "num_qubits": 4,
+    "depth_layers": 14,
+    "t_count": 0,
+    "max_checks": 3,
+    "energy_budget": 100,
+    "check_cost": 35,
+    "target_score": 58.0,
+    "min_retention": 0.2,
+    "description": "A 4-qubit Clifford payload with more circuit depth. Compare which target-qubit sets improve fidelity without sacrificing too many shots."
+  },
+  "level_3": {
+    "title": "Level 3: Deep Lattice Storm",
+    "payload_type": "clifford",
+    "num_qubits": 5,
+    "depth_layers": 20,
+    "t_count": 0,
+    "max_checks": 3,
+    "energy_budget": 120,
+    "check_cost": 40,
+    "target_score": 60.0,
+    "min_retention": 0.2,
+    "description": "A 5-qubit Clifford payload. Explore how different target combinations change the fidelity-retention trade-off."
+  },
+  "level_4": {
+    "title": "Level 4: Thermal Decay Nexus",
+    "payload_type": "clifford",
+    "num_qubits": 6,
+    "depth_layers": 28,
+    "t_count": 0,
+    "max_checks": 4,
+    "energy_budget": 150,
+    "check_cost": 40,
+    "target_score": 62.0,
+    "min_retention": 0.15,
+    "description": "A 6-qubit Clifford payload with a deeper circuit. Check whether extra detection is worth the added circuit overhead."
+  },
+  "level_5": {
+    "title": "Level 5: Clifford Core Meltdown",
+    "payload_type": "clifford",
+    "num_qubits": 7,
+    "depth_layers": 36,
+    "t_count": 0,
+    "max_checks": 5,
+    "energy_budget": 160,
+    "check_cost": 40,
+    "target_score": 65.0,
+    "min_retention": 0.15,
+    "description": "The largest campaign Clifford payload. Compare the full strategy space and identify maximum score, fidelity, and retention."
+  }
+}

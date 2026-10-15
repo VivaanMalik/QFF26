@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +16,22 @@ from src.simulator import (
     run_ideal_simulation,
     run_noisy_simulation,
 )
+
+
+@lru_cache(maxsize=64)
+def _cached_ideal_distribution(
+    payload_type: str, num_qubits: int, depth_layers: int, reference_shots: int
+) -> dict[str, float]:
+    """Reuse the identical ideal reference across alternative check strategies."""
+    normalized_type = payload_type.lower()
+    if normalized_type == "tdoped":
+        # The T count is not needed here because this helper is only used for
+        # shared level references; T-doped calls use the dedicated helper below.
+        raise ValueError("T-doped reference caching requires an explicit T count.")
+    payload = get_clifford_payload(num_qubits, depth_layers)
+    return run_ideal_simulation(
+        payload, shots=reference_shots, payload_type=normalized_type
+    )
 
 
 def load_level_configs(config_path="config/levels.json") -> dict[str, dict[str, Any]]:
@@ -123,12 +140,26 @@ def play_level(
         if num_checks > max_budget_checks:
             raise ValueError("The requested check count exceeds the mission's energy budget.")
 
-    ideal_distribution = run_ideal_simulation(
-        payload,
-        shots=max(int(shots) * 4, 8192),
-        payload_type=payload_type,
+    reference_shots = max(int(shots) * 4, 8192)
+    if payload_type == "clifford":
+        # All strategies for a mission share this same ideal reference. Reusing
+        # it avoids resampling the identical circuit once per qubit subset.
+        ideal_distribution = _cached_ideal_distribution(
+            payload_type, n, depth_layers, reference_shots
+        )
+    else:
+        ideal_distribution = run_ideal_simulation(
+            payload, shots=reference_shots, payload_type=payload_type
+        )
+    paulice_noise, aer_noise, noise_source = get_noise_models(
+        n, require_paulice=(payload_type == "clifford")
     )
-    paulice_noise, aer_noise, noise_source = get_noise_models(n)
+    if payload_type == "tdoped":
+        from src.simulator import T_GATE_DEPOLARIZING_RATE
+        noise_source = (
+            f"{noise_source}; T/Tdg single-qubit depolarizing error="
+            f"{T_GATE_DEPOLARIZING_RATE:.1%} (T-study only)"
+        )
     bare_measured = measured_payload(payload)
 
     checked_object = None
@@ -170,10 +201,20 @@ def play_level(
         postselection_method=postselection_method,
     )
     cost = circuit_cost(bare_measured, final_circuit, n)
-    # T-doped levels are analysis-only per the official permitted route. Avoid
-    # presenting a strategy score when no checks were used.
+    # T-doped experiments are analysis-only and never receive a campaign score.
+    # Campaign scoring also accounts for check resources: a check is not free,
+    # and later missions intentionally apply a stronger resource penalty.
+    base_harmonic_score = 100.0 * metrics["harmonic_score"]
+    check_penalty_weight = max(0.0, float(cfg.get("check_penalty_weight", 0.0)))
+    energy_budget = max(1.0, float(cfg.get("energy_budget", 1.0)))
+    check_cost = max(0.0, float(cfg.get("check_cost", 0.0)))
+    check_overhead_penalty = (
+        100.0 * check_penalty_weight * check_cost * num_checks / energy_budget
+        if payload_type == "clifford"
+        else 0.0
+    )
     game_score = (
-        round(100.0 * metrics["harmonic_score"], 2)
+        round(max(0.0, base_harmonic_score - check_overhead_penalty), 2)
         if payload_type == "clifford"
         else None
     )
@@ -189,6 +230,7 @@ def play_level(
             "t_count": t_count,
             "target_score": float(cfg.get("target_score", 60.0)),
             "min_retention": float(cfg.get("min_retention", 0.15)),
+            "check_penalty_weight": check_penalty_weight,
         },
         "num_checks_requested": num_checks,
         "num_checks_used": actual_checks,
@@ -205,6 +247,7 @@ def play_level(
             "post_selected_fidelity": round(metrics["post_selected_fidelity"], 6),
             "retention_rate": round(metrics["retention_rate"], 6),
             "harmonic_score_H": round(metrics["harmonic_score"], 6),
+            "check_overhead_penalty": round(check_overhead_penalty, 4),
             "raw_shots": metrics["raw_shots"],
             "retained_shots": metrics["retained_shots"],
         },

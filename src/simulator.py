@@ -10,6 +10,12 @@ from qiskit_aer import AerSimulator
 from qiskit_aer.noise import NoiseModel as AerNoiseModel
 from qiskit_aer.noise import ReadoutError, depolarizing_error
 
+# The campaign uses the shared two-qubit/readout model. In the separate
+# T-gate study, model a T/Tdg operation with an explicit 1% single-qubit
+# depolarizing error. This is a transparent study assumption, not a claim of
+# a backend-calibrated T-gate error rate.
+T_GATE_DEPOLARIZING_RATE = 0.01
+
 # The official spacetime-code implementation is imported explicitly here so it
 # is visible during code review and easy to verify. The optional-import guard
 # only lets non-quantum unit tests (for example, the scoring tests) run in a
@@ -89,21 +95,26 @@ def _connected_layout(coupling_map: Any, count: int) -> list[int]:
     raise ValueError(f"Could not find {count} connected backend qubits.")
 
 
-def get_noise_models(num_qubits: int = 7):
-    """Return (Paulice planner model, Aer model, human-readable source label).
+def get_noise_models(num_qubits: int = 7, *, require_paulice: bool = True):
+    """Return (optional Paulice planner model, Aer model, source label).
 
-    Both models use the same uniform two-qubit depolarizing and readout rates.
-    This follows the Paulice quickstart pattern and the hackathon's permitted
-    FakeTorino-derived / synthetic-noise setup.
+    Both branches share the same uniform two-qubit and readout rates. Campaign
+    checks require qiskit-paulice; the separate T-gate study only needs Aer and
+    can therefore use the explicitly labelled synthetic fallback without
+    pretending to construct a spacetime-check model.
     """
-    if PauliceNoiseModel is None:
+    if require_paulice and PauliceNoiseModel is None:
         raise RuntimeError(
             "qiskit-paulice is required for the official Clifford check workflow. "
             "Install project dependencies with: python -m pip install -r requirements.txt"
         )
 
     p_gate, p_readout, source = _reference_noise_parameters()
-    paulice_model = PauliceNoiseModel(gate_noise=p_gate, readout_noise=p_readout)
+    paulice_model = (
+        PauliceNoiseModel(gate_noise=p_gate, readout_noise=p_readout)
+        if require_paulice and PauliceNoiseModel is not None
+        else None
+    )
 
     aer_model = AerNoiseModel()
     if p_gate > 0:
@@ -122,12 +133,16 @@ def get_noise_models(num_qubits: int = 7):
                 ]
             )
         )
+    # Campaign Clifford circuits contain neither instruction, so this has no
+    # effect on campaign scores or rankings. It is used only by T-study runs.
+    t_gate_error = depolarizing_error(T_GATE_DEPOLARIZING_RATE, 1)
+    aer_model.add_all_qubit_quantum_error(t_gate_error, ["t", "tdg"])
     return paulice_model, aer_model, source
 
 
 def get_default_noise_model(num_qubits: int = 7) -> AerNoiseModel:
-    """Compatibility helper returning the Aer side of the official noise model."""
-    return get_noise_models(num_qubits)[1]
+    """Return an Aer model without requiring the Paulice planner package."""
+    return get_noise_models(num_qubits, require_paulice=False)[1]
 
 
 def remove_barriers(circuit: QuantumCircuit) -> QuantumCircuit:
@@ -167,7 +182,15 @@ def run_ideal_simulation(
 
     measured = clean.copy()
     measured.measure_all()
-    simulator = AerSimulator(method="stabilizer")
+    # Limit Aer's internal parallelism. Ranking repeatedly creates simulators;
+    # unrestricted OpenMP workers can oversubscribe machines and destabilize
+    # long batches, especially on Windows laptops.
+    simulator = AerSimulator(
+        method="stabilizer",
+        max_parallel_threads=1,
+        max_parallel_experiments=1,
+        max_parallel_shots=1,
+    )
     result = simulator.run(
         measured, shots=max(int(shots), 8192), seed_simulator=1764
     ).result()
@@ -223,7 +246,15 @@ def run_noisy_simulation(
     if noise_model is None:
         noise_model = get_default_noise_model(circuit.num_qubits)
     method = "statevector" if payload_type.lower() == "tdoped" else "stabilizer"
-    simulator = AerSimulator(method=method, noise_model=noise_model)
+    # One native worker per simulation makes repeated ranking runs much less
+    # likely to exhaust thread/memory resources on either Windows or Linux.
+    simulator = AerSimulator(
+        method=method,
+        noise_model=noise_model,
+        max_parallel_threads=1,
+        max_parallel_experiments=1,
+        max_parallel_shots=1,
+    )
     result = simulator.run(
         circuit, shots=int(shots), seed_simulator=2026
     ).result()

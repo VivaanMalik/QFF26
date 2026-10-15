@@ -1,2939 +1,2430 @@
 {
   "rankings": {
-    "Standard::level_10::7f526c2e9237aa3f": {
-      "analysis_only_count": 1,
-      "best_strategy": null,
-      "cache_key": "Standard::level_10::7f526c2e9237aa3f",
-      "config_signature": "7f526c2e9237aa3f64af59991f4fa0bdc4e2303f9ec8bc38934cd59eb0048e94",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          1,
-          3
+    "level_1": {
+      "Full Challenge": {
+        "baseline_score": 91.57,
+        "best_score": 93.86,
+        "candidate_count": 7,
+        "difficulty": "Full Challenge",
+        "failed_rows": [],
+        "level_id": "level_1",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
         ],
-        "check_cost": 35,
-        "depth_layers": 12,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 5,
-        "payload_type": "tdoped",
-        "t_count": 8,
-        "target_score": 52.0,
-        "title": "Level 10: Absolute Zero Citadel"
-      },
-      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
-      "invalid_strategy_count": 0,
-      "level_id": "level_10",
-      "level_title": "Level 10: Absolute Zero Citadel",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "tdoped",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:35+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
-            "added_depth": 0,
-            "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 78,
-            "depth_before": 78,
-            "two_qubit_gates_after": 64,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.692315,
-          "rank": null,
-          "raw_fidelity": 0.692315,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": null,
-          "status": "analysis_only",
-          "targets": []
-        }
-      ],
-      "strategies_attempted": 1,
-      "valid_strategy_count": 0
-    },
-    "Standard::level_1::ad48f69178909cc4": {
-      "analysis_only_count": 0,
-      "best_strategy": {
-        "fidelity": 0.965539,
-        "rank": 1,
-        "retention": 0.844238,
-        "score": 93.86,
-        "targets": [
-          2
-        ]
-      },
-      "cache_key": "Standard::level_1::ad48f69178909cc4",
-      "config_signature": "ad48f69178909cc43b70b6df4df14191c4ccb30fe7c2cb1a5854b0c160b77a56",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [],
-        "check_cost": 35,
-        "depth_layers": 4,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 2,
-        "min_retention": 0.12,
-        "num_qubits": 3,
-        "payload_type": "clifford",
-        "t_count": 0,
-        "target_score": 52.0,
-        "title": "Level 1: Outpost Sector"
-      },
-      "error": null,
-      "invalid_strategy_count": 0,
-      "level_id": "level_1",
-      "level_title": "Level 1: Outpost Sector",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "clifford",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:11+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
-            "added_depth": 0,
-            "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 20,
-            "depth_before": 20,
-            "two_qubit_gates_after": 14,
-            "two_qubit_gates_before": 14
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.896835,
-          "rank": 8,
-          "raw_fidelity": 0.896835,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": 91.57,
-          "status": "valid",
-          "targets": []
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3
+        "non_baseline_strategy_count": 6,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 14,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.965539,
+            "harmonic_score": 0.938568,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.891926,
+            "relative_score": 100.0,
+            "retained_shots": 1729,
+            "retention": 0.844238,
+            "score": 93.86,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
             ]
-          ],
-          "cost": {
+          },
+          {
             "added_depth": 9,
             "added_two_qubit_gates": 2,
-            "ancilla_qubits": 1,
-            "depth_after": 29,
-            "depth_before": 20,
-            "two_qubit_gates_after": 16,
-            "two_qubit_gates_before": 14
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.0579067345610735,
-          "post_selected_fidelity": 0.972135,
-          "rank": 2,
-          "raw_fidelity": 0.890591,
-          "raw_shots": 2048,
-          "retained_shots": 1688,
-          "retention_rate": 0.824219,
-          "score": 93.85,
-          "status": "valid",
-          "targets": [
-            0
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.972135,
+            "harmonic_score": 0.938452,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.890591,
+            "relative_score": 99.56331877729235,
+            "retained_shots": 1688,
+            "retention": 0.824219,
+            "score": 93.85,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
             ]
-          ],
-          "cost": {
+          },
+          {
             "added_depth": 6,
             "added_two_qubit_gates": 2,
-            "ancilla_qubits": 1,
-            "depth_after": 26,
-            "depth_before": 20,
-            "two_qubit_gates_after": 16,
-            "two_qubit_gates_before": 14
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.0592925687567056,
-          "post_selected_fidelity": 0.968259,
-          "rank": 3,
-          "raw_fidelity": 0.885724,
-          "raw_shots": 2048,
-          "retained_shots": 1702,
-          "retention_rate": 0.831055,
-          "score": 93.73,
-          "status": "valid",
-          "targets": [
-            1
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.968259,
+            "harmonic_score": 0.93731,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 3,
+            "raw_fidelity": 0.885724,
+            "relative_score": 94.3231441048037,
+            "retained_shots": 1702,
+            "retention": 0.831055,
+            "score": 93.73,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
             ]
-          ],
-          "cost": {
-            "added_depth": 14,
-            "added_two_qubit_gates": 3,
-            "ancilla_qubits": 1,
-            "depth_after": 34,
-            "depth_before": 20,
-            "two_qubit_gates_after": 17,
-            "two_qubit_gates_before": 14
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.0592925687567056,
-          "post_selected_fidelity": 0.965539,
-          "rank": 1,
-          "raw_fidelity": 0.891926,
-          "raw_shots": 2048,
-          "retained_shots": 1729,
-          "retention_rate": 0.844238,
-          "score": 93.86,
-          "status": "valid",
-          "targets": [
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3
-            ],
-            [
-              2,
-              4
-            ]
-          ],
-          "cost": {
+          {
             "added_depth": 9,
             "added_two_qubit_gates": 4,
-            "ancilla_qubits": 2,
-            "depth_after": 29,
-            "depth_before": 20,
-            "two_qubit_gates_after": 18,
-            "two_qubit_gates_before": 14
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.0278729072226047,
-          "post_selected_fidelity": 0.990898,
-          "rank": 4,
-          "raw_fidelity": 0.881242,
-          "raw_shots": 2048,
-          "retained_shots": 1576,
-          "retention_rate": 0.769531,
-          "score": 93.7,
-          "status": "valid",
-          "targets": [
-            0,
-            1
-          ]
-        },
-        {
-          "check_supports": [
-            [
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.990898,
+            "harmonic_score": 0.93699,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 4,
+            "raw_fidelity": 0.881242,
+            "relative_score": 93.01310043668138,
+            "retained_shots": 1576,
+            "retention": 0.769531,
+            "score": 93.7,
+            "status": "valid",
+            "strategy": "{q0, q1}",
+            "targets": [
               0,
-              1,
-              2,
-              3
-            ],
-            [
-              4
+              1
             ]
-          ],
-          "cost": {
+          },
+          {
             "added_depth": 24,
             "added_two_qubit_gates": 5,
-            "ancilla_qubits": 2,
-            "depth_after": 44,
-            "depth_before": 20,
-            "two_qubit_gates_after": 19,
-            "two_qubit_gates_before": 14
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.0298933043593321,
-          "post_selected_fidelity": 0.983117,
-          "rank": 5,
-          "raw_fidelity": 0.893456,
-          "raw_shots": 2048,
-          "retained_shots": 1613,
-          "retention_rate": 0.787598,
-          "score": 93.66,
-          "status": "valid",
-          "targets": [
-            0,
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.983117,
+            "harmonic_score": 0.936614,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 5,
+            "raw_fidelity": 0.893456,
+            "relative_score": 91.26637554585143,
+            "retained_shots": 1613,
+            "retention": 0.787598,
+            "score": 93.66,
+            "status": "valid",
+            "strategy": "{q0, q2}",
+            "targets": [
               0,
-              1,
-              2,
-              3
-            ],
-            [
-              1,
-              2,
-              4
+              2
             ]
-          ],
-          "cost": {
+          },
+          {
             "added_depth": 10,
             "added_two_qubit_gates": 4,
-            "ancilla_qubits": 2,
-            "depth_after": 30,
-            "depth_before": 20,
-            "two_qubit_gates_after": 18,
-            "two_qubit_gates_before": 14
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.031917672808623,
-          "post_selected_fidelity": 0.984072,
-          "rank": 6,
-          "raw_fidelity": 0.87784,
-          "raw_shots": 2048,
-          "retained_shots": 1593,
-          "retention_rate": 0.777832,
-          "score": 93.45,
-          "status": "valid",
-          "targets": [
-            1,
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.984072,
+            "harmonic_score": 0.934515,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 6,
+            "raw_fidelity": 0.87784,
+            "relative_score": 82.09606986899583,
+            "retained_shots": 1593,
+            "retention": 0.777832,
+            "score": 93.45,
+            "status": "valid",
+            "strategy": "{q1, q2}",
+            "targets": [
               1,
-              2,
-              3
-            ],
-            [
-              2,
-              4
-            ],
-            [
-              1,
-              5
+              2
             ]
-          ],
-          "cost": {
-            "added_depth": 14,
-            "added_two_qubit_gates": 7,
-            "ancilla_qubits": 3,
-            "depth_after": 34,
-            "depth_before": 20,
-            "two_qubit_gates_after": 21,
-            "two_qubit_gates_before": 14
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0171642059335755,
-          "post_selected_fidelity": 0.993747,
-          "rank": 7,
-          "raw_fidelity": 0.888703,
-          "raw_shots": 2048,
-          "retained_shots": 1517,
-          "retention_rate": 0.740723,
-          "score": 93.02,
-          "status": "valid",
-          "targets": [
-            0,
-            1,
-            2
-          ]
-        }
-      ],
-      "strategies_attempted": 8,
-      "valid_strategy_count": 8
-    },
-    "Standard::level_2::80207b049a6ea7b3": {
-      "analysis_only_count": 0,
-      "best_strategy": {
-        "fidelity": 0.969514,
-        "rank": 1,
-        "retention": 0.738281,
-        "score": 91.24,
-        "targets": [
-          0,
-          2
-        ]
-      },
-      "cache_key": "Standard::level_2::80207b049a6ea7b3",
-      "config_signature": "80207b049a6ea7b3d59f33ea99a9b296ab193640171c66f542f80a7400a4f03a",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          1
-        ],
-        "check_cost": 35,
-        "depth_layers": 6,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 4,
-        "payload_type": "clifford",
-        "t_count": 0,
-        "target_score": 52.0,
-        "title": "Level 2: Hazardous Corridor"
-      },
-      "error": null,
-      "invalid_strategy_count": 0,
-      "level_id": "level_2",
-      "level_title": "Level 2: Hazardous Corridor",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "clifford",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:13+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
+          {
             "added_depth": 0,
             "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 34,
-            "depth_before": 34,
-            "two_qubit_gates_after": 27,
-            "two_qubit_gates_before": 27
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.82071,
-          "rank": 8,
-          "raw_fidelity": 0.82071,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": 85.12,
-          "status": "valid",
-          "targets": []
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4
-            ]
-          ],
-          "cost": {
-            "added_depth": 7,
-            "added_two_qubit_gates": 2,
-            "ancilla_qubits": 1,
-            "depth_after": 41,
-            "depth_before": 34,
-            "two_qubit_gates_after": 29,
-            "two_qubit_gates_before": 27
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.1191666590296736,
-          "post_selected_fidelity": 0.936627,
-          "rank": 7,
-          "raw_fidelity": 0.820148,
-          "raw_shots": 2048,
-          "retained_shots": 1630,
-          "retention_rate": 0.795898,
-          "score": 90.46,
-          "status": "valid",
-          "targets": [
-            0
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4
-            ]
-          ],
-          "cost": {
-            "added_depth": 21,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.896835,
+            "harmonic_score": 0.91573,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 7,
+            "raw_fidelity": 0.896835,
+            "relative_score": 0.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 91.57,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 6,
+        "worst_score": 91.57
+      },
+      "Guided": {
+        "baseline_score": 89.0,
+        "best_score": 95.01,
+        "candidate_count": 7,
+        "difficulty": "Guided",
+        "failed_rows": [],
+        "level_id": "level_1",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 6,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 15,
             "added_two_qubit_gates": 3,
-            "ancilla_qubits": 1,
-            "depth_after": 55,
-            "depth_before": 34,
-            "two_qubit_gates_after": 30,
-            "two_qubit_gates_before": 27
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.132430760045643,
-          "post_selected_fidelity": 0.930123,
-          "rank": 6,
-          "raw_fidelity": 0.824621,
-          "raw_shots": 2048,
-          "retained_shots": 1676,
-          "retention_rate": 0.818359,
-          "score": 90.54,
-          "status": "valid",
-          "targets": [
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.981334,
+            "harmonic_score": 0.950093,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.871514,
+            "relative_score": 99.99999999999999,
+            "retained_shots": 1726,
+            "retention": 0.842773,
+            "score": 95.01,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
             ]
-          ],
-          "cost": {
+          },
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.992716,
+            "harmonic_score": 0.949745,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.869597,
+            "relative_score": 99.33444259567378,
+            "retained_shots": 1658,
+            "retention": 0.80957,
+            "score": 94.97,
+            "status": "valid",
+            "strategy": "{q0, q1}",
+            "targets": [
+              0,
+              1
+            ]
+          },
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.987157,
+            "harmonic_score": 0.944733,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 3,
+            "raw_fidelity": 0.869597,
+            "relative_score": 91.01497504159724,
+            "retained_shots": 1651,
+            "retention": 0.806152,
+            "score": 94.47,
+            "status": "valid",
+            "strategy": "{q0, q2}",
+            "targets": [
+              0,
+              2
+            ]
+          },
+          {
+            "added_depth": 33,
+            "added_two_qubit_gates": 6,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.978265,
+            "harmonic_score": 0.93418,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 4,
+            "raw_fidelity": 0.8621,
+            "relative_score": 73.54409317803658,
+            "retained_shots": 1621,
+            "retention": 0.791504,
+            "score": 93.42,
+            "status": "valid",
+            "strategy": "{q1, q2}",
+            "targets": [
+              1,
+              2
+            ]
+          },
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.949311,
+            "harmonic_score": 0.934011,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 5,
+            "raw_fidelity": 0.873476,
+            "relative_score": 73.21131447587358,
+            "retained_shots": 1797,
+            "retention": 0.877441,
+            "score": 93.4,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
             "added_depth": 4,
             "added_two_qubit_gates": 2,
-            "ancilla_qubits": 1,
-            "depth_after": 38,
-            "depth_before": 34,
-            "two_qubit_gates_after": 29,
-            "two_qubit_gates_before": 27
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.1133214808775866,
-          "post_selected_fidelity": 0.944424,
-          "rank": 4,
-          "raw_fidelity": 0.819666,
-          "raw_shots": 2048,
-          "retained_shots": 1624,
-          "retention_rate": 0.792969,
-          "score": 90.97,
-          "status": "valid",
-          "targets": [
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4
-            ],
-            [
-              0,
-              2,
-              5
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.920513,
+            "harmonic_score": 0.91882,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 6,
+            "raw_fidelity": 0.876145,
+            "relative_score": 47.92013311148075,
+            "retained_shots": 1868,
+            "retention": 0.912109,
+            "score": 91.88,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
             ]
-          ],
-          "cost": {
-            "added_depth": 9,
-            "added_two_qubit_gates": 4,
-            "ancilla_qubits": 2,
-            "depth_after": 43,
-            "depth_before": 34,
-            "two_qubit_gates_after": 31,
-            "two_qubit_gates_before": 27
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.0482565276111566,
-          "post_selected_fidelity": 0.969514,
-          "rank": 1,
-          "raw_fidelity": 0.814926,
-          "raw_shots": 2048,
-          "retained_shots": 1512,
-          "retention_rate": 0.738281,
-          "score": 91.24,
-          "status": "valid",
-          "targets": [
-            0,
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4
-            ],
-            [
-              0,
-              1,
-              3,
-              5
-            ]
-          ],
-          "cost": {
-            "added_depth": 10,
-            "added_two_qubit_gates": 4,
-            "ancilla_qubits": 2,
-            "depth_after": 44,
-            "depth_before": 34,
-            "two_qubit_gates_after": 31,
-            "two_qubit_gates_before": 27
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.0565227134022495,
-          "post_selected_fidelity": 0.96751,
-          "rank": 3,
-          "raw_fidelity": 0.817369,
-          "raw_shots": 2048,
-          "retained_shots": 1510,
-          "retention_rate": 0.737305,
-          "score": 91.06,
-          "status": "valid",
-          "targets": [
-            0,
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4
-            ],
-            [
-              0,
-              1,
-              2,
-              3,
-              5
-            ]
-          ],
-          "cost": {
-            "added_depth": 21,
-            "added_two_qubit_gates": 5,
-            "ancilla_qubits": 2,
-            "depth_after": 55,
-            "depth_before": 34,
-            "two_qubit_gates_after": 32,
-            "two_qubit_gates_before": 27
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.0746570868285856,
-          "post_selected_fidelity": 0.962732,
-          "rank": 2,
-          "raw_fidelity": 0.823492,
-          "raw_shots": 2048,
-          "retained_shots": 1538,
-          "retention_rate": 0.750977,
-          "score": 91.13,
-          "status": "valid",
-          "targets": [
-            2,
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4
-            ],
-            [
-              0,
-              2,
-              5
-            ],
-            [
-              0,
-              1,
-              3,
-              6
-            ]
-          ],
-          "cost": {
-            "added_depth": 10,
-            "added_two_qubit_gates": 6,
-            "ancilla_qubits": 3,
-            "depth_after": 44,
-            "depth_before": 34,
-            "two_qubit_gates_after": 33,
-            "two_qubit_gates_before": 27
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0211668318872127,
-          "post_selected_fidelity": 0.989291,
-          "rank": 5,
-          "raw_fidelity": 0.809368,
-          "raw_shots": 2048,
-          "retained_shots": 1389,
-          "retention_rate": 0.678223,
-          "score": 90.62,
-          "status": "valid",
-          "targets": [
-            0,
-            2,
-            3
-          ]
-        }
-      ],
-      "strategies_attempted": 8,
-      "valid_strategy_count": 8
-    },
-    "Standard::level_3::2092a675efdcf26f": {
-      "analysis_only_count": 0,
-      "best_strategy": {
-        "fidelity": 0.94904,
-        "rank": 1,
-        "retention": 0.670898,
-        "score": 87.64,
-        "targets": [
-          0,
-          2
-        ]
-      },
-      "cache_key": "Standard::level_3::2092a675efdcf26f",
-      "config_signature": "2092a675efdcf26fabe5fb68a03ccb62ff3a1a071f53f73552d7ce1d55fa0ae4",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          3
-        ],
-        "check_cost": 35,
-        "depth_layers": 8,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 5,
-        "payload_type": "clifford",
-        "t_count": 0,
-        "target_score": 52.0,
-        "title": "Level 3: Deep Lattice Storm"
-      },
-      "error": null,
-      "invalid_strategy_count": 0,
-      "level_id": "level_3",
-      "level_title": "Level 3: Deep Lattice Storm",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "clifford",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:20+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
+          {
             "added_depth": 0,
             "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 52,
-            "depth_before": 52,
-            "two_qubit_gates_after": 44,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.714841,
-          "rank": 16,
-          "raw_fidelity": 0.714841,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": 75.81,
-          "status": "valid",
-          "targets": []
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.8662,
+            "harmonic_score": 0.890017,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 7,
+            "raw_fidelity": 0.8662,
+            "relative_score": 0.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 89.0,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 6,
+        "worst_score": 89.0
+      },
+      "Standard": {
+        "baseline_score": 89.12,
+        "best_score": 94.89,
+        "candidate_count": 7,
+        "difficulty": "Standard",
+        "failed_rows": [],
+        "level_id": "level_1",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 6,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.975372,
+            "harmonic_score": 0.948896,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.865193,
+            "relative_score": 99.99999999999999,
+            "retained_shots": 1753,
+            "retention": 0.855957,
+            "score": 94.89,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
             ]
-          ],
-          "cost": {
-            "added_depth": 23,
-            "added_two_qubit_gates": 4,
-            "ancilla_qubits": 1,
-            "depth_after": 75,
-            "depth_before": 52,
-            "two_qubit_gates_after": 48,
-            "two_qubit_gates_before": 44
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.2313980411196623,
-          "post_selected_fidelity": 0.883117,
-          "rank": 15,
-          "raw_fidelity": 0.714345,
-          "raw_shots": 2048,
-          "retained_shots": 1540,
-          "retention_rate": 0.751953,
-          "score": 85.33,
-          "status": "valid",
-          "targets": [
-            0
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ]
-          ],
-          "cost": {
-            "added_depth": 13,
+          {
+            "added_depth": 18,
             "added_two_qubit_gates": 3,
-            "ancilla_qubits": 1,
-            "depth_after": 65,
-            "depth_before": 52,
-            "two_qubit_gates_after": 47,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.2591100846746177,
-          "post_selected_fidelity": 0.881046,
-          "rank": 12,
-          "raw_fidelity": 0.723537,
-          "raw_shots": 2048,
-          "retained_shots": 1589,
-          "retention_rate": 0.775879,
-          "score": 85.78,
-          "status": "valid",
-          "targets": [
-            1
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.972884,
+            "harmonic_score": 0.942267,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.859925,
+            "relative_score": 88.56152512998273,
+            "retained_shots": 1714,
+            "retention": 0.836914,
+            "score": 94.23,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
             ]
-          ],
-          "cost": {
+          },
+          {
+            "added_depth": 35,
+            "added_two_qubit_gates": 8,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.984462,
+            "harmonic_score": 0.937452,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 3,
+            "raw_fidelity": 0.85199,
+            "relative_score": 80.24263431542458,
+            "retained_shots": 1612,
+            "retention": 0.787109,
+            "score": 93.75,
+            "status": "valid",
+            "strategy": "{q1, q2}",
+            "targets": [
+              1,
+              2
+            ]
+          },
+          {
+            "added_depth": 35,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.969228,
+            "harmonic_score": 0.93666,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 4,
+            "raw_fidelity": 0.848141,
+            "relative_score": 78.85615251299828,
+            "retained_shots": 1691,
+            "retention": 0.825684,
+            "score": 93.67,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
+            "added_depth": 20,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.982618,
+            "harmonic_score": 0.936528,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 5,
+            "raw_fidelity": 0.849112,
+            "relative_score": 78.50953206239176,
+            "retained_shots": 1615,
+            "retention": 0.788574,
+            "score": 93.65,
+            "status": "valid",
+            "strategy": "{q0, q2}",
+            "targets": [
+              0,
+              2
+            ]
+          },
+          {
+            "added_depth": 21,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": true,
+            "check_overhead_penalty": 0.0,
+            "checks": 2,
+            "error": "",
+            "fidelity": 0.983703,
+            "harmonic_score": 0.93593,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 6,
+            "raw_fidelity": 0.850091,
+            "relative_score": 77.46967071057196,
+            "retained_shots": 1605,
+            "retention": 0.783691,
+            "score": 93.59,
+            "status": "valid",
+            "strategy": "{q0, q1}",
+            "targets": [
+              0,
+              1
+            ]
+          },
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.86758,
+            "harmonic_score": 0.891182,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 7,
+            "raw_fidelity": 0.86758,
+            "relative_score": 0.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 89.12,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 6,
+        "worst_score": 89.12
+      }
+    },
+    "level_2": {
+      "Full Challenge": {
+        "baseline_score": 70.56,
+        "best_score": 77.88,
+        "candidate_count": 5,
+        "difficulty": "Full Challenge",
+        "failed_rows": [],
+        "level_id": "level_2",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 4,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 51,
+            "added_two_qubit_gates": 6,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.848644,
+            "harmonic_score": 0.823765,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.67843,
+            "relative_score": 100.0,
+            "retained_shots": 1510,
+            "retention": 0.737305,
+            "score": 77.88,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
+            ]
+          },
+          {
+            "added_depth": 27,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.838699,
+            "harmonic_score": 0.81383,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.667702,
+            "relative_score": 86.33879781420764,
+            "retained_shots": 1490,
+            "retention": 0.727539,
+            "score": 76.88,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 24,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.825941,
+            "harmonic_score": 0.808288,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 3,
+            "raw_fidelity": 0.66774,
+            "relative_score": 78.82513661202186,
+            "retained_shots": 1525,
+            "retention": 0.744629,
+            "score": 76.33,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
+            "added_depth": 23,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.815813,
+            "harmonic_score": 0.799601,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 4,
+            "raw_fidelity": 0.668302,
+            "relative_score": 66.93989071038246,
+            "retained_shots": 1517,
+            "retention": 0.740723,
+            "score": 75.46,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.657226,
+            "harmonic_score": 0.705598,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.657226,
+            "relative_score": 0.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 70.56,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 4,
+        "worst_score": 70.56
+      },
+      "Guided": {
+        "baseline_score": 89.0,
+        "best_score": 90.51,
+        "candidate_count": 4,
+        "difficulty": "Guided",
+        "failed_rows": [],
+        "level_id": "level_2",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 3,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 15,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.981334,
+            "harmonic_score": 0.950093,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.871514,
+            "relative_score": 100.0,
+            "retained_shots": 1726,
+            "retention": 0.842773,
+            "score": 90.51,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.8662,
+            "harmonic_score": 0.890017,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.8662,
+            "relative_score": 51.75718849840254,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 89.0,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          },
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": false,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.949311,
+            "harmonic_score": 0.934011,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.873476,
+            "relative_score": 48.562300319489,
+            "retained_shots": 1797,
+            "retention": 0.877441,
+            "score": 88.9,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "beats_no_check": false,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.920513,
+            "harmonic_score": 0.91882,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.876145,
+            "relative_score": 0.0,
+            "retained_shots": 1868,
+            "retention": 0.912109,
+            "score": 87.38,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 1,
+        "worst_score": 87.38
+      },
+      "Standard": {
+        "baseline_score": 81.04,
+        "best_score": 84.52,
+        "candidate_count": 5,
+        "difficulty": "Standard",
+        "failed_rows": [],
+        "level_id": "level_2",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 4,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 26,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.926402,
+            "harmonic_score": 0.890242,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.761221,
+            "relative_score": 100.0,
+            "retained_shots": 1577,
+            "retention": 0.77002,
+            "score": 84.52,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
+            "added_depth": 17,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.915391,
+            "harmonic_score": 0.889434,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.775116,
+            "relative_score": 97.7011494252874,
+            "retained_shots": 1636,
+            "retention": 0.798828,
+            "score": 84.44,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 25,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.912522,
+            "harmonic_score": 0.884341,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 3,
+            "raw_fidelity": 0.765625,
+            "relative_score": 83.04597701149451,
+            "retained_shots": 1612,
+            "retention": 0.787109,
+            "score": 83.93,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 21,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": true,
+            "check_overhead_penalty": 4.5,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.917994,
+            "harmonic_score": 0.883889,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 4,
+            "raw_fidelity": 0.760705,
+            "relative_score": 81.896551724138,
+            "retained_shots": 1576,
+            "retention": 0.769531,
+            "score": 83.89,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
+            ]
+          },
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.773708,
+            "harmonic_score": 0.810385,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.773708,
+            "relative_score": 0.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 81.04,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 4,
+        "worst_score": 81.04
+      }
+    },
+    "level_3": {
+      "Full Challenge": {
+        "baseline_score": 68.15,
+        "best_score": 69.23,
+        "candidate_count": 6,
+        "difficulty": "Full Challenge",
+        "failed_rows": [],
+        "level_id": "level_3",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 5,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 22,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.797925,
+            "harmonic_score": 0.782326,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.635088,
+            "relative_score": 100.0,
+            "retained_shots": 1486,
+            "retention": 0.725586,
+            "score": 69.23,
+            "status": "valid",
+            "strategy": "{q4}",
+            "targets": [
+              4
+            ]
+          },
+          {
+            "added_depth": 40,
+            "added_two_qubit_gates": 6,
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.795042,
+            "harmonic_score": 0.776432,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.625,
+            "relative_score": 65.49707602339177,
+            "retained_shots": 1454,
+            "retention": 0.709961,
+            "score": 68.64,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 22,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.790231,
+            "harmonic_score": 0.772409,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.634607,
+            "relative_score": 42.10526315789448,
+            "retained_shots": 1451,
+            "retention": 0.708496,
+            "score": 68.24,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.631196,
+            "harmonic_score": 0.681461,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.631196,
+            "relative_score": 36.84210526315829,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 68.15,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          },
+          {
+            "added_depth": 30,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.788655,
+            "harmonic_score": 0.769337,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.624437,
+            "relative_score": 23.976608187135025,
+            "retained_shots": 1435,
+            "retention": 0.700684,
+            "score": 67.93,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
+            ]
+          },
+          {
+            "added_depth": 34,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.783203,
+            "harmonic_score": 0.76518,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 6,
+            "raw_fidelity": 0.628885,
+            "relative_score": 0.0,
+            "retained_shots": 1435,
+            "retention": 0.700684,
+            "score": 67.52,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 3,
+        "worst_score": 67.52
+      },
+      "Guided": {
+        "baseline_score": 89.0,
+        "best_score": 89.0,
+        "candidate_count": 4,
+        "difficulty": "Guided",
+        "failed_rows": [],
+        "level_id": "level_3",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 3,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.8662,
+            "harmonic_score": 0.890017,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.8662,
+            "relative_score": 100.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 89.0,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          },
+          {
+            "added_depth": 15,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": false,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.981334,
+            "harmonic_score": 0.950093,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.871514,
+            "relative_score": 51.14379084967332,
+            "retained_shots": 1726,
+            "retention": 0.842773,
+            "score": 86.01,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": false,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.949311,
+            "harmonic_score": 0.934011,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.873476,
+            "relative_score": 24.836601307189692,
+            "retained_shots": 1797,
+            "retention": 0.877441,
+            "score": 84.4,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "beats_no_check": false,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.920513,
+            "harmonic_score": 0.91882,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.876145,
+            "relative_score": 0.0,
+            "retained_shots": 1868,
+            "retention": 0.912109,
+            "score": 82.88,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 0,
+        "worst_score": 82.88
+      },
+      "Standard": {
+        "baseline_score": 75.81,
+        "best_score": 77.15,
+        "candidate_count": 6,
+        "difficulty": "Standard",
+        "failed_rows": [],
+        "level_id": "level_3",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 5,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
             "added_depth": 16,
             "added_two_qubit_gates": 3,
-            "ancilla_qubits": 1,
-            "depth_after": 68,
-            "depth_before": 52,
-            "two_qubit_gates_after": 47,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.2378631467069556,
-          "post_selected_fidelity": 0.885601,
-          "rank": 11,
-          "raw_fidelity": 0.725018,
-          "raw_shots": 2048,
-          "retained_shots": 1591,
-          "retention_rate": 0.776855,
-          "score": 86.15,
-          "status": "valid",
-          "targets": [
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.885601,
+            "harmonic_score": 0.861483,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.725018,
+            "relative_score": 100.0,
+            "retained_shots": 1591,
+            "retention": 0.776855,
+            "score": 77.15,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
             ]
-          ],
-          "cost": {
+          },
+          {
+            "added_depth": 13,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.881046,
+            "harmonic_score": 0.857792,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 2,
+            "raw_fidelity": 0.723537,
+            "relative_score": 72.38805970149227,
+            "retained_shots": 1589,
+            "retention": 0.775879,
+            "score": 76.78,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
             "added_depth": 19,
             "added_two_qubit_gates": 3,
-            "ancilla_qubits": 1,
-            "depth_after": 71,
-            "depth_before": 52,
-            "two_qubit_gates_after": 47,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.2690389881607498,
-          "post_selected_fidelity": 0.876869,
-          "rank": 14,
-          "raw_fidelity": 0.724544,
-          "raw_shots": 2048,
-          "retained_shots": 1600,
-          "retention_rate": 0.78125,
-          "score": 85.59,
-          "status": "valid",
-          "targets": [
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.876869,
+            "harmonic_score": 0.855918,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "PASS",
+            "rank": 3,
+            "raw_fidelity": 0.724544,
+            "relative_score": 58.20895522388054,
+            "retained_shots": 1600,
+            "retention": 0.78125,
+            "score": 76.59,
+            "status": "valid",
+            "strategy": "{q4}",
+            "targets": [
+              4
             ]
-          ],
-          "cost": {
-            "added_depth": 42,
-            "added_two_qubit_gates": 8,
-            "ancilla_qubits": 2,
-            "depth_after": 94,
-            "depth_before": 52,
-            "two_qubit_gates_after": 52,
-            "two_qubit_gates_before": 44
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1089576401074484,
-          "post_selected_fidelity": 0.923303,
-          "rank": 13,
-          "raw_fidelity": 0.690054,
-          "raw_shots": 2048,
-          "retained_shots": 1362,
-          "retention_rate": 0.665039,
-          "score": 85.68,
-          "status": "valid",
-          "targets": [
-            0,
-            1
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              2,
-              3,
-              6
+          {
+            "added_depth": 23,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.883117,
+            "harmonic_score": 0.853347,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.714345,
+            "relative_score": 38.80597014925333,
+            "retained_shots": 1540,
+            "retention": 0.751953,
+            "score": 76.33,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
             ]
-          ],
-          "cost": {
-            "added_depth": 27,
-            "added_two_qubit_gates": 6,
-            "ancilla_qubits": 2,
-            "depth_after": 79,
-            "depth_before": 52,
-            "two_qubit_gates_after": 50,
-            "two_qubit_gates_before": 44
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1031657815694482,
-          "post_selected_fidelity": 0.94904,
-          "rank": 1,
-          "raw_fidelity": 0.703611,
-          "raw_shots": 2048,
-          "retained_shots": 1374,
-          "retention_rate": 0.670898,
-          "score": 87.64,
-          "status": "valid",
-          "targets": [
-            0,
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              2,
-              3,
-              6
+          {
+            "added_depth": 32,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": true,
+            "check_overhead_penalty": 9.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.876116,
+            "harmonic_score": 0.851296,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.713862,
+            "relative_score": 23.880597014924803,
+            "retained_shots": 1566,
+            "retention": 0.764648,
+            "score": 76.13,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
             ]
-          ],
-          "cost": {
-            "added_depth": 35,
-            "added_two_qubit_gates": 7,
-            "ancilla_qubits": 2,
-            "depth_after": 87,
-            "depth_before": 52,
-            "two_qubit_gates_after": 51,
-            "two_qubit_gates_before": 44
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1177024937249787,
-          "post_selected_fidelity": 0.940487,
-          "rank": 8,
-          "raw_fidelity": 0.706956,
-          "raw_shots": 2048,
-          "retained_shots": 1362,
-          "retention_rate": 0.665039,
-          "score": 86.85,
-          "status": "valid",
-          "targets": [
-            0,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              6
-            ]
-          ],
-          "cost": {
-            "added_depth": 40,
-            "added_two_qubit_gates": 7,
-            "ancilla_qubits": 2,
-            "depth_after": 92,
-            "depth_before": 52,
-            "two_qubit_gates_after": 51,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.120632742358218,
-          "post_selected_fidelity": 0.936916,
-          "rank": 7,
-          "raw_fidelity": 0.70553,
-          "raw_shots": 2048,
-          "retained_shots": 1380,
-          "retention_rate": 0.673828,
-          "score": 86.91,
-          "status": "valid",
-          "targets": [
-            1,
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              1,
-              3,
-              4,
-              6
-            ]
-          ],
-          "cost": {
-            "added_depth": 13,
-            "added_two_qubit_gates": 5,
-            "ancilla_qubits": 2,
-            "depth_after": 65,
-            "depth_before": 52,
-            "two_qubit_gates_after": 49,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1428558715551282,
-          "post_selected_fidelity": 0.936924,
-          "rank": 2,
-          "raw_fidelity": 0.712392,
-          "raw_shots": 2048,
-          "retained_shots": 1413,
-          "retention_rate": 0.689941,
-          "score": 87.43,
-          "status": "valid",
-          "targets": [
-            1,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              4,
-              6
-            ]
-          ],
-          "cost": {
-            "added_depth": 19,
-            "added_two_qubit_gates": 5,
-            "ancilla_qubits": 2,
-            "depth_after": 71,
-            "depth_before": 52,
-            "two_qubit_gates_after": 49,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1324307600456427,
-          "post_selected_fidelity": 0.933705,
-          "rank": 3,
-          "raw_fidelity": 0.707489,
-          "raw_shots": 2048,
-          "retained_shots": 1421,
-          "retention_rate": 0.693848,
-          "score": 87.33,
-          "status": "valid",
-          "targets": [
-            2,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
-            ],
-            [
-              1,
-              2,
-              3,
-              4,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 45,
-            "added_two_qubit_gates": 10,
-            "ancilla_qubits": 3,
-            "depth_after": 97,
-            "depth_before": 52,
-            "two_qubit_gates_after": 54,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0537601007104067,
-          "post_selected_fidelity": 0.967051,
-          "rank": 6,
-          "raw_fidelity": 0.700187,
-          "raw_shots": 2048,
-          "retained_shots": 1275,
-          "retention_rate": 0.622559,
-          "score": 87.07,
-          "status": "valid",
-          "targets": [
-            0,
-            1,
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
-            ],
-            [
-              0,
-              2,
-              3,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 47,
-            "added_two_qubit_gates": 13,
-            "ancilla_qubits": 3,
-            "depth_after": 99,
-            "depth_before": 52,
-            "two_qubit_gates_after": 57,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.060680218364184,
-          "post_selected_fidelity": 0.971089,
-          "rank": 9,
-          "raw_fidelity": 0.692258,
-          "raw_shots": 2048,
-          "retained_shots": 1248,
-          "retention_rate": 0.609375,
-          "score": 86.8,
-          "status": "valid",
-          "targets": [
-            0,
-            1,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              2,
-              3,
-              6
-            ],
-            [
-              3,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 35,
-            "added_two_qubit_gates": 9,
-            "ancilla_qubits": 3,
-            "depth_after": 87,
-            "depth_before": 52,
-            "two_qubit_gates_after": 53,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0565227134022495,
-          "post_selected_fidelity": 0.96867,
-          "rank": 4,
-          "raw_fidelity": 0.702599,
-          "raw_shots": 2048,
-          "retained_shots": 1279,
-          "retention_rate": 0.624512,
-          "score": 87.25,
-          "status": "valid",
-          "targets": [
-            0,
-            2,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              6
-            ],
-            [
-              0,
-              1,
-              4,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 44,
-            "added_two_qubit_gates": 9,
-            "ancilla_qubits": 3,
-            "depth_after": 96,
-            "depth_before": 52,
-            "two_qubit_gates_after": 53,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0662490185222893,
-          "post_selected_fidelity": 0.962103,
-          "rank": 5,
-          "raw_fidelity": 0.699202,
-          "raw_shots": 2048,
-          "retained_shots": 1293,
-          "retention_rate": 0.631348,
-          "score": 87.09,
-          "status": "valid",
-          "targets": [
-            1,
-            2,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
-            ],
-            [
-              1,
-              2,
-              3,
-              4,
-              7
-            ],
-            [
-              2,
-              3,
-              4,
-              8
-            ]
-          ],
-          "cost": {
-            "added_depth": 45,
-            "added_two_qubit_gates": 12,
-            "ancilla_qubits": 4,
-            "depth_after": 97,
-            "depth_before": 52,
-            "two_qubit_gates_after": 56,
-            "two_qubit_gates_before": 44
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 4,
-          "num_checks_used": 4,
-          "paulice_cost": 1.0305676522003089,
-          "post_selected_fidelity": 0.980703,
-          "rank": 10,
-          "raw_fidelity": 0.692382,
-          "raw_shots": 2048,
-          "retained_shots": 1196,
-          "retention_rate": 0.583984,
-          "score": 86.34,
-          "status": "valid",
-          "targets": [
-            0,
-            1,
-            2,
-            4
-          ]
-        }
-      ],
-      "strategies_attempted": 16,
-      "valid_strategy_count": 16
-    },
-    "Standard::level_4::d9682dbd60499664": {
-      "analysis_only_count": 0,
-      "best_strategy": {
-        "fidelity": 0.920795,
-        "rank": 1,
-        "retention": 0.629395,
-        "score": 84.28,
-        "targets": [
-          1,
-          3
-        ]
-      },
-      "cache_key": "Standard::level_4::d9682dbd60499664",
-      "config_signature": "d9682dbd60499664614395df36ec7ab1fbe4977217afdafe00793c20974c34e4",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          2,
-          4
-        ],
-        "check_cost": 35,
-        "depth_layers": 12,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 5,
-        "payload_type": "clifford",
-        "t_count": 0,
-        "target_score": 52.0,
-        "title": "Level 4: Thermal Decay Nexus"
-      },
-      "error": null,
-      "invalid_strategy_count": 0,
-      "level_id": "level_4",
-      "level_title": "Level 4: Thermal Decay Nexus",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "clifford",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:24+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
+          {
             "added_depth": 0,
             "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 76,
-            "depth_before": 76,
-            "two_qubit_gates_after": 64,
-            "two_qubit_gates_before": 64
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.714841,
+            "harmonic_score": 0.758075,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 6,
+            "raw_fidelity": 0.714841,
+            "relative_score": 0.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 75.81,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 5,
+        "worst_score": 75.81
+      }
+    },
+    "level_4": {
+      "Full Challenge": {
+        "baseline_score": 53.07,
+        "best_score": 53.07,
+        "candidate_count": 7,
+        "difficulty": "Full Challenge",
+        "failed_rows": [],
+        "level_id": "level_4",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 6,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.475001,
+            "harmonic_score": 0.530727,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.475001,
+            "relative_score": 100.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 53.07,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.692325,
-          "rank": 8,
-          "raw_fidelity": 0.692325,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": 73.77,
-          "status": "valid",
-          "targets": []
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
+          {
+            "added_depth": 15,
+            "added_two_qubit_gates": 2,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.675648,
+            "harmonic_score": 0.674594,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 2,
+            "raw_fidelity": 0.476986,
+            "relative_score": 47.1253534401508,
+            "retained_shots": 1373,
+            "retention": 0.67041,
+            "score": 47.46,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 31,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.656245,
+            "harmonic_score": 0.656246,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.46679,
+            "relative_score": 29.783223374175275,
+            "retained_shots": 1344,
+            "retention": 0.65625,
+            "score": 45.62,
+            "status": "valid",
+            "strategy": "{q5}",
+            "targets": [
               5
             ]
-          ],
-          "cost": {
+          },
+          {
+            "added_depth": 26,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.644894,
+            "harmonic_score": 0.650116,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.462658,
+            "relative_score": 24.033930254476882,
+            "retained_shots": 1376,
+            "retention": 0.671875,
+            "score": 45.01,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 32,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.646272,
+            "harmonic_score": 0.64313,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.453124,
+            "relative_score": 17.43638077285581,
+            "retained_shots": 1292,
+            "retention": 0.630859,
+            "score": 44.31,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
+            "added_depth": 43,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.639438,
+            "harmonic_score": 0.6383,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 6,
+            "raw_fidelity": 0.457026,
+            "relative_score": 12.912346842601297,
+            "retained_shots": 1298,
+            "retention": 0.633789,
+            "score": 43.83,
+            "status": "valid",
+            "strategy": "{q4}",
+            "targets": [
+              4
+            ]
+          },
+          {
+            "added_depth": 35,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.617235,
+            "harmonic_score": 0.624574,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 7,
+            "raw_fidelity": 0.453613,
+            "relative_score": 0.0,
+            "retained_shots": 1343,
+            "retention": 0.655762,
+            "score": 42.46,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
+            ]
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 0,
+        "worst_score": 42.46
+      },
+      "Guided": {
+        "baseline_score": 89.12,
+        "best_score": 89.12,
+        "candidate_count": 4,
+        "difficulty": "Guided",
+        "failed_rows": [],
+        "level_id": "level_4",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 3,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.86758,
+            "harmonic_score": 0.891182,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.86758,
+            "relative_score": 100.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 89.12,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          },
+          {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.975372,
+            "harmonic_score": 0.948896,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 2,
+            "raw_fidelity": 0.865193,
+            "relative_score": 7.89644012944983,
+            "retained_shots": 1753,
+            "retention": 0.855957,
+            "score": 74.89,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.972884,
+            "harmonic_score": 0.942267,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.859925,
+            "relative_score": 3.6245954692556777,
+            "retained_shots": 1714,
+            "retention": 0.836914,
+            "score": 74.23,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 35,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.969228,
+            "harmonic_score": 0.93666,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.848141,
+            "relative_score": 0.0,
+            "retained_shots": 1691,
+            "retention": 0.825684,
+            "score": 73.67,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 0,
+        "worst_score": 73.67
+      },
+      "Standard": {
+        "baseline_score": 73.77,
+        "best_score": 73.77,
+        "candidate_count": 6,
+        "difficulty": "Standard",
+        "failed_rows": [],
+        "level_id": "level_4",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 5,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.692325,
+            "harmonic_score": 0.737721,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.692325,
+            "relative_score": 100.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 73.77,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
+          },
+          {
+            "added_depth": 25,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.878318,
+            "harmonic_score": 0.844146,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 2,
+            "raw_fidelity": 0.674277,
+            "relative_score": 24.210526315789444,
+            "retained_shots": 1496,
+            "retention": 0.730469,
+            "score": 64.41,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 21,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.852781,
+            "harmonic_score": 0.831576,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.676231,
+            "relative_score": 14.089068825910896,
+            "retained_shots": 1549,
+            "retention": 0.756348,
+            "score": 63.16,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
+            ]
+          },
+          {
             "added_depth": 25,
             "added_two_qubit_gates": 5,
-            "ancilla_qubits": 1,
-            "depth_after": 101,
-            "depth_before": 76,
-            "two_qubit_gates_after": 69,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.3164191468467972,
-          "post_selected_fidelity": 0.843791,
-          "rank": 6,
-          "raw_fidelity": 0.666554,
-          "raw_shots": 2048,
-          "retained_shots": 1498,
-          "retention_rate": 0.731445,
-          "score": 81.86,
-          "status": "valid",
-          "targets": [
-            0
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.843791,
+            "harmonic_score": 0.818643,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.666554,
+            "relative_score": 3.5627530364372304,
+            "retained_shots": 1498,
+            "retention": 0.731445,
+            "score": 61.86,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
             ]
-          ],
-          "cost": {
+          },
+          {
             "added_depth": 24,
             "added_two_qubit_gates": 5,
-            "ancilla_qubits": 1,
-            "depth_after": 100,
-            "depth_before": 76,
-            "two_qubit_gates_after": 69,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.2874457749565837,
-          "post_selected_fidelity": 0.842068,
-          "rank": 7,
-          "raw_fidelity": 0.661192,
-          "raw_shots": 2048,
-          "retained_shots": 1478,
-          "retention_rate": 0.72168,
-          "score": 81.49,
-          "status": "valid",
-          "targets": [
-            1
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.842068,
+            "harmonic_score": 0.814881,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.661192,
+            "relative_score": 0.566801619433201,
+            "retained_shots": 1478,
+            "retention": 0.72168,
+            "score": 61.49,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
             ]
-          ],
-          "cost": {
-            "added_depth": 21,
-            "added_two_qubit_gates": 4,
-            "ancilla_qubits": 1,
-            "depth_after": 97,
-            "depth_before": 76,
-            "two_qubit_gates_after": 68,
-            "two_qubit_gates_before": 64
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.3478078393751787,
-          "post_selected_fidelity": 0.852781,
-          "rank": 5,
-          "raw_fidelity": 0.676231,
-          "raw_shots": 2048,
-          "retained_shots": 1549,
-          "retention_rate": 0.756348,
-          "score": 83.16,
-          "status": "valid",
-          "targets": [
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              3,
-              6
-            ]
-          ],
-          "cost": {
-            "added_depth": 46,
-            "added_two_qubit_gates": 9,
-            "ancilla_qubits": 2,
-            "depth_after": 122,
-            "depth_before": 76,
-            "two_qubit_gates_after": 73,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1361430520367042,
-          "post_selected_fidelity": 0.90549,
-          "rank": 4,
-          "raw_fidelity": 0.663959,
-          "raw_shots": 2048,
-          "retained_shots": 1303,
-          "retention_rate": 0.63623,
-          "score": 83.48,
-          "status": "valid",
-          "targets": [
-            0,
-            1
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              6
-            ]
-          ],
-          "cost": {
-            "added_depth": 44,
-            "added_two_qubit_gates": 11,
-            "ancilla_qubits": 2,
-            "depth_after": 120,
-            "depth_before": 76,
-            "two_qubit_gates_after": 75,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1331722467946683,
-          "post_selected_fidelity": 0.91589,
-          "rank": 3,
-          "raw_fidelity": 0.653307,
-          "raw_shots": 2048,
-          "retained_shots": 1273,
-          "retention_rate": 0.621582,
-          "score": 83.67,
-          "status": "valid",
-          "targets": [
-            0,
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              3,
-              6
-            ]
-          ],
-          "cost": {
-            "added_depth": 38,
-            "added_two_qubit_gates": 10,
-            "ancilla_qubits": 2,
-            "depth_after": 114,
-            "depth_before": 76,
-            "two_qubit_gates_after": 74,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1353996213530941,
-          "post_selected_fidelity": 0.920795,
-          "rank": 1,
-          "raw_fidelity": 0.665021,
-          "raw_shots": 2048,
-          "retained_shots": 1289,
-          "retention_rate": 0.629395,
-          "score": 84.28,
-          "status": "valid",
-          "targets": [
-            1,
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              3,
-              6
-            ],
-            [
-              1,
-              2,
-              3,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 46,
-            "added_two_qubit_gates": 11,
-            "ancilla_qubits": 3,
-            "depth_after": 122,
-            "depth_before": 76,
-            "two_qubit_gates_after": 75,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0697443560136322,
-          "post_selected_fidelity": 0.951502,
-          "rank": 2,
-          "raw_fidelity": 0.654267,
-          "raw_shots": 2048,
-          "retained_shots": 1179,
-          "retention_rate": 0.575684,
-          "score": 84.16,
-          "status": "valid",
-          "targets": [
-            0,
-            1,
-            3
-          ]
-        }
-      ],
-      "strategies_attempted": 8,
-      "valid_strategy_count": 8
-    },
-    "Standard::level_5::4d2259551c132223": {
-      "analysis_only_count": 0,
-      "best_strategy": {
-        "fidelity": 0.958985,
-        "rank": 1,
-        "retention": 0.596191,
-        "score": 85.49,
-        "targets": [
-          2,
-          3,
-          4
-        ]
-      },
-      "cache_key": "Standard::level_5::4d2259551c132223",
-      "config_signature": "4d2259551c1322232b73b48ce53f04d5fe2b9af488fc2a12dc14dd41fbe8ee28",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          1
-        ],
-        "check_cost": 35,
-        "depth_layers": 12,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 5,
-        "payload_type": "clifford",
-        "t_count": 0,
-        "target_score": 52.0,
-        "title": "Level 5: Clifford Core Meltdown"
-      },
-      "error": null,
-      "invalid_strategy_count": 0,
-      "level_id": "level_5",
-      "level_title": "Level 5: Clifford Core Meltdown",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "clifford",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:34+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
-            "added_depth": 0,
-            "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 76,
-            "depth_before": 76,
-            "two_qubit_gates_after": 64,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.692325,
-          "rank": 16,
-          "raw_fidelity": 0.692325,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": 73.77,
-          "status": "valid",
-          "targets": []
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ]
-          ],
-          "cost": {
-            "added_depth": 25,
-            "added_two_qubit_gates": 5,
-            "ancilla_qubits": 1,
-            "depth_after": 101,
-            "depth_before": 76,
-            "two_qubit_gates_after": 69,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.3164191468467974,
-          "post_selected_fidelity": 0.843791,
-          "rank": 14,
-          "raw_fidelity": 0.666554,
-          "raw_shots": 2048,
-          "retained_shots": 1498,
-          "retention_rate": 0.731445,
-          "score": 81.86,
-          "status": "valid",
-          "targets": [
-            0
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ]
-          ],
-          "cost": {
-            "added_depth": 25,
-            "added_two_qubit_gates": 4,
-            "ancilla_qubits": 1,
-            "depth_after": 101,
-            "depth_before": 76,
-            "two_qubit_gates_after": 68,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.2690389881607498,
-          "post_selected_fidelity": 0.878318,
-          "rank": 7,
-          "raw_fidelity": 0.674277,
-          "raw_shots": 2048,
-          "retained_shots": 1496,
-          "retention_rate": 0.730469,
-          "score": 84.41,
-          "status": "valid",
-          "targets": [
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ]
-          ],
-          "cost": {
-            "added_depth": 21,
-            "added_two_qubit_gates": 4,
-            "ancilla_qubits": 1,
-            "depth_after": 97,
-            "depth_before": 76,
-            "two_qubit_gates_after": 68,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.3478078393751785,
-          "post_selected_fidelity": 0.852781,
-          "rank": 12,
-          "raw_fidelity": 0.676231,
-          "raw_shots": 2048,
-          "retained_shots": 1549,
-          "retention_rate": 0.756348,
-          "score": 83.16,
-          "status": "valid",
-          "targets": [
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              5
-            ]
-          ],
-          "cost": {
+          {
             "added_depth": 31,
             "added_two_qubit_gates": 6,
-            "ancilla_qubits": 1,
-            "depth_after": 107,
-            "depth_before": 76,
-            "two_qubit_gates_after": 70,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 1,
-          "num_checks_used": 1,
-          "paulice_cost": 1.4288147290997038,
-          "post_selected_fidelity": 0.837442,
-          "rank": 15,
-          "raw_fidelity": 0.669434,
-          "raw_shots": 2048,
-          "retained_shots": 1501,
-          "retention_rate": 0.73291,
-          "score": 81.42,
-          "status": "valid",
-          "targets": [
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
+            "beats_no_check": false,
+            "check_overhead_penalty": 20.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.837442,
+            "harmonic_score": 0.814216,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 6,
+            "raw_fidelity": 0.669434,
+            "relative_score": 0.0,
+            "retained_shots": 1501,
+            "retention": 0.73291,
+            "score": 61.42,
+            "status": "valid",
+            "strategy": "{q4}",
+            "targets": [
+              4
             ]
-          ],
-          "cost": {
-            "added_depth": 46,
-            "added_two_qubit_gates": 9,
-            "ancilla_qubits": 2,
-            "depth_after": 122,
-            "depth_before": 76,
-            "two_qubit_gates_after": 73,
-            "two_qubit_gates_before": 64
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 0,
+        "worst_score": 61.42
+      }
+    },
+    "level_5": {
+      "Full Challenge": {
+        "baseline_score": 41.06,
+        "best_score": 41.06,
+        "candidate_count": 8,
+        "difficulty": "Full Challenge",
+        "failed_rows": [],
+        "level_id": "level_5",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 7,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
+            "added_depth": 0,
+            "added_two_qubit_gates": 0,
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.35789,
+            "harmonic_score": 0.410623,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.35789,
+            "relative_score": 100.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 41.06,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1428558715551282,
-          "post_selected_fidelity": 0.917204,
-          "rank": 9,
-          "raw_fidelity": 0.662474,
-          "raw_shots": 2048,
-          "retained_shots": 1293,
-          "retention_rate": 0.631348,
-          "score": 84.1,
-          "status": "valid",
-          "targets": [
-            0,
-            2
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              6
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.531132,
+            "harmonic_score": 0.545443,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 2,
+            "raw_fidelity": 0.363281,
+            "relative_score": 17.714285714285715,
+            "retained_shots": 1252,
+            "retention": 0.611328,
+            "score": 29.54,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
             ]
-          ],
-          "cost": {
-            "added_depth": 44,
-            "added_two_qubit_gates": 11,
-            "ancilla_qubits": 2,
-            "depth_after": 120,
-            "depth_before": 76,
-            "two_qubit_gates_after": 75,
-            "two_qubit_gates_before": 64
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1331722467946683,
-          "post_selected_fidelity": 0.91589,
-          "rank": 10,
-          "raw_fidelity": 0.653307,
-          "raw_shots": 2048,
-          "retained_shots": 1273,
-          "retention_rate": 0.621582,
-          "score": 83.67,
-          "status": "valid",
-          "targets": [
-            0,
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              2,
-              3,
-              6
+          {
+            "added_depth": 24,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.527969,
+            "harmonic_score": 0.542463,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.351494,
+            "relative_score": 15.642857142857148,
+            "retained_shots": 1248,
+            "retention": 0.609375,
+            "score": 29.25,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
             ]
-          ],
-          "cost": {
-            "added_depth": 40,
-            "added_two_qubit_gates": 8,
-            "ancilla_qubits": 2,
-            "depth_after": 116,
-            "depth_before": 76,
-            "two_qubit_gates_after": 72,
-            "two_qubit_gates_before": 64
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1624720850868964,
-          "post_selected_fidelity": 0.916954,
-          "rank": 6,
-          "raw_fidelity": 0.664059,
-          "raw_shots": 2048,
-          "retained_shots": 1313,
-          "retention_rate": 0.641113,
-          "score": 84.43,
-          "status": "valid",
-          "targets": [
-            0,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              1,
-              2,
-              4,
-              6
+          {
+            "added_depth": 38,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.51311,
+            "harmonic_score": 0.530365,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.365723,
+            "relative_score": 7.000000000000001,
+            "retained_shots": 1255,
+            "retention": 0.612793,
+            "score": 28.04,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
             ]
-          ],
-          "cost": {
-            "added_depth": 59,
-            "added_two_qubit_gates": 10,
-            "ancilla_qubits": 2,
-            "depth_after": 135,
-            "depth_before": 76,
-            "two_qubit_gates_after": 74,
-            "two_qubit_gates_before": 64
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1191666590296736,
-          "post_selected_fidelity": 0.932689,
-          "rank": 2,
-          "raw_fidelity": 0.672338,
-          "raw_shots": 2048,
-          "retained_shots": 1309,
-          "retention_rate": 0.63916,
-          "score": 85.42,
-          "status": "valid",
-          "targets": [
-            2,
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              2,
-              6
+          {
+            "added_depth": 43,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.515116,
+            "harmonic_score": 0.529209,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.350059,
+            "relative_score": 6.142857142857163,
+            "retained_shots": 1217,
+            "retention": 0.594238,
+            "score": 27.92,
+            "status": "valid",
+            "strategy": "{q4}",
+            "targets": [
+              4
             ]
-          ],
-          "cost": {
-            "added_depth": 28,
+          },
+          {
+            "added_depth": 24,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.511581,
+            "harmonic_score": 0.528029,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 6,
+            "raw_fidelity": 0.351529,
+            "relative_score": 5.285714285714299,
+            "retained_shots": 1241,
+            "retention": 0.605957,
+            "score": 27.8,
+            "status": "valid",
+            "strategy": "{q5}",
+            "targets": [
+              5
+            ]
+          },
+          {
+            "added_depth": 30,
             "added_two_qubit_gates": 6,
-            "ancilla_qubits": 2,
-            "depth_after": 104,
-            "depth_before": 76,
-            "two_qubit_gates_after": 70,
-            "two_qubit_gates_before": 64
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.506812,
+            "harmonic_score": 0.523371,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 7,
+            "raw_fidelity": 0.355458,
+            "relative_score": 2.0000000000000075,
+            "retained_shots": 1233,
+            "retention": 0.602051,
+            "score": 27.34,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.1428558715551282,
-          "post_selected_fidelity": 0.91381,
-          "rank": 5,
-          "raw_fidelity": 0.66748,
-          "raw_shots": 2048,
-          "retained_shots": 1346,
-          "retention_rate": 0.657227,
-          "score": 84.76,
-          "status": "valid",
-          "targets": [
-            2,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              3,
-              4,
+          {
+            "added_depth": 33,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.500638,
+            "harmonic_score": 0.520565,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 8,
+            "raw_fidelity": 0.352424,
+            "relative_score": 0.0,
+            "retained_shots": 1268,
+            "retention": 0.619141,
+            "score": 27.06,
+            "status": "valid",
+            "strategy": "{q6}",
+            "targets": [
               6
             ]
-          ],
-          "cost": {
-            "added_depth": 27,
-            "added_two_qubit_gates": 7,
-            "ancilla_qubits": 2,
-            "depth_after": 103,
-            "depth_before": 76,
-            "two_qubit_gates_after": 71,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 2,
-          "num_checks_used": 2,
-          "paulice_cost": 1.160951264857909,
-          "post_selected_fidelity": 0.923545,
-          "rank": 4,
-          "raw_fidelity": 0.663086,
-          "raw_shots": 2048,
-          "retained_shots": 1308,
-          "retention_rate": 0.638672,
-          "score": 84.79,
-          "status": "valid",
-          "targets": [
-            3,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
-            ],
-            [
-              0,
-              2,
-              3,
-              4,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 56,
-            "added_two_qubit_gates": 13,
-            "ancilla_qubits": 3,
-            "depth_after": 132,
-            "depth_before": 76,
-            "two_qubit_gates_after": 77,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0781799873336995,
-          "post_selected_fidelity": 0.95477,
-          "rank": 8,
-          "raw_fidelity": 0.65332,
-          "raw_shots": 2048,
-          "retained_shots": 1173,
-          "retention_rate": 0.572754,
-          "score": 84.24,
-          "status": "valid",
-          "targets": [
-            0,
-            2,
-            3
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 52,
-            "added_two_qubit_gates": 12,
-            "ancilla_qubits": 3,
-            "depth_after": 128,
-            "depth_before": 76,
-            "two_qubit_gates_after": 76,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0845503362526787,
-          "post_selected_fidelity": 0.95231,
-          "rank": 3,
-          "raw_fidelity": 0.683955,
-          "raw_shots": 2048,
-          "retained_shots": 1232,
-          "retention_rate": 0.601562,
-          "score": 85.29,
-          "status": "valid",
-          "targets": [
-            0,
-            2,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              6
-            ],
-            [
-              4,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 53,
-            "added_two_qubit_gates": 15,
-            "ancilla_qubits": 3,
-            "depth_after": 129,
-            "depth_before": 76,
-            "two_qubit_gates_after": 79,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0746570868285856,
-          "post_selected_fidelity": 0.93366,
-          "rank": 13,
-          "raw_fidelity": 0.641933,
-          "raw_shots": 2048,
-          "retained_shots": 1176,
-          "retention_rate": 0.574219,
-          "score": 82.98,
-          "status": "valid",
-          "targets": [
-            0,
-            3,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              1,
-              2,
-              4,
-              6
-            ],
-            [
-              0,
-              2,
-              3,
-              7
-            ]
-          ],
-          "cost": {
-            "added_depth": 71,
-            "added_two_qubit_gates": 14,
-            "ancilla_qubits": 3,
-            "depth_after": 147,
-            "depth_before": 76,
-            "two_qubit_gates_after": 78,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 3,
-          "num_checks_used": 3,
-          "paulice_cost": 1.0648540834547642,
-          "post_selected_fidelity": 0.958985,
-          "rank": 1,
-          "raw_fidelity": 0.678698,
-          "raw_shots": 2048,
-          "retained_shots": 1221,
-          "retention_rate": 0.596191,
-          "score": 85.49,
-          "status": "valid",
-          "targets": [
-            2,
-            3,
-            4
-          ]
-        },
-        {
-          "check_supports": [
-            [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            [
-              0,
-              1,
-              2,
-              4,
-              6
-            ],
-            [
-              0,
-              2,
-              3,
-              4,
-              7
-            ],
-            [
-              1,
-              3,
-              4,
-              8
-            ]
-          ],
-          "cost": {
-            "added_depth": 70,
-            "added_two_qubit_gates": 17,
-            "ancilla_qubits": 4,
-            "depth_after": 146,
-            "depth_before": 76,
-            "two_qubit_gates_after": 81,
-            "two_qubit_gates_before": 64
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 4,
-          "num_checks_used": 4,
-          "paulice_cost": 1.0565227134022495,
-          "post_selected_fidelity": 0.964292,
-          "rank": 11,
-          "raw_fidelity": 0.638012,
-          "raw_shots": 2048,
-          "retained_shots": 1102,
-          "retention_rate": 0.538086,
-          "score": 83.24,
-          "status": "valid",
-          "targets": [
-            0,
-            2,
-            3,
-            4
-          ]
-        }
-      ],
-      "strategies_attempted": 16,
-      "valid_strategy_count": 16
-    },
-    "Standard::level_6::fb086bed185cf89e": {
-      "analysis_only_count": 1,
-      "best_strategy": null,
-      "cache_key": "Standard::level_6::fb086bed185cf89e",
-      "config_signature": "fb086bed185cf89e00cb372a4c342c798e9ebf1c63ae67d52668e42207674640",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [],
-        "check_cost": 35,
-        "depth_layers": 4,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 2,
-        "min_retention": 0.12,
-        "num_qubits": 3,
-        "payload_type": "tdoped",
-        "t_count": 1,
-        "target_score": 52.0,
-        "title": "Level 6: Non-Clifford Anomaly"
-      },
-      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
-      "invalid_strategy_count": 0,
-      "level_id": "level_6",
-      "level_title": "Level 6: Non-Clifford Anomaly",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "tdoped",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:34+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
-            "added_depth": 0,
-            "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 20,
-            "depth_before": 20,
-            "two_qubit_gates_after": 14,
-            "two_qubit_gates_before": 14
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.896838,
-          "rank": null,
-          "raw_fidelity": 0.896838,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": null,
-          "status": "analysis_only",
-          "targets": []
-        }
-      ],
-      "strategies_attempted": 1,
-      "valid_strategy_count": 0
-    },
-    "Standard::level_7::9d5b758d1434431b": {
-      "analysis_only_count": 1,
-      "best_strategy": null,
-      "cache_key": "Standard::level_7::9d5b758d1434431b",
-      "config_signature": "9d5b758d1434431bad15213bcd8e4f7611d46f7c5ed87dc53a53968a98a324b7",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          2
+          }
         ],
-        "check_cost": 35,
-        "depth_layers": 7,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 4,
-        "payload_type": "tdoped",
-        "t_count": 2,
-        "target_score": 52.0,
-        "title": "Level 7: T-State Contagion"
+        "shots": 2048,
+        "strategies_beating_no_check": 0,
+        "worst_score": 27.06
       },
-      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
-      "invalid_strategy_count": 0,
-      "level_id": "level_7",
-      "level_title": "Level 7: T-State Contagion",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "tdoped",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:34+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
-            "added_depth": 0,
-            "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 40,
-            "depth_before": 40,
-            "two_qubit_gates_after": 31,
-            "two_qubit_gates_before": 31
-          },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.784177,
-          "rank": null,
-          "raw_fidelity": 0.784177,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": null,
-          "status": "analysis_only",
-          "targets": []
-        }
-      ],
-      "strategies_attempted": 1,
-      "valid_strategy_count": 0
-    },
-    "Standard::level_8::80ca37825f4013d5": {
-      "analysis_only_count": 1,
-      "best_strategy": null,
-      "cache_key": "Standard::level_8::80ca37825f4013d5",
-      "config_signature": "80ca37825f4013d5e1dbcbfd8ea419c09019633457a5b9fd3e95ce08106416a7",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          1
+      "Guided": {
+        "baseline_score": 89.12,
+        "best_score": 89.12,
+        "candidate_count": 4,
+        "difficulty": "Guided",
+        "failed_rows": [],
+        "level_id": "level_5",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
         ],
-        "check_cost": 35,
-        "depth_layers": 9,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 5,
-        "payload_type": "tdoped",
-        "t_count": 4,
-        "target_score": 52.0,
-        "title": "Level 8: Quantum Phase Cascade"
-      },
-      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
-      "invalid_strategy_count": 0,
-      "level_id": "level_8",
-      "level_title": "Level 8: Quantum Phase Cascade",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "tdoped",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:34+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
+        "non_baseline_strategy_count": 3,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
             "added_depth": 0,
             "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 59,
-            "depth_before": 59,
-            "two_qubit_gates_after": 49,
-            "two_qubit_gates_before": 49
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.86758,
+            "harmonic_score": 0.891182,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.86758,
+            "relative_score": 100.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 89.12,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.707428,
-          "rank": null,
-          "raw_fidelity": 0.707428,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": null,
-          "status": "analysis_only",
-          "targets": []
-        }
-      ],
-      "strategies_attempted": 1,
-      "valid_strategy_count": 0
-    },
-    "Standard::level_9::3e0e1a2f70bc5cf6": {
-      "analysis_only_count": 1,
-      "best_strategy": null,
-      "cache_key": "Standard::level_9::3e0e1a2f70bc5cf6",
-      "config_signature": "3e0e1a2f70bc5cf6de4255066dff66bab8c15d4b9160f9aea6b780c1b0c18b64",
-      "difficulty": "Standard",
-      "effective_config": {
-        "blocked_channels": [
-          0,
-          4
+          {
+            "added_depth": 4,
+            "added_two_qubit_gates": 2,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.975372,
+            "harmonic_score": 0.948896,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 2,
+            "raw_fidelity": 0.865193,
+            "relative_score": 5.9657701711491375,
+            "retained_shots": 1753,
+            "retention": 0.855957,
+            "score": 69.89,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 18,
+            "added_two_qubit_gates": 3,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.972884,
+            "harmonic_score": 0.942267,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.859925,
+            "relative_score": 2.7383863080684705,
+            "retained_shots": 1714,
+            "retention": 0.836914,
+            "score": 69.23,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 35,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.969228,
+            "harmonic_score": 0.93666,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.848141,
+            "relative_score": 0.0,
+            "retained_shots": 1691,
+            "retention": 0.825684,
+            "score": 68.67,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          }
         ],
-        "check_cost": 35,
-        "depth_layers": 12,
-        "description": "Standard practice: smaller instance, same FakeTorino-derived (or explicitly labelled fallback) noise rates.",
-        "energy_budget": 120,
-        "max_checks": 3,
-        "min_retention": 0.12,
-        "num_qubits": 5,
-        "payload_type": "tdoped",
-        "t_count": 5,
-        "target_score": 52.0,
-        "title": "Level 9: Fault-Tolerant Breach"
+        "shots": 2048,
+        "strategies_beating_no_check": 0,
+        "worst_score": 68.67
       },
-      "error": "T-doped circuits are stored as fidelity-only studies; Paulice check ranking is Clifford-only.",
-      "invalid_strategy_count": 0,
-      "level_id": "level_9",
-      "level_title": "Level 9: Fault-Tolerant Breach",
-      "noise_sources": [
-        "FakeTorino-derived uniform noise"
-      ],
-      "package_versions": {
-        "numpy": "2.5.4",
-        "qiskit": "2.5.2",
-        "qiskit-aer": "0.17.2",
-        "qiskit-ibm-runtime": "0.50.0",
-        "qiskit-paulice": "0.2.1"
-      },
-      "paulice_seed": 1764,
-      "payload_type": "tdoped",
-      "rank_status": "complete",
-      "ranked_at": "2026-10-14T15:32:35+00:00",
-      "ranking_engine_version": "3",
-      "scoring_beta": 2.0,
-      "shots_per_strategy": 2048,
-      "simulator_seed": 2026,
-      "strategies": [
-        {
-          "check_supports": [],
-          "cost": {
+      "Standard": {
+        "baseline_score": 73.77,
+        "best_score": 73.77,
+        "candidate_count": 6,
+        "difficulty": "Standard",
+        "failed_rows": [],
+        "level_id": "level_5",
+        "noise_sources": [
+          "FakeTorino-derived uniform noise"
+        ],
+        "non_baseline_strategy_count": 5,
+        "ranking_version": 3,
+        "relative_pass_threshold": 50.0,
+        "rows": [
+          {
             "added_depth": 0,
             "added_two_qubit_gates": 0,
-            "ancilla_qubits": 0,
-            "depth_after": 77,
-            "depth_before": 77,
-            "two_qubit_gates_after": 64,
-            "two_qubit_gates_before": 64
+            "beats_no_check": false,
+            "check_overhead_penalty": 0.0,
+            "checks": 0,
+            "error": "",
+            "fidelity": 0.692325,
+            "harmonic_score": 0.737721,
+            "highest_fidelity": false,
+            "highest_retention": true,
+            "highest_score": true,
+            "pass_fail": "PASS",
+            "rank": 1,
+            "raw_fidelity": 0.692325,
+            "relative_score": 100.0,
+            "retained_shots": 2048,
+            "retention": 1.0,
+            "score": 73.77,
+            "status": "valid",
+            "strategy": "No checks",
+            "targets": []
           },
-          "noise_source": "FakeTorino-derived uniform noise",
-          "num_checks_requested": 0,
-          "num_checks_used": 0,
-          "paulice_cost": null,
-          "post_selected_fidelity": 0.692315,
-          "rank": null,
-          "raw_fidelity": 0.692315,
-          "raw_shots": 2048,
-          "retained_shots": 2048,
-          "retention_rate": 1.0,
-          "score": null,
-          "status": "analysis_only",
-          "targets": []
-        }
-      ],
-      "strategies_attempted": 1,
-      "valid_strategy_count": 0
+          {
+            "added_depth": 25,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.878318,
+            "harmonic_score": 0.844146,
+            "highest_fidelity": true,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 2,
+            "raw_fidelity": 0.674277,
+            "relative_score": 17.233429394812656,
+            "retained_shots": 1496,
+            "retention": 0.730469,
+            "score": 59.41,
+            "status": "valid",
+            "strategy": "{q2}",
+            "targets": [
+              2
+            ]
+          },
+          {
+            "added_depth": 21,
+            "added_two_qubit_gates": 4,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.852781,
+            "harmonic_score": 0.831576,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 3,
+            "raw_fidelity": 0.676231,
+            "relative_score": 10.028818443804008,
+            "retained_shots": 1549,
+            "retention": 0.756348,
+            "score": 58.16,
+            "status": "valid",
+            "strategy": "{q3}",
+            "targets": [
+              3
+            ]
+          },
+          {
+            "added_depth": 25,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.843791,
+            "harmonic_score": 0.818643,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 4,
+            "raw_fidelity": 0.666554,
+            "relative_score": 2.536023054755031,
+            "retained_shots": 1498,
+            "retention": 0.731445,
+            "score": 56.86,
+            "status": "valid",
+            "strategy": "{q0}",
+            "targets": [
+              0
+            ]
+          },
+          {
+            "added_depth": 24,
+            "added_two_qubit_gates": 5,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.842068,
+            "harmonic_score": 0.814881,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 5,
+            "raw_fidelity": 0.661192,
+            "relative_score": 0.4034582132564859,
+            "retained_shots": 1478,
+            "retention": 0.72168,
+            "score": 56.49,
+            "status": "valid",
+            "strategy": "{q1}",
+            "targets": [
+              1
+            ]
+          },
+          {
+            "added_depth": 31,
+            "added_two_qubit_gates": 6,
+            "beats_no_check": false,
+            "check_overhead_penalty": 25.0,
+            "checks": 1,
+            "error": "",
+            "fidelity": 0.837442,
+            "harmonic_score": 0.814216,
+            "highest_fidelity": false,
+            "highest_retention": false,
+            "highest_score": false,
+            "pass_fail": "FAIL",
+            "rank": 6,
+            "raw_fidelity": 0.669434,
+            "relative_score": 0.0,
+            "retained_shots": 1501,
+            "retention": 0.73291,
+            "score": 56.42,
+            "status": "valid",
+            "strategy": "{q4}",
+            "targets": [
+              4
+            ]
+          }
+        ],
+        "shots": 2048,
+        "strategies_beating_no_check": 0,
+        "worst_score": 56.42
+      }
     }
   },
-  "schema_version": 1,
-  "updated_at": "2026-10-14T15:32:35+00:00"
+  "schema_version": 3,
+  "updated_at": "2026-10-15T08:51:33+00:00"
 }

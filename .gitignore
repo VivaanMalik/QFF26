@@ -16,3 +16,4 @@ test_scripts.py
 notebooks/
 
 *.log
+*.csv
