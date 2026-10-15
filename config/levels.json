@@ -10,7 +10,9 @@
     "target_score": 55.0,
     "min_retention": 0.25,
     "description": "A compact 3-qubit Clifford payload. Compare the no-check baseline with single-check and two-check strategies; checks have no score penalty in this onboarding mission.",
-    "check_penalty_weight": 0.0
+    "check_penalty_weight": 0.0,
+    "challenge_max_checks": 2,
+    "challenge_energy_budget": 100
   },
   "level_2": {
     "title": "Level 2: Hazardous Corridor",
@@ -23,7 +25,9 @@
     "target_score": 58.0,
     "min_retention": 0.2,
     "description": "A deeper 4-qubit Clifford payload. Check overhead is about 4.5 score points per check, so only stronger single-target strategies should beat the baseline.",
-    "check_penalty_weight": 0.1125
+    "check_penalty_weight": 0.1125,
+    "challenge_max_checks": 3,
+    "challenge_energy_budget": 120
   },
   "level_3": {
     "title": "Level 3: Deep Lattice Storm",
@@ -35,8 +39,10 @@
     "check_cost": 40,
     "target_score": 60.0,
     "min_retention": 0.2,
-    "description": "A 5-qubit Clifford payload. Check overhead is 9 score points per check, making only the strongest target selection competitive with no-check.",
-    "check_penalty_weight": 0.27
+    "description": "A 5-qubit Clifford payload. Check overhead is 9.6 score points per check, narrowing the strategies that can beat no-check.",
+    "check_penalty_weight": 0.288,
+    "challenge_max_checks": 3,
+    "challenge_energy_budget": 120
   },
   "level_4": {
     "title": "Level 4: Thermal Decay Nexus",
@@ -48,8 +54,10 @@
     "check_cost": 40,
     "target_score": 62.0,
     "min_retention": 0.15,
-    "description": "A 6-qubit, deeper Clifford payload with a high check-resource penalty. Confirm its winning-strategy count with the local design sweep.",
-    "check_penalty_weight": 0.75
+    "description": "A 6-qubit, deeper Clifford payload with a 10-point score penalty per check. Validate the remaining viable strategies against the no-check baseline.",
+    "check_penalty_weight": 0.375,
+    "challenge_max_checks": 4,
+    "challenge_energy_budget": 160
   },
   "level_5": {
     "title": "Level 5: Clifford Core Meltdown",
@@ -61,7 +69,9 @@
     "check_cost": 40,
     "target_score": 65.0,
     "min_retention": 0.15,
-    "description": "The largest 7-qubit Clifford payload with the strongest planned check-resource penalty. Confirm its winning-strategy count with the local design sweep.",
-    "check_penalty_weight": 1.0
+    "description": "The largest 7-qubit Clifford payload with an 11-point score penalty per check, designed so the no-check baseline is difficult to beat.",
+    "check_penalty_weight": 0.44,
+    "challenge_max_checks": 5,
+    "challenge_energy_budget": 200
   }
 }

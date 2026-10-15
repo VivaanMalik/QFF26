@@ -1,144 +1,83 @@
-# Syndrome Siege: QFF 2026 Advanced Track CLI
+# Qubit Crown
 
-Syndrome Siege is a terminal game about low-overhead quantum error detection using Qiskit and `qiskit-paulice`. Clifford missions let the player choose a set of target data qubits. Paulice constructs the spacetime checks, Aer simulates the noisy circuit, Paulice post-selection rejects shots with nonzero syndrome, and the game scores the resulting fidelity-retention trade-off.
+**Qubit Crown** is a Qiskit-based strategy game for exploring low-overhead quantum error detection. In Clifford campaign missions, players choose data-qubit targets and `qiskit-paulice` constructs spacetime checks. Qiskit Aer simulates the noisy circuits; the game compares post-selected output-distribution fidelity against the fraction of shots retained. A separate no-check T-gate study explores non-Clifford circuit behaviour without applying Clifford-only spacetime checks to T-doped circuits.
 
-## Run
+## Launch
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python play_cli.py
-```
-
-The game runs locally; no IBM Quantum account is needed. It first tries to build a uniform noise model from FakeTorino calibration data. If unavailable, it explicitly labels the permitted synthetic 1% gate / 1% readout noise fallback.
-
-## Main menu
-
-- `1`–`5`: Clifford spacetime-check missions.
-- `6`–`10`: T-doped fidelity-study missions without checks, as allowed by the official brief.
-- `A`: play through the levels.
-- `B`: run no-check baseline measurements across levels.
-- `R`: start/resume exhaustive ranking of every strategy for every level in the background.
-- `D`: change difficulty.
-- `H`: instructions.
-- `Q`: quit.
-
-There are no separate `T` or `O` commands. Exhaustive strategy ranking starts only when you choose `R` from the main menu; ordinary level play reads the saved ranking if one exists.
-
-## Player choice
-
-For a Clifford level, enter only the qubits you want to target, for example:
-
-```text
-Qubits to check: 0,2,4
-```
-
-This means **three target qubits and three requested checks**. There is no separate check-count prompt. Blocked and repeated qubit IDs are rejected, and the selected IDs are normalized into ascending order. This design treats the input as a set rather than making target ordering a separate game decision.
-
-Normal play only runs the strategy the player selected. It does not run an exhaustive ranking search after every mission. A strategy rank is shown only when a completed ranking for the exact level, difficulty, configuration, shot count, scoring version, and package versions is already saved.
-
-Use the main-menu **`R`** command to start or resume the exhaustive campaign ranking in a detached background process. For each Clifford level, the worker evaluates every canonical subset of unblocked qubits, including sets that exceed normal gameplay check/energy limits and sets whose measured retention falls below the mission minimum. The ranking relaxes those two gameplay limits only for its exhaustive search; blocked qubits are never included. It stores each candidate's result and rank, and saves the complete level table after that level finishes. Paulice-invalid target sets remain in the file with an error status and explanation. T-doped levels are stored as fidelity-only studies because the official path does not apply Paulice checks to non-Clifford circuits.
-
-The search covers **qubit subsets in ascending order**; it does not enumerate every permutation of a target set. Since Paulice's internal search can depend on target order, the result is the best strategy among the game's canonical sorted subsets, not a claim that every possible target ordering was explored. The same number of shots is used for every candidate (2,048 by default), with seeded simulator and Paulice calls. Ranking is still subject to finite-shot sampling; small score differences may not be statistically meaningful.
-
-## Score
-
-Let `F` be post-selected output-distribution fidelity and `R` be the retained-shot fraction. The game uses the fidelity-weighted harmonic mean with `beta = 2`:
-
-\[
-S_\beta = 100\frac{(1+\beta^2)FR}{F+\beta^2R}, \qquad \beta=2.
-\]
-
-So the implemented score is
-
-\[
-S_2 = 100\frac{5FR}{F+4R}.
-\]
-
-This weighting gives fidelity more influence than retention. The score does not replace reporting both metrics: retention is also displayed, and each level may require a minimum retention separately.
-
-Fidelity is the squared Bhattacharyya overlap (classical fidelity) between the ideal output distribution and the measured data-output distribution. The ideal Clifford reference uses the stabilizer simulator; the T-doped reference uses an exact statevector probability distribution. The raw fidelity is calculated before filtering, while post-selected fidelity uses only shots accepted by Paulice's all-zero-syndrome post-selection.
-
-## Noise and circuit overhead
-
-The noise model uses a uniform two-qubit depolarizing error and readout error, both matched to a FakeTorino-derived uniform model when possible or to the clearly labelled synthetic fallback. The report includes raw fidelity, post-selected fidelity, retention, weighted score, ancilla count, added two-qubit gates, added depth, and Paulice's gamma cost where available.
-
-## Official method boundaries
-
-- Clifford levels call `qiskit_paulice.add_pauli_checks(...)` to construct spacetime-check variants. The player chooses the target qubit subset; Paulice chooses the checks and their spacetime structure.
-- Post-selection uses each returned checked circuit's `get_postselection_method()`; shots with nonzero syndrome are discarded.
-- T-doped levels are measured without checks because `qiskit-paulice`'s official workflow accepts Clifford-only circuits. These levels report no-check fidelity, not error-detection gains.
-- This is error detection and post-selection, not error correction: the game rejects flagged shots; it does not repair a quantum state.
-
-## Tests
-
-Run the lightweight tests with:
-
-```bash
-python -m pytest -q
-```
-
-The Paulice smoke tests require Qiskit, Qiskit Aer, and `qiskit-paulice` to be installed. If those dependencies are absent, they are skipped; an end-to-end run should then be performed in the actual project environment.
-
-## Persistent background strategy ranking
-
-Normal gameplay **does not exhaustively rank strategies**. It only looks up a
-completed ranking from `data/strategy_rankings.json`; if the current level,
-difficulty, shot count, circuit configuration, scoring version, or relevant
-package versions do not match a saved record, the CLI says that a rank is not
-available yet.
-
-From the main menu, press **`R`** to start or resume the campaign ranker for the
-currently selected difficulty. It runs in a detached Python process, so the CLI
-returns to the menu immediately and you can continue playing while the scan runs.
-The worker visits every campaign level. For Clifford levels it evaluates the no-check baseline and every subset of
-unblocked target qubits, even if a set exceeds normal check/energy limits or its
-retention falls below the mission minimum. Those limits are relaxed only for
-ranking; blocked qubits remain excluded. For T-doped levels it stores the permitted
-no-check fidelity study only; these levels are not assigned a Paulice strategy score.
-
-After each level has been fully evaluated, all its attempted strategy rows are
-written atomically to `data/strategy_rankings.json`, including valid results,
-ranks, metrics, circuit overhead, and reasons for strategies that Paulice could
-not construct. Thus a completed level remains available if the worker is
-interrupted later. A subsequent `R` run skips matching completed records and
-continues missing levels. Entries are kept separately for different difficulty
-presets/configuration signatures.
-
-Background progress is stored in `data/ranking_status.json`; stdout and errors
-are logged to `data/strategy_ranking_worker.log`. Both files and the rankings
-JSON are generated locally and are ignored by Git. The worker requires the
-project's Qiskit, Qiskit Aer, FakeTorino provider, and `qiskit-paulice`
-dependencies to be installed in the same Python environment used to launch the
-CLI.
-
-
-## Streamlit web frontend
-
-A local Streamlit interface is available in `app.py`. It reuses the existing gameplay, difficulty presets, metrics, and ranking worker rather than implementing a separate simulator.
-
-### Launch
+Python 3.10+ is recommended. Run these commands from the project root.
 
 ```bash
 python -m venv .venv
+
+# Linux / macOS
 source .venv/bin/activate
+
+# Windows PowerShell
+# .venv\Scripts\Activate.ps1
+
 python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The **Campaign** page lets you choose a mission, difficulty, and target-qubit set. The number of selected qubits is the number of requested checks. The no-check baseline uses the existing simulation and noise configuration, but does not add Pauli checks. T-doped levels run as no-check fidelity studies. After a run, the page displays fidelity, retention, accepted/rejected shots, circuit overhead, and compatible saved strategy comparisons.
+The application runs locally in Streamlit. It does not require an IBM Quantum account. The simulator first attempts to derive a uniform noise level from FakeTorino calibration data and explicitly labels its synthetic 1% gate / 1% readout fallback when that backend-derived model is unavailable.
 
-The **Strategy Rankings** page starts or resumes the existing detached campaign-ranking worker and displays saved rankings only when a completed record matches the selected configuration. Progress is read from `data/ranking_status.json`; detailed worker output is written to `data/strategy_ranking_worker.log`. The **Baseline Study** page runs no-check simulations across all configured levels using the existing noise configuration. The Campaign page displays this no-check baseline beside a checked strategy when applicable, and **How It Works** describes the implemented method.
+## App navigation
 
-The CLI remains available with `python play_cli.py`.
+The six top-level destinations are:
 
-### Scoring formula note
+1. **Main Menu**: a command deck linking to every app section.
+2. **Profile**: view personal run history and difficulty-specific campaign progress.
+3. **Campaign**: play five Clifford missions; completion unlocks levels only within the same difficulty.
+4. **Strategy Rankings**: launch or inspect the background sweep. Each target subset runs in a child process so a native simulator crash marks that strategy unavailable without killing the sweep.
+5. **Analysis Lab**: one workspace with three views selected using vertical-numbered buttons:
+   - **Clifford Analysis**: select individual target qubits, run one strategy, and inspect fidelity-versus-retention, matched baseline deltas, score by target count, raw versus post-selected fidelity, added two-qubit gates, added depth, and downloadable strategy data.
+   - **No-check Baseline**: explicitly run no-check controls, inspect the saved control curve, and compare checked strategies against matched no-check rows.
+   - **T-Gate Sweep**: run the separate T/Tdg-count experiment and compare only matching circuit/noise configurations. T=0 is the control; these runs never enter Clifford rankings or campaign progression.
+6. **How To**: navigation, control meanings, and metric definitions.
 
-The current `src/metrics.py` implementation uses
+The Analysis Lab shows one view at a time. The sidebar difficulty buttons are vertical and fully labelled, levels use numbered buttons, and Clifford target qubits are selected individually with q0, q1, … buttons. Opening a page does not launch a quantum simulation; runs begin only after an explicit run button is pressed.
+
+## Physics and metric interpretation
+
+For a Clifford mission, players choose a subset of data qubits as targets. The number of selected targets is the requested check count. `qiskit-paulice` constructs the spacetime-check variants; the application uses the resulting checked circuits' post-selection method rather than a hand-built syndrome approximation.
+
+The output-distribution fidelity is the squared Bhattacharyya overlap between the ideal and measured data distributions. **Raw fidelity** is measured before filtering. **Post-selected fidelity** is measured on accepted shots. **Retention** is accepted shots divided by total shots. Fidelity and retention should be read together: a higher post-selected fidelity can come at the cost of discarding more shots.
+
+The backend score uses the following harmonic score, with \(\beta=2\), returned as a 0–1 value by `src/metrics.py` and converted to points by the caller:
 
 \[
-H_\beta = \frac{(1+\beta^2)FR}{F+\beta^2R}, \quad \beta=2.
+H_\beta = \frac{(1+\beta^2)FR}{F+\beta^2R}
 \]
 
-That denominator weights retention by \(\beta^2\), rather than weighting fidelity more heavily. The Streamlit frontend deliberately displays this discrepancy and uses the backend's current scores without silently changing them. If fidelity should receive the larger weight, agree on the intended formula first and update the backend scoring function, its tests, ranking-engine version, and README together; old rankings should then be treated as incompatible.
+where \(F\) is post-selected fidelity and \(R\) is retention. The implementation's exact scoring and any check-overhead penalty are defined by the current source and ranking version. Do not compare saved rankings from different scoring versions as though they were equivalent.
+
+The T-gate study is deliberately independent of campaign progress and Clifford rankings. T-doped circuits run without Paulice checks because the official spacetime-check workflow is intended for Clifford circuits. The T-study adds an explicit 1% single-qubit depolarizing assumption on T/Tdg gates; saved rows label the noise source and this study-only assumption.
+
+## Saved data
+
+- `data/strategy_rankings.json`: saved campaign ranking records.
+- `data/strategy_ranking_job.json`: state for the ranking worker.
+- `data/t_gate_research_runs.json`: saved T-gate observations; future experiments append records.
+- `data/baseline_study_runs.json`: saved no-check controls; future experiments append records.
+- `data/player_profiles.sqlite3`: local player/profile database, created on first launch and intentionally not bundled in source releases.
+
+Baseline matching requires comparable level, difficulty, shot count and noise source, along with a configuration signature where present. The app leaves unmatched controls unreported instead of inventing a comparison. Stored analysis can be exported as CSV from the Analysis Lab.
+
+## Tests and validation
+
+Run the lightweight tests from the project root:
+
+```bash
+python -m py_compile app.py src/*.py tests/*.py
+python -m pytest -q
+```
+
+The tests cover data normalization, matched-control calculations, metric validation, saved research logs, and player profiles. End-to-end quantum simulation requires the packages in `requirements.txt`. A syntax/test pass alone is not a substitute for running the Streamlit app and noisy Qiskit/Aer/Paulice experiments in the target environment.
+
+The bundled cache contains 278 strategy rows across five levels and passed saved-data checks for metric integrity, score consistency, and level/difficulty coverage. The uploaded diagnostic recorded 20 isolated strategy probes with zero segfaults in the target environment. The ranking worker isolates every candidate so a future native crash should leave that strategy unavailable and continue the sweep.
+
+For release validation, run the test commands above, launch the app, and perform a fresh Clifford check, no-check baseline, and T-gate sweep in the project's `.venv`.
+
+## Hackathon assessment
+
+See [`docs/HACKATHON_ASSESSMENT.md`](docs/HACKATHON_ASSESSMENT.md) for a provisional code-and-artifact review against the supplied Qiskit Fall Fest 2026 Advanced Track rubric. It is an estimate, not an official judge score.

@@ -6,6 +6,7 @@ All reusable ranking logic and persistence live here. The separate
 from __future__ import annotations
 
 import json
+import math
 import os
 import tempfile
 from datetime import datetime, timezone
@@ -14,7 +15,7 @@ from pathlib import Path
 from typing import Any, Callable, Iterable
 
 PASS_RELATIVE_SCORE_THRESHOLD = 50.0
-RANKING_VERSION = 3
+RANKING_VERSION = 4
 DIFFICULTIES = ("Guided", "Standard", "Full Challenge")
 DEFAULT_SHOTS = {"Guided": 2048, "Standard": 2048, "Full Challenge": 2048}
 
@@ -98,8 +99,41 @@ def apply_difficulty(base_cfg: dict[str, Any], difficulty: str) -> dict[str, Any
             "description": "Standard practice: a smaller instance of the campaign Clifford payload.",
         })
     elif difficulty == "Full Challenge":
-        # Keep the authored mission size and resources unchanged.
-        pass
+        # Challenge capacity is separate so Standard/Guided historical limits stay.
+        # Uses challenge_max_checks / challenge_energy_budget from levels.json when present.
+        original_qubits = int(base_cfg.get("num_qubits", 3))
+        authored_budget = max(1, int(base_cfg.get("energy_budget", 10**9)))
+        challenge_budget = max(
+            0,
+            int(base_cfg.get("challenge_energy_budget", base_cfg.get("energy_budget", 10**9))),
+        )
+        cfg.update({
+            "max_checks": min(
+                original_qubits,
+                max(
+                    0,
+                    int(
+                        base_cfg.get(
+                            "challenge_max_checks",
+                            base_cfg.get("max_checks", original_qubits),
+                        )
+                    ),
+                ),
+            ),
+            "energy_budget": challenge_budget,
+            "description": (
+                "Full Challenge: full authored payload with expanded strategy space; "
+                "compare fidelity, retention, and check overhead."
+            ),
+        })
+        # The scoring formula divides the resource penalty by energy_budget.
+        # Scale its weight alongside the larger Challenge budget so a check has
+        # the same absolute score cost at every difficulty; only affordability
+        # and circuit size are meant to change with this preset.
+        cfg["check_penalty_weight"] = (
+            max(0.0, float(base_cfg.get("check_penalty_weight", 0.0)))
+            * challenge_budget / authored_budget
+        )
     else:
         raise ValueError(f"Unknown difficulty preset {difficulty!r}.")
     return cfg
@@ -137,6 +171,15 @@ def safe_float(value: Any, default: float = 0.0) -> float:
         return default
 
 
+def optional_float(value: Any) -> float | None:
+    """Return a finite float or None; missing metrics must not become zero."""
+    try:
+        result = float(value)
+    except (TypeError, ValueError, OverflowError):
+        return None
+    return result if math.isfinite(result) else None
+
+
 def format_targets(targets: list[int] | tuple[int, ...] | None) -> str:
     values = sorted(set(int(q) for q in (targets or [])))
     return "No checks" if not values else "{" + ", ".join(f"q{q}" for q in values) + "}"
@@ -148,9 +191,26 @@ def compute_strategy_ranking(
     difficulty: str,
     shots: int,
     progress_callback: Callable[[int, int, str], None] | None = None,
+    strategy_runner: Callable[[str, list[int], dict[str, Any], int], dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Simulate every budget-valid Clifford strategy and compare with no-check."""
-    from src.game import play_level
+    """Rank every budget-valid Clifford strategy against its no-check control.
+
+    ``strategy_runner`` lets the background worker execute each native quantum
+    simulation in its own process. That protects the long-running sweep from a
+    Qiskit/Aer/Paulice segmentation fault. Direct calls remain available for
+    small local diagnostics and tests; the production worker always isolates.
+    """
+    if strategy_runner is None:
+        from src.game import play_level
+
+        def strategy_runner(_level_id: str, targets: list[int], _cfg: dict[str, Any], shot_count: int) -> dict[str, Any]:
+            return play_level(
+                level_id,
+                num_checks=len(targets),
+                target_qubits=targets,
+                shots=int(shot_count),
+                config_overrides=dict(cfg),
+            )
 
     n = int(cfg.get("num_qubits", 3))
     max_checks = maximum_affordable_checks(cfg, n)
@@ -163,13 +223,7 @@ def compute_strategy_ranking(
         if progress_callback:
             progress_callback(index - 1, len(candidates), label)
         try:
-            result = play_level(
-                level_id,
-                num_checks=len(targets),
-                target_qubits=list(targets),
-                shots=int(shots),
-                config_overrides=dict(cfg),
-            )
+            result = strategy_runner(level_id, list(targets), dict(cfg), int(shots))
             metrics = result.get("metrics", {})
             score = result.get("game_score")
             if score is None:
@@ -181,14 +235,47 @@ def compute_strategy_ranking(
                 "strategy": label,
                 "checks": len(targets),
                 "score": float(score),
-                "harmonic_score": safe_float(metrics.get("harmonic_score_H")),
-                "check_overhead_penalty": safe_float(metrics.get("check_overhead_penalty")),
-                "raw_fidelity": safe_float(metrics.get("raw_fidelity")),
-                "fidelity": safe_float(metrics.get("post_selected_fidelity")),
-                "retention": safe_float(metrics.get("retention_rate")),
+                "harmonic_score": optional_float(metrics.get("harmonic_score_H")),
+                "check_overhead_penalty": optional_float(metrics.get("check_overhead_penalty")),
+                "raw_fidelity": optional_float(metrics.get("raw_fidelity")),
+                "fidelity": optional_float(metrics.get("post_selected_fidelity")),
+                "retention": optional_float(metrics.get("retention_rate")),
                 "retained_shots": int(metrics.get("retained_shots", 0) or 0),
+                "raw_shots": int(metrics.get("raw_shots", shots) or shots),
+                "ancilla_qubits": (
+                    int(cost["ancilla_qubits"])
+                    if cost.get("ancilla_qubits") is not None else None
+                ),
+                "two_qubit_gates_before": (
+                    int(cost["two_qubit_gates_before"])
+                    if cost.get("two_qubit_gates_before") is not None else None
+                ),
+                "two_qubit_gates_after": (
+                    int(cost["two_qubit_gates_after"])
+                    if cost.get("two_qubit_gates_after") is not None else None
+                ),
+                "depth_before": (
+                    int(cost["depth_before"])
+                    if cost.get("depth_before") is not None else None
+                ),
+                "depth_after": (
+                    int(cost["depth_after"])
+                    if cost.get("depth_after") is not None else None
+                ),
                 "added_two_qubit_gates": int(cost.get("added_two_qubit_gates", 0) or 0),
                 "added_depth": int(cost.get("added_depth", 0) or 0),
+                "paulice_cost": (
+                    None if result.get("paulice_cost") is None
+                    else safe_float(result.get("paulice_cost"))
+                ),
+                "check_supports": result.get("check_supports", []),
+                "num_checks_requested": int(
+                    result.get("num_checks_requested", len(targets)) or 0
+                ),
+                "num_checks_used": int(
+                    result.get("num_checks_used", len(targets)) or 0
+                ),
+                "noise_source": str(result.get("noise_source", "unknown")),
                 "status": "valid",
                 "error": "",
             })
@@ -198,7 +285,13 @@ def compute_strategy_ranking(
                 "targets": list(targets), "strategy": label, "checks": len(targets),
                 "score": None, "harmonic_score": None, "check_overhead_penalty": None,
                 "raw_fidelity": None, "fidelity": None, "retention": None,
-                "retained_shots": 0, "added_two_qubit_gates": 0, "added_depth": 0,
+                "retained_shots": None, "raw_shots": None,
+                "ancilla_qubits": None, "two_qubit_gates_before": None,
+                "two_qubit_gates_after": None, "depth_before": None, "depth_after": None,
+                "added_two_qubit_gates": 0, "added_depth": 0,
+                "paulice_cost": None, "check_supports": [],
+                "num_checks_requested": len(targets), "num_checks_used": 0,
+                "noise_source": None,
                 "status": "failed", "error": f"{type(exc).__name__}: {exc}",
             })
         if index % 8 == 0:
@@ -214,8 +307,10 @@ def compute_strategy_ranking(
     scores = [row["score"] for row in valid]
     low = min(scores) if scores else None
     high = max(scores) if scores else None
-    max_fidelity = max((row["fidelity"] for row in valid), default=None)
-    max_retention = max((row["retention"] for row in valid), default=None)
+    fidelity_values = [float(row["fidelity"]) for row in valid if row.get("fidelity") is not None]
+    retention_values = [float(row["retention"]) for row in valid if row.get("retention") is not None]
+    max_fidelity = max(fidelity_values, default=None)
+    max_retention = max(retention_values, default=None)
     beats_baseline = 0
 
     for row in valid:
@@ -226,8 +321,8 @@ def compute_strategy_ranking(
         )
         beats_baseline += int(row["beats_no_check"])
         row["highest_score"] = high is not None and abs(row["score"] - high) < 1e-9
-        row["highest_fidelity"] = max_fidelity is not None and abs(row["fidelity"] - max_fidelity) < 1e-9
-        row["highest_retention"] = max_retention is not None and abs(row["retention"] - max_retention) < 1e-9
+        row["highest_fidelity"] = row.get("fidelity") is not None and max_fidelity is not None and abs(row["fidelity"] - max_fidelity) < 1e-9
+        row["highest_retention"] = row.get("retention") is not None and max_retention is not None and abs(row["retention"] - max_retention) < 1e-9
         row["pass_fail"] = classify_relative_score(row["relative_score"])
 
     return {
@@ -262,6 +357,12 @@ def _read_json(path: Path, default: dict[str, Any] | None = None) -> dict[str, A
 
 
 def _atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
+    """Write JSON atomically. On Windows, os.replace can fail with Access Denied
+    when another process (Streamlit UI, antivirus, indexer) briefly holds the
+    destination open. Retry the replace with short backoff before giving up.
+    """
+    import time
+
     _ensure_data_dir()
     fd, temp_name = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=str(DATA_DIR))
     try:
@@ -269,7 +370,24 @@ def _atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
             json.dump(payload, handle, indent=2, sort_keys=True)
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(temp_name, path)
+        last_error: Exception | None = None
+        for attempt in range(12):
+            try:
+                os.replace(temp_name, path)
+                return
+            except PermissionError as exc:
+                last_error = exc
+                # Windows: destination file is locked by a reader. Back off.
+                time.sleep(min(1.0, 0.04 * (2 ** attempt)))
+            except OSError as exc:
+                # Share-violation style errors sometimes surface as OSError.
+                if getattr(exc, "winerror", None) in {5, 32} or getattr(exc, "errno", None) in {13, 16}:
+                    last_error = exc
+                    time.sleep(min(1.0, 0.04 * (2 ** attempt)))
+                else:
+                    raise
+        if last_error is not None:
+            raise last_error
     finally:
         try:
             os.unlink(temp_name)
@@ -315,15 +433,44 @@ def save_job_status(status: dict[str, Any]) -> None:
 
 
 def process_is_alive(pid: int | None) -> bool:
-    if not pid or pid <= 0:
+    """Return True if *pid* appears to be a live process (Windows + Linux/macOS)."""
+    if not pid or int(pid) <= 0:
         return False
+    pid = int(pid)
+    if os.name == "nt":
+        # Windows: os.kill(pid, 0) is not reliable across all Python builds.
+        # Use OpenProcess; fall back to os.kill when ctypes is unavailable.
+        try:
+            import ctypes
+
+            PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+            kernel32 = ctypes.windll.kernel32  # type: ignore[attr-defined]
+            handle = kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid)
+            if handle:
+                kernel32.CloseHandle(handle)
+                return True
+            # ERROR_ACCESS_DENIED (5) still means the process exists.
+            if kernel32.GetLastError() == 5:
+                return True
+            return False
+        except Exception:
+            try:
+                os.kill(pid, 0)
+                return True
+            except OSError:
+                return False
+    # POSIX
     try:
-        os.kill(int(pid), 0)
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True  # exists, not owned by us
     except OSError:
         return False
-    proc_stat = Path(f"/proc/{int(pid)}/stat")
+    # Optional zombie filter when /proc is available (Linux).
     try:
-        fields = proc_stat.read_text(encoding="utf-8").split()
+        fields = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8").split()
         if len(fields) > 2 and fields[2] == "Z":
             return False
     except (OSError, IndexError):
