@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from typing import Callable
+import math
 
 import numpy as np
 
@@ -119,8 +120,8 @@ def calculate_harmonic_score(
     fidelity = float(np.clip(fidelity, 0.0, 1.0))
     retention = float(np.clip(retention, 0.0, 1.0))
     beta = float(beta)
-    if beta <= 0:
-        raise ValueError("beta must be positive")
+    if not math.isfinite(beta) or beta <= 0 or beta > 1000.0:
+        raise ValueError("beta must be finite and in the range (0, 1000]")
     beta_squared = beta * beta
     denominator = fidelity + beta_squared * retention
     return (
@@ -134,14 +135,18 @@ def compute_all_metrics(
     counts_ideal: dict[str, int | float],
     counts_noisy_raw: dict[str, int],
     postselection_method: Callable | None = None,
+    beta: float = 2.0,
 ) -> dict:
-    """Calculate raw fidelity, post-selected fidelity, retention and score."""
+    """Calculate raw fidelity, post-selected fidelity, retention and score.
+
+    ``beta`` controls the per-level balance between fidelity and retention.
+    """
     raw_data_counts = marginalize_raw_counts(counts_noisy_raw)
     raw_fidelity = calculate_hellinger_fidelity(counts_ideal, raw_data_counts)
 
     selected_counts, retention = filter_pauli_check_shots(counts_noisy_raw, postselection_method)
     selected_fidelity = calculate_hellinger_fidelity(counts_ideal, selected_counts)
-    score = calculate_harmonic_score(selected_fidelity, retention)
+    score = calculate_harmonic_score(selected_fidelity, retention, beta=beta)
     return {
         "raw_fidelity": raw_fidelity,
         "post_selected_fidelity": selected_fidelity,

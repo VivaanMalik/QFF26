@@ -35,29 +35,47 @@ def _reference_noise_parameters() -> tuple[float, float, str]:
 
     The same uniform rates are reused across all level widths, so comparisons
     between missions are not silently changing noise just because their size
-    changed.  The official brief also permits a synthetic 1% model; that is an
+    changed. The official brief also permits a synthetic 1% model; that is an
     explicitly labelled fallback if FakeTorino calibration data is unavailable.
     """
     try:
         from qiskit_ibm_runtime.fake_provider import FakeTorino
+
         if PauliceNoiseModel is None:
             raise ImportError("qiskit-paulice is not installed")
 
         backend = FakeTorino()
-        layout = _connected_layout(backend.coupling_map, min(7, backend.num_qubits))
+        layout = _connected_layout(
+            backend.coupling_map, min(7, backend.num_qubits)
+        )
         inferred = PauliceNoiseModel.from_backend(
             backend, layout=layout, uniform_gate_noise=True
         )
         gate_noise = float(inferred.gate_noise)
         readout_noise = inferred.readout_noise
-        readout_noise = 0.01 if readout_noise is None else float(readout_noise)
-        if not (0.0 <= gate_noise <= 1.0 and 0.0 <= readout_noise <= 0.5):
-            raise ValueError("FakeTorino returned noise probabilities outside valid ranges.")
-        return gate_noise, readout_noise, "FakeTorino-derived uniform noise"
+        readout_noise = (
+            0.01 if readout_noise is None else float(readout_noise)
+        )
+        if not (
+            0.0 <= gate_noise <= 1.0
+            and 0.0 <= readout_noise <= 0.5
+        ):
+            raise ValueError(
+                "FakeTorino returned noise probabilities outside valid ranges."
+            )
+        return (
+            gate_noise,
+            readout_noise,
+            "FakeTorino-derived uniform noise",
+        )
     except Exception as exc:
         # This fallback is part of the brief's allowed synthetic-noise option.
         # Label it in results so it cannot be mistaken for backend-derived data.
-        return 0.01, 0.01, f"synthetic fallback (gate=1%, readout=1%; {type(exc).__name__})"
+        return (
+            0.01,
+            0.01,
+            f"synthetic fallback (gate=1%, readout=1%; {type(exc).__name__})",
+        )
 
 
 def _connected_layout(coupling_map: Any, count: int) -> list[int]:
@@ -66,21 +84,26 @@ def _connected_layout(coupling_map: Any, count: int) -> list[int]:
         edges = list(coupling_map.get_edges())
     except Exception:
         edges = list(coupling_map)
+
     adjacency: dict[int, set[int]] = {}
     for a, b in edges:
         adjacency.setdefault(int(a), set()).add(int(b))
         adjacency.setdefault(int(b), set()).add(int(a))
+
     if not adjacency:
         raise ValueError("Backend coupling map has no readable edges.")
 
     # Start at a high-degree qubit and grow a connected set. Physical indices
     # are used only to obtain a representative uniform error rate, not as a
     # hard-coded layout for the logical game circuit.
-    starts = sorted(adjacency, key=lambda q: (-len(adjacency[q]), q))
+    starts = sorted(
+        adjacency, key=lambda q: (-len(adjacency[q]), q)
+    )
     for start in starts:
         chosen = [start]
         seen = {start}
         queue = [start]
+
         while queue and len(chosen) < count:
             q = queue.pop(0)
             for neighbor in sorted(adjacency.get(q, ())):
@@ -90,8 +113,10 @@ def _connected_layout(coupling_map: Any, count: int) -> list[int]:
                     queue.append(neighbor)
                     if len(chosen) == count:
                         break
+
         if len(chosen) == count:
             return chosen
+
     raise ValueError(f"Could not find {count} connected backend qubits.")
 
 
@@ -106,24 +131,31 @@ def get_noise_models(num_qubits: int = 7, *, require_paulice: bool = True):
     if require_paulice and PauliceNoiseModel is None:
         raise RuntimeError(
             "qiskit-paulice is required for the official Clifford check workflow. "
-            "Install project dependencies with: python -m pip install -r requirements.txt"
+            "Install project dependencies with: "
+            "python -m pip install -r requirements.txt"
         )
 
     p_gate, p_readout, source = _reference_noise_parameters()
+
     paulice_model = (
-        PauliceNoiseModel(gate_noise=p_gate, readout_noise=p_readout)
+        PauliceNoiseModel(
+            gate_noise=p_gate,
+            readout_noise=p_readout,
+        )
         if require_paulice and PauliceNoiseModel is not None
         else None
     )
 
     aer_model = AerNoiseModel()
+
     if p_gate > 0:
         two_qubit_error = depolarizing_error(min(p_gate, 1.0), 2)
-        # The payload uses CX/CZ; the extra names make the model robust to
-        # decomposition/transpilation into common two-qubit operations.
+        # The payload uses CX/CZ; these extra names allow for common
+        # two-qubit operations after decomposition or transpilation.
         aer_model.add_all_qubit_quantum_error(
             two_qubit_error, ["cx", "cz", "ecr", "swap"]
         )
+
     if p_readout > 0:
         aer_model.add_all_qubit_readout_error(
             ReadoutError(
@@ -133,28 +165,46 @@ def get_noise_models(num_qubits: int = 7, *, require_paulice: bool = True):
                 ]
             )
         )
+
     # Campaign Clifford circuits contain neither instruction, so this has no
     # effect on campaign scores or rankings. It is used only by T-study runs.
-    t_gate_error = depolarizing_error(T_GATE_DEPOLARIZING_RATE, 1)
-    aer_model.add_all_qubit_quantum_error(t_gate_error, ["t", "tdg"])
+    t_gate_error = depolarizing_error(
+        T_GATE_DEPOLARIZING_RATE, 1
+    )
+    aer_model.add_all_qubit_quantum_error(
+        t_gate_error, ["t", "tdg"]
+    )
+
     return paulice_model, aer_model, source
 
 
 def get_default_noise_model(num_qubits: int = 7) -> AerNoiseModel:
     """Return an Aer model without requiring the Paulice planner package."""
-    return get_noise_models(num_qubits, require_paulice=False)[1]
+    return get_noise_models(
+        num_qubits, require_paulice=False
+    )[1]
 
 
 def remove_barriers(circuit: QuantumCircuit) -> QuantumCircuit:
     """Copy a payload while removing checkpoint barriers and classical bits."""
     if circuit.num_clbits:
         raise ValueError("Expected an unmeasured payload circuit.")
-    out = QuantumCircuit(circuit.num_qubits, name=circuit.name)
+
+    out = QuantumCircuit(
+        circuit.num_qubits,
+        name=circuit.name,
+    )
+
     for instruction in circuit.data:
         if instruction.operation.name == "barrier":
             continue
-        qargs = [out.qubits[circuit.find_bit(qubit).index] for qubit in instruction.qubits]
+
+        qargs = [
+            out.qubits[circuit.find_bit(qubit).index]
+            for qubit in instruction.qubits
+        ]
         out.append(instruction.operation, qargs)
+
     return out
 
 
@@ -170,21 +220,30 @@ def run_ideal_simulation(
     shots: int = 8192,
     payload_type: str = "clifford",
 ) -> dict[str, float]:
-    """Reference distribution: stabilizer sampling for Clifford, statevector for T.
+    """Return the ideal output distribution.
 
-    The T-doped path returns exact probabilities (as weights) rather than noisy
-    finite-shot estimates, which reduces reference-sampling error.
+    Campaign circuits have at most 12 qubits, so exact statevector probabilities
+    are inexpensive and avoid running an extra 8,192-shot simulator for every
+    ranking candidate. The ``shots`` argument remains for API compatibility,
+    but exact references do not need sampling. For larger Clifford circuits,
+    retain the stabilizer-sampling fallback to avoid statevector memory growth.
     """
     clean = remove_barriers(circuit)
-    if payload_type.lower() == "tdoped":
-        state = Statevector.from_instruction(clean)
-        return {key: float(value) for key, value in state.probabilities_dict().items()}
 
+    # All current campaign levels are within this bound. Exact probabilities
+    # make ranking comparisons deterministic and remove reference shot noise.
+    if payload_type.lower() == "tdoped" or clean.num_qubits <= 12:
+        state = Statevector.from_instruction(clean)
+        return {
+            key: float(value)
+            for key, value in state.probabilities_dict().items()
+        }
+
+    # Larger Clifford circuits retain the memory-efficient stabilizer path.
     measured = clean.copy()
     measured.measure_all()
-    # Limit Aer's internal parallelism. Ranking repeatedly creates simulators;
-    # unrestricted OpenMP workers can oversubscribe machines and destabilize
-    # long batches, especially on Windows laptops.
+
+    # Keep Aer's internal parallelism limited on larger Clifford circuits.
     simulator = AerSimulator(
         method="stabilizer",
         max_parallel_threads=1,
@@ -192,9 +251,20 @@ def run_ideal_simulation(
         max_parallel_shots=1,
     )
     result = simulator.run(
-        measured, shots=max(int(shots), 8192), seed_simulator=1764
+        measured,
+        shots=max(int(shots), 8192),
+        seed_simulator=1764,
     ).result()
-    return {key: float(value) for key, value in result.get_counts().items()}
+
+    if not result.success:
+        raise RuntimeError(
+            f"Ideal reference simulation failed: {result.status}"
+        )
+
+    return {
+        key: float(value)
+        for key, value in result.get_counts().items()
+    }
 
 
 def build_paulice_variants(
@@ -204,8 +274,8 @@ def build_paulice_variants(
 ):
     """Return qiskit-paulice CheckedCircuit variants for 0..N selected targets.
 
-    Paulice itself picks the spacetime Pauli-check support and locations. The
-    user chooses target data qubits and the number of checks, as the brief asks.
+    Paulice picks the spacetime Pauli-check support and locations. The user
+    chooses target data qubits and the number of checks, as the brief asks.
     """
     if add_pauli_checks is None:
         raise RuntimeError(
@@ -214,18 +284,29 @@ def build_paulice_variants(
         )
 
     targets = [int(q) for q in target_qubits]
+
     if len(targets) != len(set(targets)):
         raise ValueError("Target qubits must be unique.")
+
     if any(q < 0 or q >= circuit.num_qubits for q in targets):
-        raise ValueError(f"Target qubits must be between 0 and {circuit.num_qubits - 1}.")
+        raise ValueError(
+            f"Target qubits must be between 0 and {circuit.num_qubits - 1}."
+        )
 
     prepared = measured_payload(circuit)
+
     if not targets:
         # Even the 0-check result is represented by a CheckedCircuit by Paulice;
-        # use one empty target list so its own postselection API remains in play.
+        # use an empty target list so its own postselection API remains in play.
         return add_pauli_checks(
-            prepared, [], paulice_noise_model, cost="gamma", method="windowed", seed=1764
+            prepared,
+            [],
+            paulice_noise_model,
+            cost="gamma",
+            method="windowed",
+            seed=1764,
         )
+
     return add_pauli_checks(
         prepared,
         targets,
@@ -245,7 +326,13 @@ def run_noisy_simulation(
     """Run the already-measured circuit with the matching Aer noise model."""
     if noise_model is None:
         noise_model = get_default_noise_model(circuit.num_qubits)
-    method = "statevector" if payload_type.lower() == "tdoped" else "stabilizer"
+
+    method = (
+        "statevector"
+        if payload_type.lower() == "tdoped"
+        else "stabilizer"
+    )
+
     # One native worker per simulation makes repeated ranking runs much less
     # likely to exhaust thread/memory resources on either Windows or Linux.
     simulator = AerSimulator(
@@ -255,31 +342,52 @@ def run_noisy_simulation(
         max_parallel_experiments=1,
         max_parallel_shots=1,
     )
+
     result = simulator.run(
-        circuit, shots=int(shots), seed_simulator=2026
+        circuit,
+        shots=int(shots),
+        seed_simulator=2026,
     ).result()
+
     if not result.success:
-        raise RuntimeError(f"Aer simulation failed: {result.status}")
+        raise RuntimeError(
+            f"Aer simulation failed: {result.status}"
+        )
+
     return result.get_counts()
 
 
-def circuit_cost(payload_measured: QuantumCircuit, final_circuit: QuantumCircuit, data_qubits: int) -> dict[str, int]:
+def circuit_cost(
+    payload_measured: QuantumCircuit,
+    final_circuit: QuantumCircuit,
+    data_qubits: int,
+) -> dict[str, int]:
     """Compute measurable added overhead: ancillas, 2Q gates and depth."""
+
     def count_two_qubit_gates(qc: QuantumCircuit) -> int:
         return sum(
-            1 for item in qc.data
+            1
+            for item in qc.data
             if item.operation.name not in {"barrier", "measure"}
             and item.operation.num_qubits == 2
         )
 
     base_two_qubit = count_two_qubit_gates(payload_measured)
     final_two_qubit = count_two_qubit_gates(final_circuit)
+
     return {
-        "ancilla_qubits": max(0, final_circuit.num_qubits - int(data_qubits)),
+        "ancilla_qubits": max(
+            0, final_circuit.num_qubits - int(data_qubits)
+        ),
         "two_qubit_gates_before": base_two_qubit,
         "two_qubit_gates_after": final_two_qubit,
-        "added_two_qubit_gates": max(0, final_two_qubit - base_two_qubit),
+        "added_two_qubit_gates": max(
+            0, final_two_qubit - base_two_qubit
+        ),
         "depth_before": int(payload_measured.depth()),
         "depth_after": int(final_circuit.depth()),
-        "added_depth": max(0, int(final_circuit.depth()) - int(payload_measured.depth())),
+        "added_depth": max(
+            0,
+            int(final_circuit.depth()) - int(payload_measured.depth()),
+        ),
     }

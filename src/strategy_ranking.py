@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any, Callable, Iterable
 
 PASS_RELATIVE_SCORE_THRESHOLD = 50.0
-RANKING_VERSION = 4
+RANKING_VERSION = 5
 DIFFICULTIES = ("Guided", "Standard", "Full Challenge")
 DEFAULT_SHOTS = {"Guided": 2048, "Standard": 2048, "Full Challenge": 2048}
 
@@ -74,6 +74,12 @@ def apply_difficulty(base_cfg: dict[str, Any], difficulty: str) -> dict[str, Any
     import math
 
     cfg = dict(base_cfg)
+    beta = safe_float(base_cfg.get("beta", 2.0), default=float("nan"))
+    if not math.isfinite(beta) or beta <= 0 or beta > 1000.0:
+        raise ValueError(
+            "Each level must define beta in the range (0, 1000] in config/levels.json."
+        )
+    cfg["beta"] = beta
     original_qubits = int(base_cfg.get("num_qubits", 3))
     original_depth = int(base_cfg.get("depth_layers", 2))
     original_check_limit = int(base_cfg.get("max_checks", 1))
@@ -200,10 +206,19 @@ def compute_strategy_ranking(
     Qiskit/Aer/Paulice segmentation fault. Direct calls remain available for
     small local diagnostics and tests; the production worker always isolates.
     """
+    beta = safe_float(cfg.get("beta", 2.0), default=float("nan"))
+    if not math.isfinite(beta) or beta <= 0 or beta > 1000.0:
+        raise ValueError("Ranking beta must be finite and in the range (0, 1000].")
+
     if strategy_runner is None:
         from src.game import play_level
 
-        def strategy_runner(_level_id: str, targets: list[int], _cfg: dict[str, Any], shot_count: int) -> dict[str, Any]:
+        def strategy_runner(
+            _level_id: str,
+            targets: list[int],
+            _cfg: dict[str, Any],
+            shot_count: int,
+        ) -> dict[str, Any]:
             return play_level(
                 level_id,
                 num_checks=len(targets),
@@ -317,12 +332,22 @@ def compute_strategy_ranking(
         row["rank"] = 1 + sum(other["score"] > row["score"] + 1e-9 for other in valid)
         row["relative_score"] = normalize_score(row["score"], scores)
         row["beats_no_check"] = bool(
-            baseline_score is not None and row["targets"] and row["score"] > baseline_score + 1e-9
+            baseline_score is not None
+            and row["targets"]
+            and row["score"] > baseline_score + 1e-9
         )
         beats_baseline += int(row["beats_no_check"])
         row["highest_score"] = high is not None and abs(row["score"] - high) < 1e-9
-        row["highest_fidelity"] = row.get("fidelity") is not None and max_fidelity is not None and abs(row["fidelity"] - max_fidelity) < 1e-9
-        row["highest_retention"] = row.get("retention") is not None and max_retention is not None and abs(row["retention"] - max_retention) < 1e-9
+        row["highest_fidelity"] = (
+            row.get("fidelity") is not None
+            and max_fidelity is not None
+            and abs(row["fidelity"] - max_fidelity) < 1e-9
+        )
+        row["highest_retention"] = (
+            row.get("retention") is not None
+            and max_retention is not None
+            and abs(row["retention"] - max_retention) < 1e-9
+        )
         row["pass_fail"] = classify_relative_score(row["relative_score"])
 
     return {
@@ -330,6 +355,7 @@ def compute_strategy_ranking(
         "level_id": level_id,
         "difficulty": difficulty,
         "shots": int(shots),
+        "scoring_beta": beta,
         "rows": valid,
         "failed_rows": [row for row in rows if row["status"] != "valid"],
         "baseline_score": baseline_score,
@@ -364,7 +390,9 @@ def _atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
     import time
 
     _ensure_data_dir()
-    fd, temp_name = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=str(DATA_DIR))
+    fd, temp_name = tempfile.mkstemp(
+        prefix=path.name + ".", suffix=".tmp", dir=str(DATA_DIR)
+    )
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as handle:
             json.dump(payload, handle, indent=2, sort_keys=True)
@@ -377,11 +405,12 @@ def _atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
                 return
             except PermissionError as exc:
                 last_error = exc
-                # Windows: destination file is locked by a reader. Back off.
                 time.sleep(min(1.0, 0.04 * (2 ** attempt)))
             except OSError as exc:
-                # Share-violation style errors sometimes surface as OSError.
-                if getattr(exc, "winerror", None) in {5, 32} or getattr(exc, "errno", None) in {13, 16}:
+                if (
+                    getattr(exc, "winerror", None) in {5, 32}
+                    or getattr(exc, "errno", None) in {13, 16}
+                ):
                     last_error = exc
                     time.sleep(min(1.0, 0.04 * (2 ** attempt)))
                 else:
@@ -401,11 +430,38 @@ def load_all_rankings() -> dict[str, Any]:
     return data
 
 
-def load_ranking(level_id: str, difficulty: str, shots: int | None = None) -> dict[str, Any] | None:
-    ranking = load_all_rankings().get("rankings", {}).get(level_id, {}).get(difficulty)
-    if not isinstance(ranking, dict) or int(ranking.get("ranking_version", 0)) != RANKING_VERSION:
+def _configured_level_beta(level_id: str) -> float | None:
+    """Read the current beta directly so edited levels.json invalidates stale rankings."""
+    try:
+        config = json.loads(
+            (PROJECT_ROOT / "config" / "levels.json").read_text(encoding="utf-8")
+        )
+        beta = float(config[level_id].get("beta", 2.0))
+    except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError, OverflowError):
         return None
-    if shots is not None and int(ranking.get("shots", -1)) != int(shots):
+    return beta if math.isfinite(beta) and 0 < beta <= 1000.0 else None
+
+
+def load_ranking(
+    level_id: str, difficulty: str, shots: int | None = None
+) -> dict[str, Any] | None:
+    ranking = load_all_rankings().get("rankings", {}).get(level_id, {}).get(difficulty)
+    if not isinstance(ranking, dict):
+        return None
+    try:
+        if int(ranking.get("ranking_version", 0)) != RANKING_VERSION:
+            return None
+        if shots is not None and int(ranking.get("shots", -1)) != int(shots):
+            return None
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+    current_beta = _configured_level_beta(level_id)
+    saved_beta = optional_float(ranking.get("scoring_beta"))
+    if current_beta is not None and (
+        saved_beta is None
+        or not math.isclose(saved_beta, current_beta, rel_tol=0.0, abs_tol=1e-12)
+    ):
         return None
     return ranking
 
@@ -438,8 +494,6 @@ def process_is_alive(pid: int | None) -> bool:
         return False
     pid = int(pid)
     if os.name == "nt":
-        # Windows: os.kill(pid, 0) is not reliable across all Python builds.
-        # Use OpenProcess; fall back to os.kill when ctypes is unavailable.
         try:
             import ctypes
 
@@ -449,7 +503,6 @@ def process_is_alive(pid: int | None) -> bool:
             if handle:
                 kernel32.CloseHandle(handle)
                 return True
-            # ERROR_ACCESS_DENIED (5) still means the process exists.
             if kernel32.GetLastError() == 5:
                 return True
             return False
@@ -459,16 +512,16 @@ def process_is_alive(pid: int | None) -> bool:
                 return True
             except OSError:
                 return False
-    # POSIX
+
     try:
         os.kill(pid, 0)
     except ProcessLookupError:
         return False
     except PermissionError:
-        return True  # exists, not owned by us
+        return True
     except OSError:
         return False
-    # Optional zombie filter when /proc is available (Linux).
+
     try:
         fields = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8").split()
         if len(fields) > 2 and fields[2] == "Z":

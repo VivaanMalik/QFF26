@@ -39,7 +39,15 @@ $$F(P,Q)=\left(\sum_x\sqrt{P(x)Q(x)}\right)^2$$
 
 We use the Bhattacharyya-based formula to compare ideal and noisy output probabilities, giving a similarity score between 0 and 1. Alternatives include total variation distance and KL divergence, but this formula provides a simple, intuitive measure of similarity.
 
-The game combines post-selected fidelity and retention using a weighted harmonic score, then applies a configurable penalty for check cost. This penalty is part of the game design.
+The game combines post-selected fidelity and retention using a weighted harmonic score, where $\beta$ is configurable for each level through `levels.json`.
+
+$$
+H_{\beta_\ell}=
+\frac{(1+\beta_\ell^2)FR}
+{F+\beta_\ell^2R}
+$$
+
+Here, $F$ is the post-selected fidelity, $R$ is the retention rate, and $\beta_\ell$ controls the balance between them for level $\ell$. A configurable penalty for check cost is then subtracted from the score.
 
 ### 4. Circuits and Noise
 

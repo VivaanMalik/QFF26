@@ -3,19 +3,9 @@ from __future__ import annotations
 
 import json
 from functools import lru_cache
+import math
 from pathlib import Path
 from typing import Any
-
-from src.circuits import get_clifford_payload, get_tdoped_payload
-from src.metrics import compute_all_metrics
-from src.simulator import (
-    build_paulice_variants,
-    circuit_cost,
-    get_noise_models,
-    measured_payload,
-    run_ideal_simulation,
-    run_noisy_simulation,
-)
 
 
 @lru_cache(maxsize=64)
@@ -28,6 +18,10 @@ def _cached_ideal_distribution(
         # The T count is not needed here because this helper is only used for
         # shared level references; T-doped calls use the dedicated helper below.
         raise ValueError("T-doped reference caching requires an explicit T count.")
+    # Keep Qiskit/Aer imports inside the isolated simulation process.
+    from src.circuits import get_clifford_payload
+    from src.simulator import run_ideal_simulation
+
     payload = get_clifford_payload(num_qubits, depth_layers)
     return run_ideal_simulation(
         payload, shots=reference_shots, payload_type=normalized_type
@@ -40,7 +34,6 @@ def load_level_configs(config_path="config/levels.json") -> dict[str, dict[str, 
         path = Path(__file__).resolve().parent.parent / "config" / "levels.json"
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
-
 
 
 def generate_feedback_message(fidelity, retention, score_100h):
@@ -82,7 +75,7 @@ def _check_spacetime_timeline(circuit, ancilla_indices: list[int]) -> list[dict[
     return result
 
 
-def play_level(
+def _play_level_impl(
     level_id: str,
     num_checks: int = 0,
     target_qubits: list[int] | None = None,
@@ -91,11 +84,10 @@ def play_level(
     config_overrides: dict[str, Any] | None = None,
     **_unused_compatibility_kwargs,
 ) -> dict[str, Any]:
-    """Execute a level with qiskit-paulice checks for Clifford payloads only.
+    """Perform the actual Qiskit run. Call only from a simulation child process.
 
-    The T-doped branch deliberately performs a no-check fidelity study, as
-    explicitly allowed by the official brief because add_pauli_checks accepts
-    Clifford circuits only.
+    T-doped circuits deliberately run without Paulice checks because the
+    supported spacetime-check workflow accepts Clifford circuits only.
     """
     levels = load_level_configs(config_path)
     if level_id not in levels:
@@ -108,22 +100,41 @@ def play_level(
     n = int(cfg.get("num_qubits", 3))
     depth_layers = int(cfg.get("depth_layers", 2))
     t_count = int(cfg.get("t_count", 0))
-    if payload_type == "clifford":
-        payload = get_clifford_payload(n, depth_layers)
-    elif payload_type == "tdoped":
-        payload = get_tdoped_payload(n, depth_layers, t_count)
-        if int(num_checks) != 0 or list(target_qubits or []):
-            raise ValueError(
-                "Official qiskit-paulice checks accept Clifford circuits only. "
-                "T-doped missions are run without checks and report their noisy fidelity."
-            )
-    else:
+    shots = int(shots)
+
+    # Hard limits protect the child process from malformed configs and
+    # accidental exponential statevector/memory requests. Current campaign
+    # levels are well below these limits.
+    if not 3 <= n <= 12:
+        raise ValueError("num_qubits must be between 3 and 12 for safe local simulation.")
+    if not 1 <= depth_layers <= 256:
+        raise ValueError("depth_layers must be between 1 and 256.")
+    if not 1 <= shots <= 100_000:
+        raise ValueError("shots must be between 1 and 100000.")
+    if not 0 <= t_count <= n * depth_layers:
+        raise ValueError("t_count must be between 0 and num_qubits * depth_layers.")
+
+    try:
+        beta = float(cfg.get("beta", 2.0))
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError("Level beta must be finite and in the range (0, 1000].") from exc
+    if not math.isfinite(beta) or beta <= 0 or beta > 1000.0:
+        raise ValueError("Level beta must be finite and in the range (0, 1000].")
+
+    if payload_type not in {"clifford", "tdoped"}:
         raise ValueError(f"Unsupported payload_type {payload_type!r} in {level_id}.")
 
     target_qubits = [int(q) for q in (target_qubits or [])]
     num_checks = int(num_checks)
     if num_checks < 0:
         raise ValueError("num_checks cannot be negative.")
+
+    if payload_type == "tdoped" and (num_checks != 0 or target_qubits):
+        raise ValueError(
+            "Official qiskit-paulice checks accept Clifford circuits only. "
+            "T-doped missions are run without checks and report their noisy fidelity."
+        )
+
     if payload_type == "clifford":
         if len(target_qubits) != len(set(target_qubits)):
             raise ValueError("Target qubits must be unique.")
@@ -136,11 +147,31 @@ def play_level(
             )
         if num_checks > int(cfg.get("max_checks", n)):
             raise ValueError(f"This mission permits at most {cfg.get('max_checks')} checks.")
-        max_budget_checks = int(cfg.get("energy_budget", 10**9)) // max(1, int(cfg.get("check_cost", 1)))
+        max_budget_checks = int(cfg.get("energy_budget", 10**9)) // max(
+            1, int(cfg.get("check_cost", 1))
+        )
         if num_checks > max_budget_checks:
             raise ValueError("The requested check count exceeds the mission's energy budget.")
 
-    reference_shots = max(int(shots) * 4, 8192)
+    # Only import native-backed quantum packages after validating the request.
+    from src.circuits import get_clifford_payload, get_tdoped_payload
+    from src.metrics import compute_all_metrics
+    from src.simulator import (
+        build_paulice_variants,
+        circuit_cost,
+        get_noise_models,
+        measured_payload,
+        run_ideal_simulation,
+        run_noisy_simulation,
+        T_GATE_DEPOLARIZING_RATE,
+    )
+
+    if payload_type == "clifford":
+        payload = get_clifford_payload(n, depth_layers)
+    else:
+        payload = get_tdoped_payload(n, depth_layers, t_count)
+
+    reference_shots = max(shots * 4, 8192)
     if payload_type == "clifford":
         # All strategies for a mission share this same ideal reference. Reusing
         # it avoids resampling the identical circuit once per qubit subset.
@@ -151,11 +182,11 @@ def play_level(
         ideal_distribution = run_ideal_simulation(
             payload, shots=reference_shots, payload_type=payload_type
         )
+
     paulice_noise, aer_noise, noise_source = get_noise_models(
         n, require_paulice=(payload_type == "clifford")
     )
     if payload_type == "tdoped":
-        from src.simulator import T_GATE_DEPOLARIZING_RATE
         noise_source = (
             f"{noise_source}; T/Tdg single-qubit depolarizing error="
             f"{T_GATE_DEPOLARIZING_RATE:.1%} (T-study only)"
@@ -184,23 +215,29 @@ def play_level(
         actual_checks = len(getattr(checked_object, "check_qubits", ()) or ())
         chosen_targets = list(getattr(checked_object, "target_qubits", ()) or ())
         paulice_cost = getattr(checked_object, "cost", None)
-        supports = [list(support) for support in (getattr(checked_object, "check_support", ()) or ())]
+        supports = [
+            list(support)
+            for support in (getattr(checked_object, "check_support", ()) or ())
+        ]
         spacetime_timeline = _check_spacetime_timeline(
-            final_circuit, [int(q) for q in (getattr(checked_object, "check_qubits", ()) or ())]
+            final_circuit,
+            [int(q) for q in (getattr(checked_object, "check_qubits", ()) or ())],
         )
 
     noisy_counts = run_noisy_simulation(
         final_circuit,
         noise_model=aer_noise,
-        shots=int(shots),
+        shots=shots,
         payload_type=payload_type,
     )
     metrics = compute_all_metrics(
         ideal_distribution,
         noisy_counts,
         postselection_method=postselection_method,
+        beta=beta,
     )
     cost = circuit_cost(bare_measured, final_circuit, n)
+
     # T-doped experiments are analysis-only and never receive a campaign score.
     # Campaign scoring also accounts for check resources: a check is not free,
     # and later missions intentionally apply a stronger resource penalty.
@@ -223,7 +260,11 @@ def play_level(
         "level_id": level_id,
         "level_title": cfg.get("title", level_id),
         "payload_type": payload_type,
-        "official_mode": "qiskit-paulice spacetime checks" if payload_type == "clifford" else "T-doped no-check fidelity study",
+        "official_mode": (
+            "qiskit-paulice spacetime checks"
+            if payload_type == "clifford"
+            else "T-doped no-check fidelity study"
+        ),
         "effective_config": {
             "num_qubits": n,
             "depth_layers": depth_layers,
@@ -231,6 +272,7 @@ def play_level(
             "target_score": float(cfg.get("target_score", 60.0)),
             "min_retention": float(cfg.get("min_retention", 0.15)),
             "check_penalty_weight": check_penalty_weight,
+            "beta": beta,
         },
         "num_checks_requested": num_checks,
         "num_checks_used": actual_checks,
@@ -242,6 +284,7 @@ def play_level(
         "circuit_depth": int(final_circuit.depth()),
         "total_qubits": int(final_circuit.num_qubits),
         "game_score": game_score,
+        "scoring_beta": beta,
         "metrics": {
             "raw_fidelity": round(metrics["raw_fidelity"], 6),
             "post_selected_fidelity": round(metrics["post_selected_fidelity"], 6),
@@ -255,8 +298,51 @@ def play_level(
         "feedback": (
             generate_feedback_message(
                 metrics["post_selected_fidelity"], metrics["retention_rate"], game_score
-            ) if game_score is not None else
-            "T-doped payload measured without checks because qiskit-paulice accepts Clifford circuits only."
+            )
+            if game_score is not None
+            else "T-doped payload measured without checks because qiskit-paulice accepts Clifford circuits only."
         ),
         "circuit_obj": final_circuit,
     }
+
+
+class _CircuitText:
+    """Small display-only stand-in for QuantumCircuit returned by the child."""
+
+    def __init__(self, drawing: str):
+        self._drawing = str(drawing)
+
+    def draw(self, *args, **kwargs) -> str:
+        # The UI uses draw(output="text", fold=120). Ignore rendering options
+        # because the real text drawing was generated in the child process.
+        return self._drawing
+
+
+def play_level(
+    level_id: str,
+    num_checks: int = 0,
+    target_qubits: list[int] | None = None,
+    shots: int = 1024,
+    config_path: str = "config/levels.json",
+    config_overrides: dict[str, Any] | None = None,
+    **_unused_compatibility_kwargs,
+) -> dict[str, Any]:
+    """Run a mission in a crash-isolated child process.
+
+    All app entry points (Campaign, baseline, and T-gate study) use this
+    wrapper. If a native dependency segfaults, only the child exits; Streamlit
+    receives a clear RuntimeError instead of being terminated.
+    """
+    from src.simulation_worker import run_level_isolated
+
+    result = run_level_isolated(
+        level_id=str(level_id),
+        targets=[int(q) for q in (target_qubits or [])],
+        config=dict(config_overrides or {}),
+        shots=int(shots),
+        config_path=str(config_path),
+        num_checks=int(num_checks),
+    )
+    drawing = result.pop("_circuit_text", "")
+    result["circuit_obj"] = _CircuitText(drawing) if drawing else None
+    return result

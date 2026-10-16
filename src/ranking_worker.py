@@ -5,8 +5,9 @@ strategy runs in a short-lived child process, so a native Qiskit/Aer/Paulice
 segmentation fault marks only that strategy as unavailable and does not kill
 the entire level/difficulty sweep.
 
-Run from the project root with ``python -m src.ranking_worker``. The only
-separate ranking files are this worker and ``src.strategy_ranking``.
+Run from the project root with ``python -m src.ranking_worker``. Single
+mission runs launched by the UI use ``src.simulation_worker``; ranking candidates
+are likewise executed in disposable children so native crashes stay contained.
 """
 from __future__ import annotations
 
@@ -46,9 +47,12 @@ def level_number(level_id: str) -> int:
 
 
 def _json_safe(value: Any) -> Any:
-    """Convert a small simulation result to portable JSON primitives."""
-    if value is None or isinstance(value, (str, bool, int, float)):
+    """Convert a small simulation result to strict portable JSON primitives."""
+    if value is None or isinstance(value, (str, bool, int)):
         return value
+    if isinstance(value, float):
+        import math
+        return value if math.isfinite(value) else None
     if isinstance(value, dict):
         return {str(key): _json_safe(item) for key, item in value.items()}
     if isinstance(value, (list, tuple, set)):
@@ -60,7 +64,9 @@ def _json_safe(value: Any) -> Any:
         except Exception:
             pass
     try:
-        return float(value)
+        number = float(value)
+        import math
+        return number if math.isfinite(number) else None
     except (TypeError, ValueError, OverflowError):
         return str(value)
 
@@ -78,6 +84,7 @@ def _extract_ranking_fields(result: dict[str, Any]) -> dict[str, Any]:
         "num_checks_requested": result.get("num_checks_requested"),
         "num_checks_used": result.get("num_checks_used"),
         "noise_source": result.get("noise_source", "unknown"),
+        "scoring_beta": result.get("scoring_beta", 2.0),
     })
 
 
@@ -87,9 +94,9 @@ def _run_probe_child(input_path: str, output_path: str) -> int:
     try:
         payload = json.loads(Path(input_path).read_text(encoding="utf-8"))
         # Import the simulator only in this isolated child process.
-        from src.game import play_level
+        from src.game import _play_level_impl
 
-        result = play_level(
+        result = _play_level_impl(
             str(payload["level_id"]),
             num_checks=len(payload["targets"]),
             target_qubits=[int(q) for q in payload["targets"]],
@@ -152,12 +159,24 @@ def run_strategy_isolated(
             str(input_path), str(output_path),
         ]
         env = os.environ.copy()
+        for thread_var in (
+            "OMP_NUM_THREADS",
+            "OPENBLAS_NUM_THREADS",
+            "MKL_NUM_THREADS",
+            "NUMEXPR_NUM_THREADS",
+            "VECLIB_MAXIMUM_THREADS",
+            "BLIS_NUM_THREADS",
+        ):
+            env[thread_var] = "1"
         env.setdefault("PYTHONUTF8", "1")
         env.setdefault("PYTHONIOENCODING", "utf-8")
         existing = env.get("PYTHONPATH", "")
         root_string = str(PROJECT_ROOT)
         if root_string not in existing.split(os.pathsep):
-            env["PYTHONPATH"] = root_string if not existing else root_string + os.pathsep + existing
+            env["PYTHONPATH"] = (
+                root_string if not existing
+                else root_string + os.pathsep + existing
+            )
         try:
             completed = subprocess.run(
                 command,
@@ -219,7 +238,9 @@ def main(argv: list[str] | None = None) -> int:
             for level_id in level_ids:
                 cfg = apply_difficulty(levels[level_id], difficulty)
                 n = int(cfg.get("num_qubits", 3))
-                candidates = len(enumerate_strategy_sets(range(n), maximum_affordable_checks(cfg, n)))
+                candidates = len(enumerate_strategy_sets(
+                    range(n), maximum_affordable_checks(cfg, n)
+                ))
                 tasks.append((level_id, difficulty, cfg, DEFAULT_SHOTS[difficulty], candidates))
         total_candidates = sum(task[4] for task in tasks)
         initial = load_job_status()
