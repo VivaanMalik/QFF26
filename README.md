@@ -1,5 +1,5 @@
 # Qubit Crown
-## Qiskit Fall Fest 2026 Hackathon — Advanced Track Report
+## Qiskit Fall Fest 2026 Hackathon - Advanced Track Report
 
 **Project:** Qubit Crown  
 **Track:** Qiskit Fall Fest 2026 Hackathon, Advanced Track  
