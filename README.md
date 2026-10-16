@@ -74,7 +74,40 @@ Qubit Crown explores an important trade-off in quantum error detection: improvin
 
 The project also highlights that adding more checks is not always beneficial, as the extra circuit overhead can outweigh the improvement in fidelity. By comparing checked and unchecked circuits, Qubit Crown makes these trade-offs visible through interactive experiments. Its separate T-gate study extends this exploration to non-Clifford circuits under a chosen noise model.
 
-### 7. Conclusion
+## 8. How to Run
+
+### Requirements
+
+- Python installed
+- The project repository, including `app.py` and `requirements.txt`
+
+### Setup
+
+Clone the repository and enter its directory:
+
+```bash
+git clone https://github.com/VivaanMalik/QFF26
+cd QFF26
+```
+
+### Launch the app
+
+```bash
+./scripts/run_linux.sh # linux
+\scripts\run_windows.bat # windows
+```
+
+Open the local URL printed in the terminal. From the app, use Campaign to run a level, Strategy Rankings to compare strategies, and Analysis Lab to explore Clifford Analysis, No-check Baseline, and T-Gate Sweep.
+
+## 9. Limitations and next steps
+
+1. **Statistical uncertainty:** the reported diagnostic probes use only 128 shots per configuration. Repeat runs with multiple seeds and report variation or confidence intervals.
+2. **T-gate findings:** run a documented T-count sweep and include matched T=0 controls before making claims about how T count changes fidelity or retention.
+3. **Noise comparability:** record and disclose whether each result uses FakeTorino-derived uniform noise or the synthetic fallback.
+4. **Score transparency:** explain the harmonic metric and the configurable check-overhead penalty separately, and test that game balance does not obscure the underlying physical metrics.
+5. **Final runtime verification:** run the final package in the target environment, navigate every page, execute at least one checked Clifford run, one no-check baseline, and one T-gate sweep, and archive the outputs.
+
+### 10. Conclusion
 
 Qubit Crown turns quantum error detection into a hands-on strategy game. It lets players compare noisy and ideal results, see how checks affect fidelity and retention, and consider the extra cost of using them. The preliminary results demonstrate this trade-off, although more repeated runs and fresh testing are needed before drawing broader conclusions.
 
