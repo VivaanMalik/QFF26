@@ -1,83 +1,144 @@
 # Qubit Crown
+## Qiskit Fall Fest 2026 Hackathon — Advanced Track Report
 
-**Qubit Crown** is a Qiskit-based strategy game for exploring low-overhead quantum error detection. In Clifford campaign missions, players choose data-qubit targets and `qiskit-paulice` constructs spacetime checks. Qiskit Aer simulates the noisy circuits; the game compares post-selected output-distribution fidelity against the fraction of shots retained. A separate no-check T-gate study explores non-Clifford circuit behaviour without applying Clifford-only spacetime checks to T-doped circuits.
+**Project:** Qubit Crown  
+**Track:** Qiskit Fall Fest 2026 Hackathon, Advanced Track  
+**Project type:** Quantum error-detection strategy game and research interface
 
-## Launch
+## Abstract
 
-Python 3.10+ is recommended. Run these commands from the project root.
+Qubit Crown is a Qiskit-based strategy game built around low-overhead quantum error detection with spacetime checks. In the Clifford campaign, players choose target data qubits and the `qiskit-paulice` package constructs check variants. Noisy circuits are simulated with Qiskit Aer, and strategies are assessed using output-distribution fidelity, the fraction of shots retained after post-selection, and an overhead-aware game score. A separate no-check T-gate study investigates how adding non-Clifford phase gates affects output distributions without applying the Clifford-only Paulice workflow to T-doped circuits.
 
-```bash
-python -m venv .venv
+The project is designed to make a central quantum error-detection trade-off visible: post-selection can improve the fidelity of accepted outcomes, but it discards shots and adds circuit resources. The report distinguishes implemented functionality and preliminary diagnostic evidence from results that still require repeated, reproducible runs.
 
-# Linux / macOS
-source .venv/bin/activate
+## 1. Problem and motivation
 
-# Windows PowerShell
-# .venv\Scripts\Activate.ps1
+Quantum computations are vulnerable to noise. Error detection uses measurements or checks to identify some outcomes likely to be corrupted and discard them; it does not, by itself, repair the quantum state. The Qiskit Fall Fest Advanced Track asks teams to turn this physical task into a game while preserving the underlying meaning of spacetime-code error detection.
 
-python -m pip install -r requirements.txt
-streamlit run app.py
-```
+Qubit Crown addresses this by making players choose which data qubits to target with checks, compare the checked circuit against a no-check control, and evaluate the balance between post-selected fidelity and retained shots. It is intended as an educational and experimental tool, not a claim of full fault-tolerant quantum error correction.
 
-The application runs locally in Streamlit. It does not require an IBM Quantum account. The simulator first attempts to derive a uniform noise level from FakeTorino calibration data and explicitly labels its synthetic 1% gate / 1% readout fallback when that backend-derived model is unavailable.
+## 2. Game mechanics mapped to the physics
 
-## App navigation
+The main campaign uses Clifford-only payload circuits. The player selects a subset of data-qubit targets. The project passes those targets to `qiskit-paulice`, which constructs spacetime-check circuit variants and exposes a post-selection method. The simulation pipeline then:
 
-The six top-level destinations are:
+1. Builds the payload circuit and its checked variant.
+2. Simulates the circuit under a noise model using Qiskit Aer.
+3. Reads the output counts and applies the check's post-selection rule.
+4. Discards shots with non-trivial syndromes.
+5. Computes raw fidelity, post-selected fidelity, shot retention, and the game score.
+6. Compares the result with a compatible no-check baseline when one exists.
 
-1. **Main Menu**: a command deck linking to every app section.
-2. **Profile**: view personal run history and difficulty-specific campaign progress.
-3. **Campaign**: play five Clifford missions; completion unlocks levels only within the same difficulty.
-4. **Strategy Rankings**: launch or inspect the background sweep. Each target subset runs in a child process so a native simulator crash marks that strategy unavailable without killing the sweep.
-5. **Analysis Lab**: one workspace with three views selected using vertical-numbered buttons:
-   - **Clifford Analysis**: select individual target qubits, run one strategy, and inspect fidelity-versus-retention, matched baseline deltas, score by target count, raw versus post-selected fidelity, added two-qubit gates, added depth, and downloadable strategy data.
-   - **No-check Baseline**: explicitly run no-check controls, inspect the saved control curve, and compare checked strategies against matched no-check rows.
-   - **T-Gate Sweep**: run the separate T/Tdg-count experiment and compare only matching circuit/noise configurations. T=0 is the control; these runs never enter Clifford rankings or campaign progression.
-6. **How To**: navigation, control meanings, and metric definitions.
+The target-qubit selection is the player's decision. The actual spacetime-check supports and placement are generated by the Paulice workflow; they should not be confused with the target list itself.
 
-The Analysis Lab shows one view at a time. The sidebar difficulty buttons are vertical and fully labelled, levels use numbered buttons, and Clifford target qubits are selected individually with q0, q1, … buttons. Opening a page does not launch a quantum simulation; runs begin only after an explicit run button is pressed.
+### Campaign
 
-## Physics and metric interpretation
+The campaign contains five Clifford levels with increasing circuit sizes and depths. Progress is tracked separately by difficulty, so completing a level on one difficulty does not unlock the next level on another difficulty.
 
-For a Clifford mission, players choose a subset of data qubits as targets. The number of selected targets is the requested check count. `qiskit-paulice` constructs the spacetime-check variants; the application uses the resulting checked circuits' post-selection method rather than a hand-built syndrome approximation.
+| Level | Name | Data qubits | Depth layers | Standard max checks |
+|---|---|---:|---:|---:|
+| 1 | Outpost Sector | 3 | 4 | 2 |
+| 2 | Hazardous Corridor | 4 | 20 | 1 |
+| 3 | Deep Lattice Storm | 5 | 20 | 1 |
+| 4 | Thermal Decay Nexus | 6 | 28 | 1 |
+| 5 | Clifford Core Meltdown | 7 | 36 | 1 |
 
-The output-distribution fidelity is the squared Bhattacharyya overlap between the ideal and measured data distributions. **Raw fidelity** is measured before filtering. **Post-selected fidelity** is measured on accepted shots. **Retention** is accepted shots divided by total shots. Fidelity and retention should be read together: a higher post-selected fidelity can come at the cost of discarding more shots.
+Difficulty presets can alter the effective mission configuration and check budget. The table lists the base values in `config/levels.json`, not every difficulty-specific override.
 
-The backend score uses the following harmonic score, with \(\beta=2\), returned as a 0–1 value by `src/metrics.py` and converted to points by the caller:
+### Separate T-gate study
+
+The T-gate experiment is independent of campaign progression and Clifford strategy rankings. It compares T/Tdg counts in a controlled circuit family, including a T=0 control. Because the official `qiskit-paulice` spacetime-check workflow accepts Clifford circuits only, the T-doped family is studied without Paulice checks. The T-study circuit includes fixed basis changes so diagonal T phases can affect final measurement probabilities. Its noise model includes an explicit study-only single-qubit depolarizing assumption for T/Tdg gates.
+
+## 3. Simulation and reference method
+
+### Circuit families
+
+- **Clifford campaign:** generated by `src/circuits.py` and kept within the Clifford gate set accepted by the Paulice workflow.
+- **T-gate study:** a separate circuit family with a variable number of T/Tdg gates and matched T=0 control.
+
+### Ideal reference distributions
+
+The simulator uses a stabilizer-based Qiskit Aer path for Clifford reference sampling. For T-doped circuits, it uses Qiskit's statevector probabilities to form an exact ideal output distribution for the small study circuits. These references are compared with noisy measurement distributions.
+
+### Noise model
+
+The simulator attempts to derive a uniform noise level from FakeTorino calibration data. If backend-derived calibration is unavailable, the project documents a synthetic 1% gate / 1% readout fallback. The T-study additionally applies its explicitly labelled 1% single-qubit depolarizing assumption to T/Tdg gates. Results should identify which noise source was used; results from different noise configurations should not be compared as if they were identical experiments.
+
+## 4. Metrics and scoring
+
+### Output-distribution fidelity
+
+The implementation uses the squared Bhattacharyya overlap (classical fidelity) between the ideal distribution \(P\) and measured distribution \(Q\):
 
 \[
-H_\beta = \frac{(1+\beta^2)FR}{F+\beta^2R}
+F(P,Q)=\left(\sum_x \sqrt{P(x)Q(x)}\right)^2.
 \]
 
-where \(F\) is post-selected fidelity and \(R\) is retention. The implementation's exact scoring and any check-overhead penalty are defined by the current source and ranking version. Do not compare saved rankings from different scoring versions as though they were equivalent.
+This is an output-distribution comparison, not a claim that the full noisy quantum state has been reconstructed.
 
-The T-gate study is deliberately independent of campaign progress and Clifford rankings. T-doped circuits run without Paulice checks because the official spacetime-check workflow is intended for Clifford circuits. The T-study adds an explicit 1% single-qubit depolarizing assumption on T/Tdg gates; saved rows label the noise source and this study-only assumption.
+- **Raw fidelity:** calculated from data outcomes before post-selection.
+- **Post-selected fidelity:** calculated from outcomes retained by the check's post-selection method.
+- **Shot retention:** accepted shots divided by total shots.
+- **Added two-qubit gates / added depth:** difference between checked and payload circuits when both measurements are available.
 
-## Saved data
+### Base trade-off score
 
-- `data/strategy_rankings.json`: saved campaign ranking records.
-- `data/strategy_ranking_job.json`: state for the ranking worker.
-- `data/t_gate_research_runs.json`: saved T-gate observations; future experiments append records.
-- `data/baseline_study_runs.json`: saved no-check controls; future experiments append records.
-- `data/player_profiles.sqlite3`: local player/profile database, created on first launch and intentionally not bundled in source releases.
+The metric module calculates a fidelity-weighted harmonic score:
 
-Baseline matching requires comparable level, difficulty, shot count and noise source, along with a configuration signature where present. The app leaves unmatched controls unreported instead of inventing a comparison. Stored analysis can be exported as CSV from the Analysis Lab.
+\[
+H_\beta = \frac{(1+\beta^2)FR}{F+\beta^2R}, \qquad \beta=2,
+\]
 
-## Tests and validation
+where \(F\) is post-selected fidelity and \(R\) is retention. The score is converted to a 0–100 scale by the game logic. The campaign can also apply a level-configured check-overhead penalty:
 
-Run the lightweight tests from the project root:
+\[
+S = \max\left(0,\;100H_\beta - 100w\frac{c\,n}{B}\right),
+\]
 
-```bash
-python -m py_compile app.py src/*.py tests/*.py
-python -m pytest -q
-```
+where \(w\) is the level's check-penalty weight, \(c\) is check cost, \(n\) is the number of checks used, and \(B\) is the effective energy budget. Thus, a strategy may increase post-selected fidelity yet earn a lower final game score if it discards many shots or incurs substantial configured overhead.
 
-The tests cover data normalization, matched-control calculations, metric validation, saved research logs, and player profiles. End-to-end quantum simulation requires the packages in `requirements.txt`. A syntax/test pass alone is not a substitute for running the Streamlit app and noisy Qiskit/Aer/Paulice experiments in the target environment.
+The penalty is a game-design choice, not a physical observable. It should be explained to players and tuned using transparent experiments rather than presented as a law of quantum mechanics.
 
-The bundled cache contains 278 strategy rows across five levels and passed saved-data checks for metric integrity, score consistency, and level/difficulty coverage. The uploaded diagnostic recorded 20 isolated strategy probes with zero segfaults in the target environment. The ranking worker isolates every candidate so a future native crash should leave that strategy unavailable and continue the sweep.
+## 5. Preliminary findings
 
-For release validation, run the test commands above, launch the app, and perform a fresh Clifford check, no-check baseline, and T-gate sweep in the project's `.venv`.
+The supplied local diagnostic report records 20 isolated strategy probes at 128 shots per probe. All 20 completed successfully: zero segmentation faults, zero timeouts, and zero abnormal probe outcomes were recorded. The diagnostic also reports 278 saved ranking records with zero grouped metric-integrity issues, zero score-mismatch groups, and no missing level/difficulty ranking groups at the time of collection.
 
-## Hackathon assessment
+These are useful software and data-integrity checks, but the 128-shot sample is too small to support strong statistical conclusions. The values below are illustrative individual runs from that diagnostic, not averaged results or a fresh rerun of the final packaged code.
 
-See [`docs/HACKATHON_ASSESSMENT.md`](docs/HACKATHON_ASSESSMENT.md) for a provisional code-and-artifact review against the supplied Qiskit Fall Fest 2026 Advanced Track rubric. It is an estimate, not an official judge score.
+| Diagnostic case | Raw fidelity | Post-selected fidelity | Retention | Score |
+|---|---:|---:|---:|---:|
+| Level 1, Standard, no checks | 0.873 | 0.873 | 100.0% (128/128) | 89.60 |
+| Level 1, Standard, target q0 | 0.884 | 0.975 | 85.2% (109/128) | 94.78 |
+| Level 4, Standard, no checks | 0.726 | 0.726 | 100.0% (128/128) | 76.82 |
+| Level 4, Standard, target q0 | 0.693 | 0.840 | 74.2% (95/128) | 71.84 |
+| Level 5, Full Challenge, no checks | 0.375 | 0.375 | 100.0% (128/128) | 42.83 |
+| Level 5, Full Challenge, five targets | 0.383 | 0.927 | 26.6% (34/128) | 6.90 |
+
+The examples illustrate why fidelity must be reported alongside retention and score. For Level 1, the q0 check increased post-selected fidelity and improved the score despite discarding some shots. For Level 4, post-selected fidelity increased but the configured score fell below the no-check baseline. For the five-target Level 5 example, post-selected fidelity was high but only 34 of 128 shots remained, and the final score was low. These single-run results are examples of the intended trade-off, not proof that the same ordering will hold across repeated samples.
+
+The diagnostic identified a FakeTorino-derived uniform noise source for these probes. No T-gate sweep results were present in the diagnostic evidence used for this report, so no quantitative conclusion about the effect of T count is claimed here.
+
+## 6. Software design and reproducibility
+
+The Streamlit application has six main destinations: Main Menu, Profile, Campaign, Strategy Rankings, Analysis Lab, and How To. Analysis Lab groups Clifford Analysis, No-check Baseline, and T-Gate Sweep. Opening a view does not automatically launch a simulation; the user must explicitly run an experiment.
+
+The code is organized into circuit construction, simulation, metrics, game logic, strategy ranking, crash-isolated ranking worker, player profiles, and analysis views. Ranking candidates are intended to run in isolated child processes so that a native simulator crash can mark one strategy unavailable rather than terminate the whole sweep. Uncomputed or failed measurements should be represented as N/A, not as measured zero.
+
+For reproduction, install the packages in `requirements.txt`, run `streamlit run app.py`, and execute the tests with `python -m pytest -q`. A submission-quality validation should record Python and package versions, the selected noise source, circuit width/depth, target set, requested shots, raw and retained shot counts, fidelity, overhead, and repeated-run variability. The provided diagnostic's runtime tests refer to the earlier local project snapshot; the final release should be freshly tested after the final code is installed.
+
+## 7. Limitations and next steps
+
+1. **Statistical uncertainty:** the reported diagnostic probes use only 128 shots per configuration. Repeat runs with multiple seeds and report variation or confidence intervals.
+2. **T-gate findings:** run a documented T-count sweep and include matched T=0 controls before making claims about how T count changes fidelity or retention.
+3. **Noise comparability:** record and disclose whether each result uses FakeTorino-derived uniform noise or the synthetic fallback.
+4. **Score transparency:** explain the harmonic metric and the configurable check-overhead penalty separately, and test that game balance does not obscure the underlying physical metrics.
+5. **Final runtime verification:** run the final package in the target environment, navigate every page, execute at least one checked Clifford run, one no-check baseline, and one T-gate sweep, and archive the outputs.
+
+## 8. Conclusion
+
+Qubit Crown turns low-overhead spacetime error detection into a playable strategy task. Its core loop connects player-selected targets to Paulice-generated checks, Qiskit Aer noisy simulation, syndrome-based post-selection, and a measured fidelity-retention score. Preliminary diagnostic runs show examples where post-selection improves accepted-shot fidelity while retention and overhead determine whether the strategy is worthwhile. The next step is to strengthen the evidence with repeated experiments, a documented T-gate sweep, and a clean end-to-end run of the final release.
+
+## References
+
+1. **Qiskit Fall Fest 2026 Hackathon — Advanced Track brief**, supplied by the organizers. The brief calls for a game faithful to spacetime-code error detection, Qiskit-computed scores, comparison of fidelity and retained-shot fraction, a T-doped circuit family, added-cost reporting, and a written report plus recorded presentation.
+2. `qiskit-paulice`, used by the project to construct Clifford spacetime-check variants and their post-selection method.
+3. Qiskit and Qiskit Aer, used for circuit representation and ideal/noisy simulation.
